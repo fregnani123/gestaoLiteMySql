@@ -1,0 +1,48 @@
+{
+  "name": "electronmysql",
+  "version": "1.0.0",
+  "main": "./src/main.js",
+  "scripts": {
+    "start": "electron .",
+    "pack": "electron-packager .",
+    "dist": "electron-builder"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "electron": "^31.2.1",
+    "electron-builder": "^24.7.0",
+    "electron-packager": "^15.5.0"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "mysql": "^2.18.1",
+    "mysql2": "^3.10.3"
+  },
+  "build": {
+    "appId": "com.gestaolite",
+    "directories": {
+      "output": "dist"
+    },
+    "files": [
+      "public/**/*",
+      "controllers/**/*",
+      "src/**/*",
+      "node_modules/**/*",
+      "package.json"
+    ],
+    "asar": true,
+    "win": {
+      "icon": "./img/menu-aberto.png"
+    },
+    "mac": {
+      "icon": "./img/menu-aberto.png"
+    },
+    "linux": {
+      "icon": "./img/menu-aberto.png"
+    }
+  }
+}
