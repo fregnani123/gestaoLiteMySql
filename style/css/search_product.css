@@ -13,19 +13,21 @@
     --white: rgb(255, 255, 255);
     --border-radius: 5px;
 }
-  #cadastro-produto a {
-      color: rgb(0, 0, 0);
-      padding: 8px;
-      border-radius: 5px;
-      background-color: #ffffff;
-  }
-  .menu-item-4 a {
-      color: rgb(0, 0, 0);
-      padding: 8px;
-      border-radius: 5px;
-      background-color: #ffffff;
-      width: 100%;
-  }
+
+#pesquisar-produto a {
+    color: rgb(0, 0, 0);
+    padding: 8px;
+    border-radius: 5px;
+    background-color: #ffffff;
+}
+
+.menu-item-4 a {
+    color: rgb(0, 0, 0);
+    padding: 8px;
+    border-radius: 5px;
+    background-color: #ffffff;
+    width: 100%;
+}
 
 /* Reset styles */
 body,
