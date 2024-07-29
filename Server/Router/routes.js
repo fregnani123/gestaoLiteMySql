@@ -3,7 +3,8 @@ const Router = express.Router();
 
 const controllers = require('../Controller/controllers');
 
-Router.get('/api/data', controllers.findProduto)
+Router.get('/produtos', controllers.getAllProducts);
+Router.get('/produtos/:codigoDeBarras', controllers.findOneProduct);
 
 
 module.exports = Router;
