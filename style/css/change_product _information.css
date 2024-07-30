@@ -117,8 +117,8 @@ a {
     justify-content: space-around;
     margin-bottom: 15px;
     gap: 3px;
-    height: 60px;
     max-width: 100%;
+    height: 60px;
     align-items: center;
     background-color: var(--menu-background-color);
 }
@@ -272,4 +272,11 @@ a {
 
 a:hover {
     border: 1px solid var(--link-hover-border-color);
+}
+
+#btn-cadastrar {
+    padding: 7px 30px;
+    font-size: 1.2rem;
+    margin-left: 20px;
+    cursor: pointer;
 }

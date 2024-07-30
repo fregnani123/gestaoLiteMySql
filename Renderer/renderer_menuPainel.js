@@ -10,7 +10,7 @@ const menuPainel2 = [
     { id: '7', texto: 'Cadastro de cliente', src: '../style/img/cadastroCliente.png', to: '../public/cadastro-cliente.html' },
     { id: '8', texto: 'Controle de entrada ', src: '../style/img/caixa-de-entrada.png', to: '../public/controle-entrada.html' },
     { id: '9', texto: 'Suporte', src: '../style/img/suporte.png', to: 'https://api.whatsapp.com/send?phone=5548996607600' },
-    { id: '10', texto: 'Exit', src: '../style/img/sair.png', to: '../public/index.html' },
+    { id: '10', texto: 'Sair', src: '../style/img/sair.png', to: '../public/index.html' },
 ];
 
 function criaLi(texto, id, src, to) {

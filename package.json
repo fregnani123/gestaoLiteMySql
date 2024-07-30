@@ -29,8 +29,14 @@
     },
     "files": [
       "public/**/*",
+      "Renderer/**/*",
       "controllers/**/*",
+      "config/**/*",
+      "db/**/*",
+      "Server/**/*",
+      "services/**/*",
       "src/**/*",
+      "style/**/*",
       "node_modules/**/*",
       "package.json"
     ],
