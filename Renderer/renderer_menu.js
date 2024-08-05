@@ -4,8 +4,8 @@ const menuPainel1 = [
     { id: '3', texto: 'Detalhes de venda', to: '../public/detalhes-venda.html' },
     { id: '4', texto: 'Produto', to: '../public/register_product.html' },
     { id: '7', texto: 'Cadastro de cliente', to: '../public/cadastro-cliente.html' },
-    { id: '8', texto: 'Controle de entrada ', to: '../public/controle-entrada.html' },
-   
+    { id: '8', texto: 'Cadastro de Fornecedor', to: '../public/cadastro-cliente.html' },
+    { id: '9', texto: 'Controle de entrada ', to: '../public/controle-entrada.html' },
 ];
 
 const ulMenu = document.getElementById('ul-Menu');

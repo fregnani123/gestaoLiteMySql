@@ -245,7 +245,8 @@ input[type="number"]::-webkit-outer-spin-button {
 .menu-item-5,
 .menu-item-6,
 .menu-item-7,
-.menu-item-8 {
+.menu-item-8, 
+.menu-item-9 {
     padding: 8px;
     border-radius: var(--border-radius);
     font-weight: 100;
@@ -272,9 +273,16 @@ a {
 a:hover {
     border: 1px solid var(--link-hover-border-color);
 }
-#btn-cadastrar {
-    padding: 7px 30px;
+#btn-cadastrar{
+    padding: 7px 70px;
     font-size: 1.2rem;
     margin-left: 20px;
+    cursor: pointer;
+}
+
+#add-fornecedor {
+    padding: 5px 10px;
+    font-size: 1.2rem;
+    margin-left: 5px;
     cursor: pointer;
 }
