@@ -2,7 +2,7 @@ const express = require('express');
 const path = require('path');
 const Routes = require(path.join(__dirname, '../Server/Router/routes'));
 const cors = require('cors');
-const { getData } = require(path.join(__dirname, '../db/model/product'));
+const { getAllProdutos } = require(path.join(__dirname, '../db/model/product'));
 require('dotenv').config({ path: path.join(__dirname, '../config/.env') });
 
 
@@ -17,7 +17,7 @@ serverApp.use(Routes);
 const startServer = async () => {
     try {
         // Tenta obter dados para garantir que a conexão com o banco de dados está funcionando
-        await getData();
+        await getAllProdutos();
         console.log('Servidor MySQL conectado com sucesso!');
 
         serverApp.listen(PORT, () => {

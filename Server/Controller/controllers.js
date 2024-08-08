@@ -1,10 +1,11 @@
 const path = require('path');
-const { getData, findProductByBarcode, getCategoriaProduto, getGrupoProduto } = require(path.join(__dirname, '../../db/model/product'));
+const { getAllProdutos, findProductByBarcode, getCategoriaProduto, getGrupoProduto, getFornecedor } = require(path.join(__dirname, '../../db/model/product'));
+
 
 const controllers = {
     getAllProducts: async (req, res) => {
         try {
-            const produtos = await getData();
+            const produtos = await getAllProdutos();
             res.json(produtos);
         } catch (error) {
             console.error('Erro ao buscar produtos:', error);
@@ -27,6 +28,16 @@ const controllers = {
         } catch (error) {
             console.error('Erro ao buscar grupo_produto:', error);
             res.status(500).json({ error: 'Erro ao buscar grupo_produto' });
+        }
+    },
+
+    getFornecedor: async (req, res) => {
+        try {
+            const fornecedor = await getFornecedor();
+            res.json(fornecedor);
+        } catch (error) {
+            console.error('Erro ao buscar fornecedor:', error);
+            res.status(500).json({ error: 'Erro ao buscar fornecedor' });
         }
     },
 
