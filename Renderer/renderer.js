@@ -2,10 +2,11 @@
 // Use my Methods.
 
 const selectCategoria = document.querySelector('#categoria-produto');
-const selectgrupo = document.querySelector('#grupo');
-const fornecedor = document.querySelector('#fornecedor');
-
+const selectGrupo = document.querySelector('#grupo');
+const selectFornecedor = document.querySelector('#fornecedor');
+const selectTamanhoLetras = document.querySelector('#tamanhoLetras')
 
 getCategoriasProduto(selectCategoria); 
-getGruposProduto(selectgrupo);
-getFornecedor(fornecedor);
+getGruposProduto(selectGrupo);
+getFornecedor(selectFornecedor);
+getTamanhoLetras(selectTamanhoLetras);

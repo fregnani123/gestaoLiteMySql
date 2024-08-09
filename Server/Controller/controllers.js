@@ -1,5 +1,5 @@
 const path = require('path');
-const { getAllProdutos, findProductByBarcode, getCategoriaProduto, getGrupoProduto, getFornecedor } = require(path.join(__dirname, '../../db/model/product'));
+const { getAllProdutos, findProductByBarcode, getCategoriaProduto, getGrupoProduto, getFornecedor, getTamanhoLetras } = require(path.join(__dirname, '../../db/model/product'));
 
 
 const controllers = {
@@ -38,6 +38,16 @@ const controllers = {
         } catch (error) {
             console.error('Erro ao buscar fornecedor:', error);
             res.status(500).json({ error: 'Erro ao buscar fornecedor' });
+        }
+    },
+
+    getTamanhoLetras: async (req, res) => {
+        try {
+            const tamanhoLetras = await getTamanhoLetras();
+            res.json(tamanhoLetras);
+        } catch (error) {
+            console.error('Erro ao buscar tamanhoLetras:', error);
+            res.status(500).json({ error: 'Erro ao buscar tamanhoLetras' });
         }
     },
 

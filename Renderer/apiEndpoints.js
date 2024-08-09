@@ -5,6 +5,7 @@ const apiEndpoints = {
     getCategoriasProduto: 'http://localhost:3000/categorias',
     getGruposProduto: 'http://localhost:3000/grupos',
     getFornecedor: 'http://localhost:3000/fornecedor',
+    getTamanhoLetras: 'http://localhost:3000/tamanhoLetras',
 };
 
 function getCategoriasProduto(renderer) {
@@ -65,5 +66,26 @@ function getFornecedor(renderer){
             console.error('Erro ao buscar dados:', error);
         });
 }
+
+
+function getTamanhoLetras(renderer) {
+    const getTamanho = apiEndpoints.getTamanhoLetras;  
+
+    fetch(getTamanho)
+        .then(response => response.json())
+        .then(data => {
+            data.forEach((tamanho) => {
+                const option = document.createElement('option');
+                option.innerHTML = tamanho.tamanho; 
+                option.value = tamanho.tamanho_id;  
+                renderer.appendChild(option);
+            });
+            console.log(data);
+        })
+        .catch(error => {
+            console.error('Erro ao buscar dados:', error);
+        });
+}
+
 
 

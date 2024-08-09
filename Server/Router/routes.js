@@ -7,6 +7,7 @@ Router.get('/produtos', controllers.getAllProducts);
 Router.get('/categorias', controllers.getCategoriaProduto);
 Router.get('/grupos', controllers.getGrupoProduto);
 Router.get('/fornecedor', controllers.getFornecedor);
+Router.get('/tamanhoLetras', controllers.getTamanhoLetras);
 Router.get('/produtos/:codigoDeBarras', controllers.findOneProduct);
 
 
