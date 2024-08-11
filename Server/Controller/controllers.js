@@ -1,5 +1,5 @@
 const path = require('path');
-const { getAllProdutos, findProductByBarcode, getCategoriaProduto, getGrupoProduto, getFornecedor, getTamanhoLetras } = require(path.join(__dirname, '../../db/model/product'));
+const { getAllProdutos, findProductByBarcode, getCategoriaProduto, getGrupoProduto, getFornecedor, getTamanhoLetras, getTamanhoNumeros } = require(path.join(__dirname, '../../db/model/product'));
 
 
 const controllers = {
@@ -48,6 +48,25 @@ const controllers = {
         } catch (error) {
             console.error('Erro ao buscar tamanhoLetras:', error);
             res.status(500).json({ error: 'Erro ao buscar tamanhoLetras' });
+        }
+    },
+
+    getTamanhoNumeros: async (req, res) => {
+        try {
+            const tamanhoNumeros = await getTamanhoNumeros();
+            res.json(tamanhoNumeros);
+        } catch (error) {
+            console.error('Erro ao buscar tamanhoNumeros:', error);
+            res.status(500).json({ error: 'Erro ao buscar tamanhoNumeros' });
+        }
+    },
+    getUnidade_massa: async (req, res) => {
+        try {
+            const unidade_massa = await getUnidade_massa();
+            res.json(unidade_massa);
+        } catch (error) {
+            console.error('Erro ao busca Unidade_massa:', error);
+            res.status(500).json({ error: 'Erro ao buscar Unidade_massa' });
         }
     },
 
