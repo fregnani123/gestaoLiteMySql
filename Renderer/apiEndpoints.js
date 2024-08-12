@@ -7,7 +7,7 @@ const apiEndpoints = {
     getFornecedor: 'http://localhost:3000/fornecedor',
     getTamanhoLetras: 'http://localhost:3000/tamanhoLetras',
     getTamanhoNumeros: 'http://localhost:3000/tamanhoNumeros',
-    getTamanhoNumeros: 'http://localhost:3000/UnidadeMassa',
+    getunidadeDeMassa: 'http://localhost:3000/unidadeMassa',
 };
 
 function getCategoriasProduto(renderer) {
@@ -69,7 +69,6 @@ function getFornecedor(renderer){
         });
 }
 
-
 function getTamanhoLetras(renderer) {
     const getTamanho = apiEndpoints.getTamanhoLetras;  
 
@@ -88,6 +87,26 @@ function getTamanhoLetras(renderer) {
             console.error('Erro ao buscar dados:', error);
         });
 }
+
+function getunidadeDeMassa(renderer) {
+    const getunidadeDeMassa = apiEndpoints.getunidadeDeMassa;  
+
+    fetch(getunidadeDeMassa)
+        .then(response => response.json())
+        .then(data => {
+            data.forEach((unMassa) => {
+                const option = document.createElement('option');
+                option.innerHTML = unMassa.unidade_nome; 
+                option.value = unMassa.unidade_massa_id;  
+                renderer.appendChild(option);
+            });
+            console.log(data);
+        })
+        .catch(error => {
+            console.error('Erro ao buscar dados:', error);
+        });
+}
+
 function getTamanhoNumeros(renderer) {
     const getTamanho = apiEndpoints.getTamanhoNumeros;  
 
@@ -98,6 +117,25 @@ function getTamanhoNumeros(renderer) {
                 const option = document.createElement('option');
                 option.innerHTML = tamanho.tamanho; 
                 option.value = tamanho.tamanho_id;  
+                renderer.appendChild(option);
+            });
+            console.log(data);
+        })
+        .catch(error => {
+            console.error('Erro ao buscar dados:', error);
+        });
+}
+
+function getMedidaVolume(renderer) {
+    const getVolume = apiEndpoints.getMedidaVolume;  
+
+    fetch(getVolume)
+        .then(response => response.json())
+        .then(data => {
+            data.forEach((volume) => {
+                const option = document.createElement('option');
+                option.innerHTML = volume.volume_id; 
+                option.value = volume.volume_id;  
                 renderer.appendChild(option);
             });
             console.log(data);

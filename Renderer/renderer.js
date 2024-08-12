@@ -7,10 +7,12 @@ const selectFornecedor = document.querySelector('#fornecedor');
 const selectTamanhoLetras = document.querySelector('#tamanhoLetras');
 const selectTamanhoNumeros = document.querySelector('#tamanhoNumeros');
 const selectUnidadeMassa = document.querySelector('#unidadeDeMassa');
+const selectMedidaVolume = document.querySelector('#medidaVolume');
 
 getCategoriasProduto(selectCategoria); 
 getGruposProduto(selectGrupo);
 getFornecedor(selectFornecedor);
 getTamanhoLetras(selectTamanhoLetras);
 getTamanhoNumeros(selectTamanhoNumeros);
-getTamanhoNumeros(selectUnidadeMassa);
+getunidadeDeMassa(selectUnidadeMassa);
+getMedidaVolume(selectMedidaVolume);

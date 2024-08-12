@@ -9,8 +9,10 @@ Router.get('/grupos', controllers.getGrupoProduto);
 Router.get('/fornecedor', controllers.getFornecedor);
 Router.get('/tamanhoLetras', controllers.getTamanhoLetras);
 Router.get('/tamanhoNumeros', controllers.getTamanhoNumeros);
-Router.get('/UnidadeMassa', controllers.getTamanhoNumeros);
+Router.get('/unidadeMassa', controllers.getUnidadeMassa);
+Router.get('/medidaVolume', controllers.getMedidaVolume);
 Router.get('/produtos/:codigoDeBarras', controllers.findOneProduct);
+
 
 
 module.exports = Router;
