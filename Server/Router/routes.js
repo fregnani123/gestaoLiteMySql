@@ -11,6 +11,7 @@ Router.get('/tamanhoLetras', controllers.getTamanhoLetras);
 Router.get('/tamanhoNumeros', controllers.getTamanhoNumeros);
 Router.get('/unidadeMassa', controllers.getUnidadeMassa);
 Router.get('/medidaVolume', controllers.getMedidaVolume);
+Router.get('/unidadeComprimento', controllers.getUnidadeComprimento);
 Router.get('/produtos/:codigoDeBarras', controllers.findOneProduct);
 
 

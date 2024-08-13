@@ -8,6 +8,8 @@ const apiEndpoints = {
     getTamanhoLetras: 'http://localhost:3000/tamanhoLetras',
     getTamanhoNumeros: 'http://localhost:3000/tamanhoNumeros',
     getunidadeDeMassa: 'http://localhost:3000/unidadeMassa',
+    getMedidaVolume: 'http://localhost:3000/medidaVolume',
+    getunidadeComprimento: 'http://localhost:3000/unidadeComprimento',
 };
 
 function getCategoriasProduto(renderer) {
@@ -125,6 +127,24 @@ function getTamanhoNumeros(renderer) {
             console.error('Erro ao buscar dados:', error);
         });
 }
+function getunidadeComprimento(renderer) {
+    const getComprimento = apiEndpoints.getunidadeComprimento;  
+
+    fetch(getComprimento)
+        .then(response => response.json())
+        .then(data => {
+            data.forEach((comprimento) => {
+                const option = document.createElement('option');
+                option.innerHTML = comprimento.unidade_nome; 
+                option.value = comprimento.unidade_comprimento_id;  
+                renderer.appendChild(option);
+            });
+            console.log(data);
+        })
+        .catch(error => {
+            console.error('Erro ao buscar dados:', error);
+        });
+}
 
 function getMedidaVolume(renderer) {
     const getVolume = apiEndpoints.getMedidaVolume;  
@@ -132,10 +152,10 @@ function getMedidaVolume(renderer) {
     fetch(getVolume)
         .then(response => response.json())
         .then(data => {
-            data.forEach((volume) => {
+            data.forEach((medida) => {
                 const option = document.createElement('option');
-                option.innerHTML = volume.volume_id; 
-                option.value = volume.volume_id;  
+                option.innerHTML = medida.medida_nome; 
+                option.value = medida.medida_volume_id;  
                 renderer.appendChild(option);
             });
             console.log(data);
