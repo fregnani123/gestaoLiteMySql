@@ -17,4 +17,4 @@ getTamanhoLetras(selectTamanhoLetras);
 getTamanhoNumeros(selectTamanhoNumeros);
 getunidadeDeMassa(selectUnidadeMassa);
 getMedidaVolume(selectMedidaVolume);
-getMedidaVolume(selectUnidadeComprimento);
+getunidadeComprimento(selectUnidadeComprimento);

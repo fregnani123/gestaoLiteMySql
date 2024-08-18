@@ -28,16 +28,15 @@
       "output": "dist"
     },
     "files": [
-      "public/**/*",
-      "Renderer/**/*",
-      "controllers/**/*",
       "config/**/*",
       "db/**/*",
+      "node_modules/**/*",
+      "public/**/*",
+      "Renderer/**/*",
       "Server/**/*",
       "services/**/*",
       "src/**/*",
-      "style/**/*",
-      "node_modules/**/*",
+      "style/**/*",    
       "package.json"
     ],
     "asar": true,
