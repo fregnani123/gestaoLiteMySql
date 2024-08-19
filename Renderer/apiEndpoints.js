@@ -10,6 +10,7 @@ const apiEndpoints = {
     getunidadeDeMassa: 'http://localhost:3000/unidadeMassa',
     getMedidaVolume: 'http://localhost:3000/medidaVolume',
     getunidadeComprimento: 'http://localhost:3000/unidadeComprimento',
+    getunidadeEstoque: 'http://localhost:3000/unidadeEstoque',
 };
 
 function getCategoriasProduto(renderer) {
@@ -137,6 +138,25 @@ function getunidadeComprimento(renderer) {
                 const option = document.createElement('option');
                 option.innerHTML = comprimento.unidade_nome; 
                 option.value = comprimento.unidade_comprimento_id;  
+                renderer.appendChild(option);
+            });
+            console.log(data);
+        })
+        .catch(error => {
+            console.error('Erro ao buscar dados:', error);
+        });
+}
+
+function getunidadeEstoque(renderer) {
+    const getEstoque = apiEndpoints.getunidadeEstoque;  
+
+    fetch(getEstoque)
+        .then(response => response.json())
+        .then(data => {
+            data.forEach((unidadeEstoque) => {
+                const option = document.createElement('option');
+                option.innerHTML = unidadeEstoque.estoque_nome; 
+                option.value = unidadeEstoque.unidade_estoque_id;  
                 renderer.appendChild(option);
             });
             console.log(data);

@@ -9,6 +9,7 @@ const selectTamanhoNumeros = document.querySelector('#tamanhoNumeros');
 const selectUnidadeMassa = document.querySelector('#unidadeDeMassa');
 const selectMedidaVolume = document.querySelector('#medidaVolume');
 const selectUnidadeComprimento = document.querySelector('#unidadeComprimento');
+const selectUnidadeEstoque = document.querySelector('#unidadeEstoque');
 
 getCategoriasProduto(selectCategoria); 
 getGruposProduto(selectGrupo);
@@ -18,3 +19,4 @@ getTamanhoNumeros(selectTamanhoNumeros);
 getunidadeDeMassa(selectUnidadeMassa);
 getMedidaVolume(selectMedidaVolume);
 getunidadeComprimento(selectUnidadeComprimento);
+getunidadeEstoque(selectUnidadeEstoque);

@@ -1,5 +1,5 @@
 const path = require('path');
-const { getAllProdutos, findProductByBarcode, getCategoriaProduto, getGrupoProduto, getFornecedor, getTamanhoLetras, getTamanhoNumeros, getUnidadeMassa, getMedidaVolume, getUnidadeComprimento } = require(path.join(__dirname, '../../db/model/product'));
+const { getAllProdutos, findProductByBarcode, getCategoriaProduto, getGrupoProduto, getFornecedor, getTamanhoLetras, getTamanhoNumeros, getUnidadeMassa, getMedidaVolume, getUnidadeComprimento, getUnidadeEstoque } = require(path.join(__dirname, '../../db/model/product'));
 
 const controllers = {
 
@@ -86,6 +86,16 @@ const controllers = {
         } catch (error) {
             console.error('Erro ao busca Unidade_Comprimento:', error);
             res.status(500).json({ error: 'Erro ao buscar Unidade_Comprimento'});
+        }
+    },
+
+    getUnidadeEstoque: async (req, res) => {
+        try {
+            const unidadeEstoque = await getUnidadeEstoque();
+            res.json(unidadeEstoque);
+        } catch (error) {
+            console.error('Erro ao busca Unidade_estoque:', error);
+            res.status(500).json({ error: 'Erro ao buscar Unidade_estoque'});
         }
     },
 
