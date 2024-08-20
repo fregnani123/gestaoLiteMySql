@@ -14,6 +14,7 @@ const inputCodigoEAN = document.querySelector('#codigoDeBarras');
 const inputNomeProduto = document.querySelector('#nomeProduto');
 const inputDescricao = document.querySelector('#descricao');
 const inputMassa = document.querySelector('#massaNumero');
+const inputVolume = document.querySelector('#volumeNumero');
 const inputMedidaQuantidade = document.querySelector('#medidaQuantidade');
 const inputCorProduto = document.querySelector('#corProduto');
 const inputQuantidadeEstoque = document.querySelector('#quantidadeEstoque');
@@ -33,10 +34,16 @@ document.querySelector('#btn-cadastrar').addEventListener('click', function () {
         "descricao": inputDescricao.value,
         "tamanho_letras_id": selectTamanhoLetras.value,
         "tamanho_num_id": selectTamanhoNumeros.value,
-        "unidade_massa_id": `${selectUnidadeMassa.value} ${inputMassa.value}`,
+
+        "unidade_massa_qtd": inputMassa.value,
+        "unidade_massa_id": selectUnidadeMassa.value,
+        
+        "medida_volume_qtd": inputVolume.value,
         "medida_volume_id": selectMedidaVolume.value,
+
         "medida_quantidade": inputMedidaQuantidade.value,
         "unidade_comprimento_id": selectUnidadeComprimento.value,
+        
         "cor_produto": inputCorProduto.value,
         "quantidade_estoque": inputQuantidadeEstoque.value,
         "preco_compra": inputPrecoCompra.value,
