@@ -1,5 +1,5 @@
 const path = require('path');
-const { getAllProdutos, findProductByBarcode, getCategoriaProduto, getGrupoProduto, getFornecedor, getTamanhoLetras, getTamanhoNumeros, getUnidadeMassa, getMedidaVolume, getUnidadeComprimento, getUnidadeEstoque } = require(path.join(__dirname, '../../db/model/product'));
+const { getAllProdutos, findProductByBarcode, getCategoriaProduto, getGrupoProduto, getFornecedor, getTamanhoLetras, getTamanhoNumeros, getUnidadeMassa, getMedidaVolume, getUnidadeComprimento, getUnidadeEstoque, postNewProduct } = require(path.join(__dirname, '../../db/model/product'));
 
 const controllers = {
 
@@ -111,8 +111,35 @@ const controllers = {
             console.error('Erro ao buscar produto:', error);
             res.status(500).json({ error: 'Erro ao buscar produto' });
         }
+    },
+
+
+    postNewProduct: async (req, res) => {
+        try {
+            // Extrai os dados do produto do corpo da requisição
+            const productData = req.body;
+
+            // Chama a função insertNewProduct para inserir o produto no banco de dados
+            const newProductId = await postNewProduct(productData);
+
+            // Cria uma resposta contendo o ID do novo produto inserido
+            const response = {
+                message: 'Produto inserido com sucesso!',
+                produto_id: newProductId
+            };
+
+            // Envia a resposta em formato JSON
+            res.json(response);
+        } catch (error) {
+            console.error('Erro ao inserir o produto:', error);
+            res.status(500).json({ error: 'Erro ao inserir o produto.' });
+        }
     }
+
 };
+
+
+
 
 module.exports = controllers;
 

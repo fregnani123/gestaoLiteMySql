@@ -14,7 +14,7 @@ Router.get('/medidaVolume', controllers.getMedidaVolume);
 Router.get('/unidadeComprimento', controllers.getUnidadeComprimento);
 Router.get('/unidadeEstoque', controllers.getUnidadeEstoque);
 Router.get('/produtos/:codigoDeBarras', controllers.findOneProduct);
-
+Router.post('/postNewProduto', controllers.postNewProduct);
 
 
 module.exports = Router;

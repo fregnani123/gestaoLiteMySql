@@ -1,6 +1,5 @@
 // My Methods.
 
-
 const apiEndpoints = {
     getCategoriasProduto: 'http://localhost:3000/categorias',
     getGruposProduto: 'http://localhost:3000/grupos',
@@ -11,7 +10,34 @@ const apiEndpoints = {
     getMedidaVolume: 'http://localhost:3000/medidaVolume',
     getunidadeComprimento: 'http://localhost:3000/unidadeComprimento',
     getunidadeEstoque: 'http://localhost:3000/unidadeEstoque',
+    postNewProduto: 'http://localhost:3000/postNewProduto',
 };
+
+
+function postNewProduto(produtoData) {
+    const postNewProdutoData = apiEndpoints.postNewProduto;
+
+    fetch(postNewProdutoData, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(produtoData),
+    })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+            return response.json();
+        })
+        .then(data => {
+            console.log('Produto added successfully:', data);
+        })
+        .catch(error => {
+            console.error('Error adding produto:', error);
+        });
+}
+
 
 function getCategoriasProduto(renderer) {
     const getCategoriasProduto = apiEndpoints.getCategoriasProduto;
