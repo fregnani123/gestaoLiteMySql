@@ -59,6 +59,7 @@
                 <label for="fornecedor">Fornecedor:</label>
                 <select id="fornecedor" name="fornecedor">
                     <option value="">Selecione...</option>
+                    <option value="1">Não cadastrar</option>
                 </select><button id="add-fornecedor">...</button>
 
             </div>
@@ -104,10 +105,10 @@
 
 <div class="form-group">
     <label for="cor">Cor do Produto:</label>
-    <input id="cor" type="color" name="cor" value="" aria-describedby="corHelp">
+    <input id="corProduto" type="color" name="corProduto" value="" aria-describedby="corHelp">
     <label for="estoque1">Estoque Inicial:</label>
     <span class="qtd">Qtd:</span>
-    <input value="0" type="number" id="estoque" name="estoque" autocomplete="off" required>
+    <input value="0" type="number" id="estoqueQtd" name="estoqueQtd" autocomplete="off" required>
     <select id="unidadeEstoque"name="">
     </select>
 </div>
@@ -116,8 +117,8 @@
     <input type="number" id="precoCusto" name="preco"  autocomplete="off" required>
     <label for="markup">Markup:</label>
     <input type="number" id="markup" name="markup"  autocomplete="off" required>
-    <label for="preco1">Preço de Venda</label>
-    <input type="number" id="preco1" name="preco" autocomplete="off" required>
+    <label for="precoVenda">Preço de Venda</label>
+    <input type="number" id="precoVenda" name="preco" autocomplete="off" required>
 
     <button id="btn-cadastrar">Cadastrar</button>
     <!-- <button id="btn-cadastrar">Limpar Formulário</button> -->

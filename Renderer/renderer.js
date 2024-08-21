@@ -15,10 +15,10 @@ const inputNomeProduto = document.querySelector('#nomeProduto');
 const inputDescricao = document.querySelector('#descricao');
 const inputMassa = document.querySelector('#massaNumero');
 const inputVolume = document.querySelector('#volumeNumero');
-const inputMedidaQuantidade = document.querySelector('#medidaQuantidade');
+const inputComprimento = document.querySelector('#comprimento');
 const inputCorProduto = document.querySelector('#corProduto');
-const inputQuantidadeEstoque = document.querySelector('#quantidadeEstoque');
-const inputPrecoCompra = document.querySelector('#precoCompra');
+const inputQuantidadeEstoque = document.querySelector('#estoqueQtd');
+const inputPrecoCompra = document.querySelector('#precoCusto');
 const inputMarkup = document.querySelector('#markup');
 const inputPrecoVenda = document.querySelector('#precoVenda');
 
@@ -41,15 +41,15 @@ document.querySelector('#btn-cadastrar').addEventListener('click', function () {
         "medida_volume_qtd": inputVolume.value,
         "medida_volume_id": selectMedidaVolume.value,
 
-        "medida_quantidade": inputMedidaQuantidade.value,
+        "unidade_comprimento_qtd": inputComprimento.value,
         "unidade_comprimento_id": selectUnidadeComprimento.value,
         
         "cor_produto": inputCorProduto.value,
-        "quantidade_estoque": inputQuantidadeEstoque.value,
         "preco_compra": inputPrecoCompra.value,
         "markup": inputMarkup.value,
         "preco_venda": inputPrecoVenda.value,
-        "unidade_estoque_id": selectUnidadeEstoque.value
+        "unidade_estoque_id": selectUnidadeEstoque.value,
+        "quantidade_estoque": inputQuantidadeEstoque.value,
     };
 
     // Call the function to post the new product
