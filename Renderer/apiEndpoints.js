@@ -87,7 +87,7 @@ function getFornecedor(renderer){
             const fornecedor = data;
             fornecedor.forEach((fornecedor) => {
                 const option = document.createElement('option');
-                option.innerHTML = fornecedor.nome_fornecedor;
+                option.innerHTML = fornecedor.fornecedor_nome;
                 option.value =fornecedor.fornecedor_id;
                 renderer.appendChild(option);
             });
