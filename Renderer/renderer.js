@@ -37,23 +37,26 @@ document.querySelector('#btn-cadastrar').addEventListener('click', function () {
 
         "unidade_massa_qtd": inputMassa.value,
         "unidade_massa_id": selectUnidadeMassa.value,
-        
+
         "medida_volume_qtd": inputVolume.value,
         "medida_volume_id": selectMedidaVolume.value,
 
         "unidade_comprimento_qtd": inputComprimento.value,
         "unidade_comprimento_id": selectUnidadeComprimento.value,
-        
+
         "cor_produto": inputCorProduto.value,
         "preco_compra": inputPrecoCompra.value,
         "markup": inputMarkup.value,
         "preco_venda": inputPrecoVenda.value,
         "unidade_estoque_id": selectUnidadeEstoque.value,
         "quantidade_estoque": inputQuantidadeEstoque.value,
+        "fornecedor_id": selectFornecedor.value,
     };
 
     // Call the function to post the new product
     postNewProduto(produtoData);
+
+
 });
 
 // Initialize the select dropdowns with data
