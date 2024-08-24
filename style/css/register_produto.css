@@ -9,7 +9,7 @@
     --form-background-color: #ffffff;
     --form-shadow-color: rgba(0, 0, 0, 0.1);
     --input-border-color: #ccc;
-    --label-text-color: #555;
+    --label-text-color: #000000;
     --white: rgb(255, 255, 255);
     --border-radius: 5px;
     --bg-input:#E8F0FE;
@@ -94,7 +94,7 @@ a {
     border-radius: 8px;
     box-shadow: 0 0 8px var(--form-shadow-color);
     box-sizing: border-box;
-    max-width: 100%;
+ 
 }
 
 /* Estilo do menu principal */
@@ -168,30 +168,30 @@ a {
 
 /* Estilo do formulário */
 form {
-    display: grid;
     gap: 8px;
     box-sizing: border-box;
+    overflow: hidden;
+    width:900px;
 }
 
 /* Alinhamento dos labels e inputs */
 .form-group {
     display: flex;
     align-items: center;
-    margin-bottom: 8px;
-    max-width: 100%;
+    margin-bottom: 10px;
     box-sizing: border-box;
+    /* background-color: red; */
+    text-align: center;
 }
 
 label {
     font-weight: bold;
-    width: 200px;
     font-size: 1rem;
-    margin-right: 10px;
     text-align: right;
     color: var(--label-text-color);
     /* Cor do texto dos labels */
 }
-
+textarea,
 input[type="text"],
 input[type="number"],
 select {
@@ -200,10 +200,11 @@ select {
     border-radius: 4px;
     font-size: 1rem;
     text-align: center;
-    margin-left: 10px;
     flex: 1;
     background-color:var(--bg-input);
     color: var(--text-color);
+    margin-top: 5px;
+    width: 100%;
 }
 
 input[type="number"] {
@@ -229,8 +230,63 @@ input[type="number"]::-webkit-outer-spin-button {
     width: 100%;
 }
 
+.select-wrapper{
+    margin-left: 20px;
+}
+
+.div-codigoDeBarras{
+    width: 350px;
+    margin-right: 20px;
+}
+.div-nomeProduto{
+width: 100%;
+ 
+}
+
+.input-select-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    
+}
+
+.input-select-wrapper input {
+    flex: 1;
+   
+}
+
+.input-select-wrapper select {
+    flex: 1;
+   
+}
+
+.input-select-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+}
+
+.input-select-wrapper select {
+    flex: 1;
+}
+
+.input-select-wrapper button {
+    flex-shrink: 0;
+
+}
+
 #nomeProduto {
     width: 100%;
+}
+.input-select-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.qtd {
+    margin-right: 5px;
 }
 
 #descricao {
@@ -285,4 +341,8 @@ a:hover {
     font-size: 1.2rem;
     margin-left: 5px;
     cursor: pointer;
+}
+
+.label-Observacoes{
+    margin-right: 20px;
 }

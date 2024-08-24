@@ -19,7 +19,7 @@
     <div class="divForm">
         <ul class="menu-secundario">
             <li id="cadastro-produto" class="li-menu2">
-                <a class="a2">Cadastrar Novo Produto</a>
+                <a class="a2">Cadastro de Produtos</a>
             </li>
             <li class="li-menu2">
                 <a class="a2" href="../public/change_product _information.html">Alterar Informações do Produto</a>
@@ -34,100 +34,133 @@
         <p class="barra">Cadastrar Novo Produto</p>
         <form>
             <div class="form-group">
-                <label for="codigoDeBarras">Codigo EAN do Produto:</label>
-                <input type="number" id="codigoDeBarras" name="codigoDeBarras" autocomplete="off" required
-                   >
-
-                <label for="nomeProduto">Nome do Produto:</label>
-                <input type="text" id="nomeProduto" name="nome" autocomplete="off" required>
-
-            </div>
-            <div class="form-group">
-                <label for="descricao">Descrição do Produto:</label>
-                <input type="text" id="descricao" name="descricao" autocomplete="off" required>
-                <label for="categoria-produto">Categoria do Produto:</label>
-                <select id="categoriaProduto" name="categoriaProduto">
-                    <option value="">Selecione...</option>
-                </select>
-                
-            </div>
-            <div class="form-group">
-    <label for="grupo">Grupo</label>
-    <select id="grupo" name="grupo" required>
-        <option value="">Selecione</option>
-    </select>
-                <label for="fornecedor">Fornecedor:</label>
-                <select id="fornecedor" name="fornecedor">
-                    <option value="">Selecione...</option>
-                </select><button id="add-fornecedor">...</button>
-
-            </div>
-            <div class="form-group">
-
-                <label for="tamanho">Tamanho - P/GG:</label>
-                <select id="tamanhoLetras" name="tamanhoLetras">
-                    <option value="">Selecione</option>
-                  
-                </select>
-
-                <label for="tamanhoNumeros">Tamanho/Numeração:</label>
-                <select id="tamanhoNumeros" name="tamanho">
-                    <option value="">Selecione</option>
-                  
-                </select>
-
-                <label for="massaNumero">Unidade de Massa:</label>
-                <span class="qtd">Qtd:</span>
-                <input id="massaNumero" type="number" value="0">
-                <select id="unidadeDeMassa" name="unidadeMassa">
-                    <option value="">Selecione</option>
-                </select>
-
+                <div class="div-codigoDeBarras">
+                    <label for="codigoDeBarras">Código / Cód. Barras</label>
+                    <input type="number" id="codigoDeBarras" name="codigoDeBarras" autocomplete="off">
+                </div>
+                <div class="div-nomeProduto">
+                    <label for="nomeProduto">Nome Produto / Descrição</label>
+                    <input type="text" id="nomeProduto" name="nome" autocomplete="off">
+                </div>
             </div>
 
             <div class="form-group">
-                <label for="volumeNumero">Medida de Volume:</label>
-                <span class="qtd">Qtd:</span>
-                <input id="volumeNumero" type="number" value="0">
-                <select id="medidaVolume" name="medidaVolume">
-                    <option value="">Selecione</option>
-                </select>
+                <div class="div-categoria-produto">
+                    <label for="categoria-produto">Grupo:</label>
+                    <select id="categoriaProduto" name="categoriaProduto">
+                        <option value="">Selecione...</option>
+                    </select>
+                </div>
+                <div class="select-wrapper">
+                    <label for="grupo">Sub-Grupo</label>
+                    <select id="grupo" name="grupo" required>
+                        <option value="">Selecione</option>
+                    </select>
+                </div>
+                <div class="select-wrapper">
+                    <label for="fornecedor">Fornecedor:</label>
+                    <div class="input-select-wrapper">
+                        <select id="fornecedor" name="fornecedor">
+                            <option value="">Selecione...</option>
+                        </select>
+                        <button id="add-fornecedor">...</button>
+                    </div>
+                </div>
 
-                <label for="unidadeComprimento">Unidade Comprimento:</label>
-                <span class="qtd">Qtd:</span>
-                <input id="comprimento" type="number" value="0">
-                <select id="unidadeComprimento" name="unidadeComprimento">
-                    <option value="">Selecione</option>
-                </select>
-                
+            </div>
+            <div class="form-group">
+            
+                <div>
+                    <label for="estoque1">Estoque Inicial:</label>
+                    <div class="input-select-wrapper">
+
+                        <input value="0" type="number" id="estoqueQtd" name="estoqueQtd" autocomplete="off">
+                        <select id="unidadeEstoque" name="unidadeEstoque">
+                            <option value="">Selecione</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="select-wrapper">
+                    <label for="precoCusto">Preço de Custo:</label>
+                    <input type="number" id="precoCusto" name="preco" autocomplete="off">
+                </div>
+                <div class="select-wrapper">
+                    <label for="markup">Markup:</label>
+                    <input type="number" id="markup" name="markup" autocomplete="off">
+                </div>
+                <div class="select-wrapper">
+                    <label for="precoVenda">Preço de Venda</label>
+                    <input type="number" id="precoVenda" name="preco" autocomplete="off">
+                </div>
             </div>
 
-<div class="form-group">
-    <label for="cor">Cor do Produto:</label>
-    <input id="corProduto" type="color" name="corProduto" value="" aria-describedby="corHelp">
-    <label for="estoque1">Estoque Inicial:</label>
-    <span class="qtd">Qtd:</span>
-    <input value="0" type="number" id="estoqueQtd" name="estoqueQtd" autocomplete="off" >
-    <select id="unidadeEstoque"name="">
-    </select>
-</div>
-<div class="form-group">
-    <label for="precoCusto">Preço de Custo:</label>
-    <input type="number" id="precoCusto" name="preco"  autocomplete="off" >
-    <label for="markup">Markup:</label>
-    <input type="number" id="markup" name="markup"  autocomplete="off" >
-    <label for="precoVenda">Preço de Venda</label>
-    <input type="number" id="precoVenda" name="preco" autocomplete="off" >
+            <div class="form-group">
+                <div>
+                    <label for="tamanho">Tamanho - P/GG:</label>
+                    <select id="tamanhoLetras" name="tamanhoLetras">
+                        <option value="">Selecione</option>
+                    </select>
+                </div>
+                <div class="select-wrapper">
+                    <label for="tamanhoNumeros">Tamanho/Numeração:</label>
+                    <select id="tamanhoNumeros" name="tamanho">
+                        <option value="">Selecione</option>
+                    </select>
+                </div>
 
-    <button id="btn-cadastrar">Cadastrar</button>
-    <!-- <button id="btn-cadastrar">Limpar Formulário</button> -->
-     
-</div>
+                <div class="select-wrapper">
+                    <label for="cor">Cor do Produto:</label>
+                    <select id="corProduto" name="corProduto">
+                        <option value="">Selecione</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <div>
+                    <label for="volumeNumero">Medida de Volume:</label>
+                    <div class="input-select-wrapper">
+        
+                        <input id="volumeNumero" type="number" value="0">
+                        <select id="medidaVolume" name="medidaVolume">
+                            <option value="">Selecione</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="select-wrapper">
+                    <label for="unidadeComprimento">Unidade Comprimento:</label>
+                    <div class="input-select-wrapper">
+      
+                        <input id="comprimento" type="number" value="0">
+                        <select id="unidadeComprimento" name="unidadeComprimento">
+                            <option value="">Selecione</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="select-wrapper">
+                    <label for="massaNumero">Unidade de Massa:</label>
+                    <div class="input-select-wrapper">
+                        <input id="massaNumero" type="number" value="0">
+                        <select id="unidadeDeMassa" name="unidadeMassa">
+                            <option value="">Selecione</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+          
+
+        <div class="form-group">
+            <label class="label-Observacoes" for="descricao">Observações:</label>
+            <textarea id="descricao" name="descricao" autocomplete="off"></textarea>
+            <button id="btn-cadastrar">Cadastrar</button>
+        </div>
+
         </form>
+
     </div>
     <script src="../Renderer/renderer_menu.js"></script>
     <script src="../Renderer/apiEndpoints.js"></script>
-    <script src="../Renderer/renderer.js"></script> 
+    <script src="../Renderer/renderer.js"></script>
 </body>
 
 </html>
