@@ -8,11 +8,11 @@
     --link-hover-border-color: rgb(255, 255, 255);
     --form-background-color: #ffffff;
     --form-shadow-color: rgba(0, 0, 0, 0.1);
-    --input-border-color: #ccc;
+    --input-border-color: #030303;
     --label-text-color: #000000;
     --white: rgb(255, 255, 255);
     --border-radius: 5px;
-    --bg-input:#E8F0FE;
+    --bg-input:#f2f7ff;
 }
   #cadastro-produto a {
       color: rgb(0, 0, 0);
@@ -86,6 +86,10 @@ a {
     padding: 0px 30px;
     display: block;
 }
+.div-form-container{
+    display: flex;
+    border: 1px solid black;
+}
 
 .divForm {
     margin-top: 100px;
@@ -94,7 +98,7 @@ a {
     border-radius: 8px;
     box-shadow: 0 0 8px var(--form-shadow-color);
     box-sizing: border-box;
- 
+    border: 1px solid black;
 }
 
 /* Estilo do menu principal */
@@ -169,9 +173,11 @@ a {
 /* Estilo do formulário */
 form {
     gap: 8px;
+    padding: 5px;
     box-sizing: border-box;
     overflow: hidden;
-    width:900px;
+    max-width: 1000px;
+    position: relative;
 }
 
 /* Alinhamento dos labels e inputs */
@@ -195,9 +201,9 @@ textarea,
 input[type="text"],
 input[type="number"],
 select {
-    padding: 8px;
+    padding: 7px;
     border: 1px solid var(--input-border-color);
-    border-radius: 4px;
+    border-radius: 2px;
     font-size: 1rem;
     text-align: center;
     flex: 1;
@@ -330,19 +336,93 @@ a:hover {
     border: 1px solid var(--link-hover-border-color);
 }
 #btn-cadastrar{
-    padding: 7px 70px;
     font-size: 1.2rem;
     margin-left: 20px;
     cursor: pointer;
+    background-color: transparent;
+    padding: 4px
 }
 
 #add-fornecedor {
-    padding: 5px 10px;
-    font-size: 1.2rem;
-    margin-left: 5px;
+    padding: 6px 10px;
+    font-size: 1rem;
+    margin-left: -5px;
+    margin-top: 5px;
     cursor: pointer;
+
+}
+.cad{
+    border-bottom: 1px solid black;
 }
 
 .label-Observacoes{
     margin-right: 20px;
+}
+
+.div-img-produto{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    font-size: 1.2rem;
+    text-align: center;
+    width: 250px;
+    height: 350px;
+    padding: 10px;
+    align-items: center;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+.quadro-img{
+    width: 220px;
+    height: 250px;
+    border-left: 2px solid black;
+    border-bottom: 2px solid black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 5px;
+}
+
+.form-container{
+display: flex;
+}
+
+/* Esconder o texto padrão */
+input[type="file"]::file-selector-button {
+    display: none;
+}
+
+/* Customizar o input como um botão */
+input[type="file"] {
+    display: inline-block;
+    padding: 5px;
+    font-size: .8rem;
+    cursor: pointer;
+    border: 1px solid #ccc;
+    border-radius: 2px;
+    background-color: #f0f0f0;
+    color: #333;
+    margin-bottom: 5px;
+    width: 220px;
+    /* Espaçamento abaixo do input */
+}
+
+#file-name {
+    font-size: 14px;
+    color: #333;
+}
+
+.img-produto{
+    width: 200px;
+    height: auto;
+    margin-bottom: 10px;
+}
+
+.img-disquete{
+width: 2.5rem;
+}
+
+.title-foto-produto{
+    font-weight: bold;
+    margin-bottom: 10px;
 }
