@@ -1,6 +1,6 @@
 const express = require('express');
 const Router = express.Router();
-
+const { upload } = require('../Controller/multer')
 const controllers = require('../Controller/controllers');
 
 Router.get('/produtos', controllers.getAllProducts);
@@ -15,6 +15,6 @@ Router.get('/unidadeComprimento', controllers.getUnidadeComprimento);
 Router.get('/unidadeEstoque', controllers.getUnidadeEstoque);
 Router.get('/produtos/:codigoDeBarras', controllers.findOneProduct);
 Router.post('/postNewProduto', controllers.postNewProduct);
-
+Router.post(('/upload-imagem', upload.single('imagemProduto'),controllers.postImgProduct))
 
 module.exports = Router;

@@ -1,4 +1,5 @@
 const path = require('path');
+
 const { getAllProdutos, findProductByBarcode, getCategoriaProduto, getGrupoProduto, getFornecedor, getTamanhoLetras, getTamanhoNumeros, getUnidadeMassa, getMedidaVolume, getUnidadeComprimento, getUnidadeEstoque, postNewProduct } = require(path.join(__dirname, '../../db/model/product'));
 
 const controllers = {
@@ -113,7 +114,6 @@ const controllers = {
         }
     },
 
-
     postNewProduct: async (req, res) => {
         try {
             // Extrai os dados do produto do corpo da requisição
@@ -134,11 +134,19 @@ const controllers = {
             console.error('Erro ao inserir o produto:', error);
             res.status(500).json({ error: 'Erro ao inserir o produto.' });
         }
+    },
+
+    postImgProduct: async (req, res) => {
+        if (!req.file) {
+            return res.status(400).send('Nenhum arquivo enviado.');
+        }
+        res.send('Imagem salva com sucesso!');
     }
+}
 
-};
 
 
+   
 
 
 module.exports = controllers;
