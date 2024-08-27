@@ -12,7 +12,7 @@ const selectUnidadeEstoque = document.querySelector('#unidadeEstoque');
 // Select all the input fields
 const inputCodigoEAN = document.querySelector('#codigoDeBarras');
 const inputNomeProduto = document.querySelector('#nomeProduto');
-const inputDescricao = document.querySelector('#descricao');
+const inputObservacoes = document.querySelector('#observacoes');
 const inputMassa = document.querySelector('#massaNumero');
 const inputVolume = document.querySelector('#volumeNumero');
 const inputComprimento = document.querySelector('#comprimento');
@@ -22,22 +22,45 @@ const inputPrecoCompra = document.querySelector('#precoCusto');
 const inputMarkup = document.querySelector('#markup');
 const inputPrecoVenda = document.querySelector('#precoVenda');
 
-// Button click event listener
+const inputPathImg = document.querySelector('#produto-imagem');
+const divImgProduct = document.querySelector('.quadro-img');
+
+inputPathImg.onchange = function (event) {
+    const file = event.target.files[0]; // O primeiro (e geralmente único) arquivo selecionado
+    if (file) {
+        const rendererImgProduct = document.createElement('img');
+        rendererImgProduct.style.maxWidth = '100%'; // Garantir que a imagem não ultrapasse o contêiner
+
+        const reader = new FileReader();
+
+        reader.onload = function (e) {
+            rendererImgProduct.src = e.target.result; // URL temporária da imagem
+            divImgProduct.innerHTML = ''; // Limpa qualquer imagem anterior
+            divImgProduct.appendChild(rendererImgProduct); // Adiciona a nova imagem ao div
+        };
+
+        reader.readAsDataURL(file); // Lê o arquivo como uma URL base64
+
+        // Aqui você cria um caminho relativo para o arquivo.
+        const relativePath = `images/${file.name}`;  
+       inputPathImg.setAttribute('data-relative-path', relativePath); // Armazena o caminho relativo no dataset
+    }
+};
+
 document.querySelector('#btn-cadastrar').addEventListener('click', function () {
 
     // Get the values from the input fields and populate the object
     const produtoData = {
         "codigo_ean": inputCodigoEAN.value,
+        "nome_produto": inputNomeProduto.value,                                
         "categoria_id": selectCategoria.value,
         "grupo_produto_id": selectGrupo.value,
-        "nome_produto": inputNomeProduto.value,
-        "descricao": inputDescricao.value,
         "tamanho_letras_id": selectTamanhoLetras.value,
         "tamanho_num_id": selectTamanhoNumeros.value,
-
+   
         "unidade_massa_qtd": inputMassa.value,
         "unidade_massa_id": selectUnidadeMassa.value,
-
+        
         "medida_volume_qtd": inputVolume.value,
         "medida_volume_id": selectMedidaVolume.value,
 
@@ -45,21 +68,23 @@ document.querySelector('#btn-cadastrar').addEventListener('click', function () {
         "unidade_comprimento_id": selectUnidadeComprimento.value,
 
         "cor_produto": inputCorProduto.value,
+        "observacoes": inputObservacoes.value,
+        "quantidade_estoque": inputQuantidadeEstoque.value,
         "preco_compra": inputPrecoCompra.value,
         "markup": inputMarkup.value,
         "preco_venda": inputPrecoVenda.value,
         "unidade_estoque_id": selectUnidadeEstoque.value,
-        "quantidade_estoque": inputQuantidadeEstoque.value,
+       
         "fornecedor_id": selectFornecedor.value,
+        "caminho_img_produto": inputPathImg.getAttribute('data-relative-path')
     };
-
-    // Call the function to post the new product
+       
     postNewProduto(produtoData);
 
 
 });
 
-// Initialize the select dropdowns with data
+
 getCategoriasProduto(selectCategoria);
 getGruposProduto(selectGrupo);
 getFornecedor(selectFornecedor);

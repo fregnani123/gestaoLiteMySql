@@ -136,12 +136,12 @@ const controllers = {
         }
     },
 
-    postImgProduct: async (req, res) => {
-        if (!req.file) {
-            return res.status(400).send('Nenhum arquivo enviado.');
-        }
-        res.send('Imagem salva com sucesso!');
-    }
+    // postImgProduct: async (req, res) => {
+    //     if (!req.file) {
+    //         return res.status(400).send('Nenhum arquivo enviado.');
+    //     }
+    //     res.send('Imagem salva com sucesso!');
+    // }
 }
 
 

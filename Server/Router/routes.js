@@ -15,6 +15,6 @@ Router.get('/unidadeComprimento', controllers.getUnidadeComprimento);
 Router.get('/unidadeEstoque', controllers.getUnidadeEstoque);
 Router.get('/produtos/:codigoDeBarras', controllers.findOneProduct);
 Router.post('/postNewProduto', controllers.postNewProduct);
-Router.post(('/upload-imagem', upload.single('imagemProduto'),controllers.postImgProduct))
+// Router.post(('/upload-imagem', upload.single('imagemProduto'), controllers.postImgProduct));
 
 module.exports = Router;
