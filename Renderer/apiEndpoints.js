@@ -10,6 +10,7 @@ const apiEndpoints = {
     getMedidaVolume: 'http://localhost:3000/medidaVolume',
     getunidadeComprimento: 'http://localhost:3000/unidadeComprimento',
     getunidadeEstoque: 'http://localhost:3000/unidadeEstoque',
+    getCorProduto: 'http://localhost:3000/corProduto',
     postNewProduto: 'http://localhost:3000/postNewProduto',
     postImgProduto: 'http://localhost:3000/uploadImagem'
 };
@@ -227,6 +228,25 @@ function getMedidaVolume(renderer) {
                 const option = document.createElement('option');
                 option.innerHTML = medida.medida_nome; 
                 option.value = medida.medida_volume_id;  
+                renderer.appendChild(option);
+            });
+            console.log(data);
+        })
+        .catch(error => {
+            console.error('Erro ao buscar dados:', error);
+        });
+}
+
+function getCorProduto(renderer) {
+    const getVolume = apiEndpoints.getCorProduto;  
+
+    fetch(getVolume)
+        .then(response => response.json())
+        .then(data => {
+            data.forEach((cor) => {
+                const option = document.createElement('option');
+                option.innerHTML = cor.nome_cor_produto; 
+                option.value = cor.cor_produto_id;  
                 renderer.appendChild(option);
             });
             console.log(data);

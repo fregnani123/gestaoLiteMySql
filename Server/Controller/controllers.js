@@ -1,7 +1,7 @@
 const path = require('path');
 const multer = require('multer');
 
-const { getAllProdutos, findProductByBarcode, getCategoriaProduto, getGrupoProduto, getFornecedor, getTamanhoLetras, getTamanhoNumeros, getUnidadeMassa, getMedidaVolume, getUnidadeComprimento, getUnidadeEstoque, postNewProduct } = require(path.join(__dirname, '../../db/model/product'));
+const { getAllProdutos, findProductByBarcode, getCategoriaProduto, getGrupoProduto, getFornecedor, getTamanhoLetras, getTamanhoNumeros, getUnidadeMassa, getMedidaVolume, getUnidadeComprimento, getUnidadeEstoque,getCorProduto, postNewProduct } = require(path.join(__dirname, '../../db/model/product'));
 
 const controllers = {
 
@@ -98,6 +98,16 @@ const controllers = {
         } catch (error) {
             console.error('Erro ao busca Unidade_estoque:', error);
             res.status(500).json({ error: 'Erro ao buscar Unidade_estoque'});
+        }
+    },
+
+    getCorProduto: async (req, res) => {
+        try {
+            const unidadeEstoque = await getCorProduto();
+            res.json(unidadeEstoque);
+        } catch (error) {
+            console.error('Erro ao busca Cor do Produto:', error);
+            res.status(500).json({ error: 'Erro ao buscar Cor do Produto'});
         }
     },
 

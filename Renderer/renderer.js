@@ -8,6 +8,7 @@ const selectUnidadeMassa = document.querySelector('#unidadeDeMassa');
 const selectMedidaVolume = document.querySelector('#medidaVolume');
 const selectUnidadeComprimento = document.querySelector('#unidadeComprimento');
 const selectUnidadeEstoque = document.querySelector('#unidadeEstoque');
+const selectCorProduto = document.querySelector('#corProduto');
 
 // Select all the input fields
 const inputCodigoEAN = document.querySelector('#codigoDeBarras');
@@ -16,7 +17,6 @@ const inputObservacoes = document.querySelector('#observacoes');
 const inputMassa = document.querySelector('#massaNumero');
 const inputVolume = document.querySelector('#volumeNumero');
 const inputComprimento = document.querySelector('#comprimento');
-const inputCorProduto = document.querySelector('#corProduto');
 const inputQuantidadeEstoque = document.querySelector('#estoqueQtd');
 const inputPrecoCompra = document.querySelector('#precoCusto');
 const inputMarkup = document.querySelector('#markup');
@@ -69,7 +69,7 @@ document.querySelector('#btn-cadastrar').addEventListener('click', function () {
         "unidade_comprimento_qtd": inputComprimento.value,
         "unidade_comprimento_id": selectUnidadeComprimento.value,
 
-        "cor_produto": inputCorProduto.value,
+        "cor_produto_id": selectCorProduto.value,
         "observacoes": inputObservacoes.value,
         "quantidade_estoque": inputQuantidadeEstoque.value,
         "preco_compra": inputPrecoCompra.value,
@@ -96,6 +96,6 @@ getunidadeDeMassa(selectUnidadeMassa);
 getMedidaVolume(selectMedidaVolume);
 getunidadeComprimento(selectUnidadeComprimento);
 getunidadeEstoque(selectUnidadeEstoque);
-
+getCorProduto(selectCorProduto);
 
 
