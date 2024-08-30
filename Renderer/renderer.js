@@ -25,6 +25,7 @@ const inputPrecoVenda = document.querySelector('#precoVenda');
 const inputPathImg = document.querySelector('#produto-imagem');
 const divImgProduct = document.querySelector('.quadro-img');
 
+
 inputPathImg.onchange = function (event) {
     const file = event.target.files[0]; // O primeiro (e geralmente único) arquivo selecionado
     if (file) {
@@ -46,6 +47,7 @@ inputPathImg.onchange = function (event) {
        inputPathImg.setAttribute('data-relative-path', relativePath); // Armazena o caminho relativo no dataset
     }
 };
+
 
 document.querySelector('#btn-cadastrar').addEventListener('click', function () {
 
@@ -80,7 +82,7 @@ document.querySelector('#btn-cadastrar').addEventListener('click', function () {
     };
        
     postNewProduto(produtoData);
-
+    uploadImage(inputPathImg);
 
 });
 

@@ -11,7 +11,32 @@ const apiEndpoints = {
     getunidadeComprimento: 'http://localhost:3000/unidadeComprimento',
     getunidadeEstoque: 'http://localhost:3000/unidadeEstoque',
     postNewProduto: 'http://localhost:3000/postNewProduto',
+    postImgProduto: 'http://localhost:3000/uploadImagem'
 };
+
+
+async function uploadImage(input) {
+    const inputData = input;
+    const formData = new FormData();
+    formData.append('image', inputData.files[0]);
+
+    try {
+        const response = await fetch(apiEndpoints.postImgProduto, {
+            method: 'POST',
+            body: formData
+        });
+
+        if (response.ok) {
+            const data = await response.json();
+            console.log('Upload successful:', data);
+
+        } else {
+            console.error('Upload failed');
+        }
+    } catch (error) {
+        console.error('Error uploading file:', error);
+    }
+}
 
 
 function postNewProduto(produtoData) {

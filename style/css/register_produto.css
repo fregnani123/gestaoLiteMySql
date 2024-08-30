@@ -387,24 +387,39 @@ a:hover {
 display: flex;
 }
 
-/* Esconder o texto padrão */
-input[type="file"]::file-selector-button {
-    display: none;
-}
-
 /* Customizar o input como um botão */
 input[type="file"] {
-    display: inline-block;
+    
     padding: 5px;
-    font-size: .8rem;
+    font-size: 1rem;
     cursor: pointer;
     border: 1px solid #ccc;
     border-radius: 2px;
     background-color: #f0f0f0;
-    color: #333;
+    color: transparent;
+    /* Esconde o texto padrão do botão */
     margin-bottom: 5px;
     width: 220px;
-    /* Espaçamento abaixo do input */
+    position: relative;
+}
+
+/* Adicionar texto personalizado no botão */
+input[type="file"]::before {
+    content: 'Escolher arquivo';
+    /* Texto personalizado */
+    color: black;
+    border-bottom: 1px solid black;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none;
+    margin-left: 22%;
+    font-weight: bold;
+}
+
+/* Esconder o ícone do botão */
+input[type="file"]::file-selector-button {
+    display: none;
 }
 
 #file-name {
