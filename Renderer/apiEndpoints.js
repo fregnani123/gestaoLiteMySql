@@ -16,10 +16,12 @@ const apiEndpoints = {
 };
 
 
-async function uploadImage(input) {
-    const inputData = input;
+async function uploadImage(fileName) {
+    const fileInput = document.querySelector('input[type="file"]');
     const formData = new FormData();
-    formData.append('image', inputData.files[0]);
+    const file = fileInput.files[0];
+    const extension = file.name.split('.').pop();
+    formData.append('image', file, `${fileName}`);
 
     try {
         const response = await fetch(apiEndpoints.postImgProduto, {
@@ -29,16 +31,15 @@ async function uploadImage(input) {
 
         if (response.ok) {
             const data = await response.json();
-            console.log('Upload successful:', data);
+            console.log('Upload bem-sucedido:', data);
 
         } else {
-            console.error('Upload failed');
+            console.error('Falha no upload');
         }
     } catch (error) {
-        console.error('Error uploading file:', error);
+        console.error('Erro ao fazer upload do arquivo:', error);
     }
 }
-
 
 function postNewProduto(produtoData) {
     const postNewProdutoData = apiEndpoints.postNewProduto;

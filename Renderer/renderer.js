@@ -27,48 +27,46 @@ const divImgProduct = document.querySelector('.quadro-img');
 
 
 inputPathImg.onchange = function (event) {
-    const file = event.target.files[0]; // O primeiro (e geralmente único) arquivo selecionado
+    const file = event.target.files[0];
     if (file) {
         const rendererImgProduct = document.createElement('img');
-        rendererImgProduct.style.maxWidth = '100%'; // Garantir que a imagem não ultrapasse o contêiner
+        rendererImgProduct.style.maxWidth = '100%';
 
         const reader = new FileReader();
 
         reader.onload = function (e) {
-            rendererImgProduct.src = e.target.result; // URL temporária da imagem
-            divImgProduct.innerHTML = ''; // Limpa qualquer imagem anterior
-            divImgProduct.appendChild(rendererImgProduct); // Adiciona a nova imagem ao div
+            rendererImgProduct.src = e.target.result;
+            divImgProduct.innerHTML = '';
+            divImgProduct.appendChild(rendererImgProduct);
         };
 
-        reader.readAsDataURL(file); // Lê o arquivo como uma URL base64
+        reader.readAsDataURL(file);
 
-        // Aqui você cria um caminho relativo para o arquivo.
-        const relativePath = `images/${file.name}`;  
-       inputPathImg.setAttribute('data-relative-path', relativePath); // Armazena o caminho relativo no dataset
+        // Define o caminho relativo sem a extensão
+        const relativePath = file.name.replace(/\.[^/.]+$/, "");
+        inputPathImg.setAttribute('data-relative-path', relativePath);
     }
 };
 
-
 document.querySelector('#btn-cadastrar').addEventListener('click', function () {
+    const file = document.querySelector('input[type="file"]').files[0];
+    const extension = file.name.split('.').pop();
+    const relativePath = `${inputPathImg.getAttribute('data-relative-path')}-${inputCodigoEAN.value}.${extension}`;
 
     // Get the values from the input fields and populate the object
     const produtoData = {
         "codigo_ean": inputCodigoEAN.value,
-        "nome_produto": inputNomeProduto.value,                                
+        "nome_produto": inputNomeProduto.value,
         "categoria_id": selectCategoria.value,
         "grupo_produto_id": selectGrupo.value,
         "tamanho_letras_id": selectTamanhoLetras.value,
         "tamanho_num_id": selectTamanhoNumeros.value,
-   
         "unidade_massa_qtd": inputMassa.value,
         "unidade_massa_id": selectUnidadeMassa.value,
-        
         "medida_volume_qtd": inputVolume.value,
         "medida_volume_id": selectMedidaVolume.value,
-
         "unidade_comprimento_qtd": inputComprimento.value,
         "unidade_comprimento_id": selectUnidadeComprimento.value,
-
         "cor_produto_id": selectCorProduto.value,
         "observacoes": inputObservacoes.value,
         "quantidade_estoque": inputQuantidadeEstoque.value,
@@ -76,15 +74,16 @@ document.querySelector('#btn-cadastrar').addEventListener('click', function () {
         "markup": inputMarkup.value,
         "preco_venda": inputPrecoVenda.value,
         "unidade_estoque_id": selectUnidadeEstoque.value,
-       
         "fornecedor_id": selectFornecedor.value,
-        "caminho_img_produto": inputPathImg.getAttribute('data-relative-path')
+        "caminho_img_produto": relativePath
     };
-       
-    postNewProduto(produtoData);
-    uploadImage(inputPathImg);
 
+    postNewProduto(produtoData);
+    uploadImage(relativePath); // Passa o caminho único para salvar a imagem
 });
+
+
+
 
 
 getCategoriasProduto(selectCategoria);

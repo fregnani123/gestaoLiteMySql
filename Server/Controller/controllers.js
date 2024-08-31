@@ -150,23 +150,24 @@ const controllers = {
     postImgProduct: async (req, res) => {
         const storage = multer.diskStorage({
             destination: function (req, file, cb) {
-                cb(null, path.join(__dirname, '../../img/produtos')); // Define the path where images will be saved
+                cb(null, path.join(__dirname, '../../img/produtos')); // Define o caminho onde as imagens serão salvas
             },
             filename: function (req, file, cb) {
-                cb(null, `${Date.now()}-${file.originalname}`); // Define the file name
+                cb(null, file.originalname); // Define o nome do arquivo com a extensão
             }
         });
 
-        const upload = multer({ storage: storage }).single('image'); // Assuming 'image' is the name of the file input field
+        const upload = multer({ storage: storage }).single('image');
 
         upload(req, res, function (err) {
             if (err) {
-                return res.status(500).json({ message: 'File upload failed', error: err.message });
+                return res.status(500).json({ message: 'Falha no upload do arquivo', error: err.message });
             }
-            // Proceed with the rest of your logic, such as saving the file info to the database
-            res.status(200).json({ message: 'File uploaded successfully', filePath: req.file.path });
+            res.status(200).json({ message: 'Arquivo carregado com sucesso', filePath: req.file.path });
         });
     }
+
+
 }
 
 
