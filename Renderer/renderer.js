@@ -1,6 +1,6 @@
 // Select dropdown elements
-const selectCategoria = document.querySelector('#categoriaProduto');
-const selectGrupo = document.querySelector('#grupo');
+const selectGrupo = document.querySelector('#categoriaProduto');
+const selectSubGrupo = document.querySelector('#grupo');
 const selectFornecedor = document.querySelector('#fornecedor');
 const selectTamanhoLetras = document.querySelector('#tamanhoLetras');
 const selectTamanhoNumeros = document.querySelector('#tamanhoNumeros');
@@ -67,8 +67,8 @@ document.querySelector('#btn-cadastrar').addEventListener('click', function (e) 
     const produtoData = {
         "codigo_ean": inputCodigoEAN.value,
         "nome_produto": inputNomeProduto.value,
-        "categoria_id": selectCategoria.value,
-        "grupo_produto_id": selectGrupo.value,
+        "grupo_id": selectGrupo.value,
+        "sub_grupo_id": selectSubGrupo.value,
         "tamanho_letras_id": selectTamanhoLetras.value,
         "tamanho_num_id": selectTamanhoNumeros.value,
         "unidade_massa_qtd": inputMassa.value,
@@ -97,8 +97,8 @@ document.querySelector('#btn-cadastrar').addEventListener('click', function (e) 
 });
 
 
-getCategoriasProduto(selectCategoria);
-getGruposProduto(selectGrupo);
+getGrupo(selectGrupo);
+getSubGrupo(selectSubGrupo);
 getFornecedor(selectFornecedor);
 getTamanhoLetras(selectTamanhoLetras);
 getTamanhoNumeros(selectTamanhoNumeros);

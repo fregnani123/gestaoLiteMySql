@@ -1,8 +1,8 @@
 // My Methods.
 
 const apiEndpoints = {
-    getCategoriasProduto: 'http://localhost:3000/grupos',
-    getGruposProduto: 'http://localhost:3000/sub-grupos',
+    getGrupo: 'http://localhost:3000/grupos',
+    getSubGrupo: 'http://localhost:3000/subGrupos',
     getFornecedor: 'http://localhost:3000/fornecedor',
     getTamanhoLetras: 'http://localhost:3000/tamanhoLetras',
     getTamanhoNumeros: 'http://localhost:3000/tamanhoNumeros',
@@ -70,16 +70,16 @@ function postNewProduto(produtoData) {
 }
 
 
-function getCategoriasProduto(renderer) {
-    const getCategoriasProduto = apiEndpoints.getCategoriasProduto;
-    fetch(getCategoriasProduto)
+function getGrupo(renderer) {
+    const getGrupo = apiEndpoints.getGrupo;
+    fetch(getGrupo)
         .then(response => response.json())
         .then(data => {
-            const categorias = data;
-            categorias.forEach((categoria) => {
+            const grupo = data;
+            grupo.forEach((grupo) => {
                 const option = document.createElement('option');
-                option.innerHTML = categoria.nome_categoria;
-                option.value = categoria.categoria_id;
+                option.innerHTML = grupo.nome_grupo;
+                option.value = grupo.grupo_id;
                 renderer.appendChild(option);
             });
             console.log(data);
@@ -89,17 +89,17 @@ function getCategoriasProduto(renderer) {
         });
 }
 
-function getGruposProduto(renderer) {
-    const getGruposProduto = apiEndpoints.getGruposProduto;
+function getSubGrupo(renderer) {
+    const getSubGrupo = apiEndpoints.getSubGrupo;
 
-    fetch(getGruposProduto)
+    fetch(getSubGrupo)
         .then(response => response.json()) 
         .then(data => {
-            const grupoProduto = data;
-            grupoProduto.forEach((grupo) => {
+            const subGrupo = data;
+            subGrupo.forEach((subGrupo) => {
                 const option = document.createElement('option');
-                option.innerHTML = grupo.nome_grupo;
-                option.value = grupo.grupo_id;
+                option.innerHTML = subGrupo.nome_sub_grupo;
+                option.value = subGrupo.sub_grupo_id;
                 renderer.appendChild(option);
             });
             console.log(data);
