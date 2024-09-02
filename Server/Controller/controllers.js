@@ -1,7 +1,7 @@
 const path = require('path');
 const multer = require('multer');
 
-const { getAllProdutos, findProductByBarcode, getCategoriaProduto, getGrupoProduto, getFornecedor, getTamanhoLetras, getTamanhoNumeros, getUnidadeMassa, getMedidaVolume, getUnidadeComprimento, getUnidadeEstoque,getCorProduto, postNewProduct } = require(path.join(__dirname, '../../db/model/product'));
+const { getAllProdutos, findProductByBarcode, getGrupo, getSubGrupo, getFornecedor, getTamanhoLetras, getTamanhoNumeros, getUnidadeMassa, getMedidaVolume, getUnidadeComprimento, getUnidadeEstoque,getCorProduto, postNewProduct } = require(path.join(__dirname, '../../db/model/product'));
 
 const controllers = {
 
@@ -14,18 +14,18 @@ const controllers = {
             res.status(500).json({ error: 'Erro ao buscar produtos' });
         }
     },
-    getCategoriaProduto : async (req, res) => {
+    getGrupo : async (req, res) => {
         try {
-            const categorias = await getCategoriaProduto();
+            const categorias = await getGrupo();
             res.json(categorias);
         } catch (error) {
             console.error('Erro ao buscar Categoria de Produto:', error);
             res.status(500).json({ error: 'Erro ao buscar Categoria de Produto' });
         }
     },
-    getGrupoProduto : async (req, res) => {
+    getSubGrupo : async (req, res) => {
         try {
-            const grupoProduto = await getGrupoProduto();
+            const grupoProduto = await getSubGrupo();
             res.json(grupoProduto);
         } catch (error) {
             console.error('Erro ao buscar grupo_produto:', error);

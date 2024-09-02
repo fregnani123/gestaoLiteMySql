@@ -1,8 +1,8 @@
 // My Methods.
 
 const apiEndpoints = {
-    getCategoriasProduto: 'http://localhost:3000/categorias',
-    getGruposProduto: 'http://localhost:3000/grupos',
+    getCategoriasProduto: 'http://localhost:3000/grupos',
+    getGruposProduto: 'http://localhost:3000/sub-grupos',
     getFornecedor: 'http://localhost:3000/fornecedor',
     getTamanhoLetras: 'http://localhost:3000/tamanhoLetras',
     getTamanhoNumeros: 'http://localhost:3000/tamanhoNumeros',
@@ -43,7 +43,11 @@ async function uploadImage(fileName) {
 
 function postNewProduto(produtoData) {
     const postNewProdutoData = apiEndpoints.postNewProduto;
-
+    
+    if (!produtoData.codigo_ean || !produtoData.nome_produto) {
+        console.error('Erro: código EAN e nome do produto são obrigatórios.');
+        return;
+    }
     fetch(postNewProdutoData, {
         method: 'POST',
         headers: {

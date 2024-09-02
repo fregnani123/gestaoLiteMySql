@@ -3,8 +3,8 @@ const Router = express.Router();
 const controllers = require('../Controller/controllers');
 
 Router.get('/produtos', controllers.getAllProducts);
-Router.get('/categorias', controllers.getCategoriaProduto);
-Router.get('/grupos', controllers.getGrupoProduto);
+Router.get('/grupos', controllers.getSubGrupo);
+Router.get('/sub-grupos', controllers.getGrupo);
 Router.get('/fornecedor', controllers.getFornecedor);
 Router.get('/tamanhoLetras', controllers.getTamanhoLetras);
 Router.get('/tamanhoNumeros', controllers.getTamanhoNumeros);

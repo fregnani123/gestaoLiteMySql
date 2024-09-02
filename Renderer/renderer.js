@@ -48,11 +48,21 @@ inputPathImg.onchange = function (event) {
     }
 };
 
-document.querySelector('#btn-cadastrar').addEventListener('click', function () {
+document.querySelector('#btn-cadastrar').addEventListener('click', function (e) {
+    e.preventDefault();
     const file = document.querySelector('input[type="file"]').files[0];
-    const extension = file.name.split('.').pop();
-    const relativePath = `${inputPathImg.getAttribute('data-relative-path')}-${inputCodigoEAN.value}.${extension}`;
+    let relativePath = null;
 
+    if (file) {
+        const extension = file.name.split('.').pop();
+        relativePath = `${inputPathImg.getAttribute('data-relative-path')}-${inputCodigoEAN.value}.${extension}`;
+    };
+
+    if (!inputCodigoEAN.value || !inputNomeProduto.value) {
+        alert("Por favor, preencha os campos Código EAN e Nome do Produto.");
+        return;
+    }
+    
     // Get the values from the input fields and populate the object
     const produtoData = {
         "codigo_ean": inputCodigoEAN.value,
@@ -79,11 +89,12 @@ document.querySelector('#btn-cadastrar').addEventListener('click', function () {
     };
 
     postNewProduto(produtoData);
-    uploadImage(relativePath); // Passa o caminho único para salvar a imagem
+
+    if (relativePath) {
+        uploadImage(relativePath); // Passa o caminho único para salvar a imagem
+    };
+
 });
-
-
-
 
 
 getCategoriasProduto(selectCategoria);
