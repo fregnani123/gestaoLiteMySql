@@ -94,8 +94,41 @@ document.querySelector('#btn-cadastrar').addEventListener('click', function (e) 
         uploadImage(relativePath); // Passa o caminho único para salvar a imagem
     };
 
+    clearForm();
 });
 
+function clearForm() {
+    // Limpar inputs de texto
+    inputCodigoEAN.value = '';
+    inputNomeProduto.value = '';
+    inputObservacoes.value = '';
+    inputMassa.value = '';
+    inputVolume.value = '';
+    inputComprimento.value = '';
+    inputQuantidadeEstoque.value = '';
+    inputPrecoCompra.value = '';
+    inputMarkup.value = '';
+    inputPrecoVenda.value = '';
+
+    // Limpar selects
+    selectGrupo.selectedIndex = 0;
+    selectSubGrupo.selectedIndex = 0;
+    selectTamanhoLetras.selectedIndex = 0;
+    selectTamanhoNumeros.selectedIndex = 0;
+    selectUnidadeMassa.selectedIndex = 0;
+    selectMedidaVolume.selectedIndex = 0;
+    selectUnidadeComprimento.selectedIndex = 0;
+    selectUnidadeEstoque.selectedIndex = 0;
+    selectCorProduto.selectedIndex = 0;
+    selectFornecedor.selectedIndex = 0;
+
+    // Limpar a imagem exibida
+    divImgProduct.innerHTML = '';
+    
+    // Limpar o input de imagem
+    inputPathImg.value = '';
+    inputPathImg.removeAttribute('data-relative-path');
+}
 
 getGrupo(selectGrupo);
 getSubGrupo(selectSubGrupo);

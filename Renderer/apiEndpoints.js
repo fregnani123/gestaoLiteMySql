@@ -46,6 +46,7 @@ function postNewProduto(produtoData) {
     
     if (!produtoData.codigo_ean || !produtoData.nome_produto) {
         console.error('Erro: código EAN e nome do produto são obrigatórios.');
+        alert('Erro: código EAN e nome do produto são obrigatórios.');
         return;
     }
     fetch(postNewProdutoData, {
