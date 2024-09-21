@@ -110,6 +110,7 @@ a {
     left: 50%;
     transform: translate(-50%, -50%);
     border: 1px solid black;
+    display: none;
 }
 .btn-exit{
     position: absolute;
@@ -362,7 +363,7 @@ a:hover {
     padding: 4px
 }
 
-#add-fornecedor {
+#add-fornecedor,#add-grupo {
     padding: 6px 10px;
     font-size: 1rem;
     margin-left: -5px;

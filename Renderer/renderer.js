@@ -25,13 +25,28 @@ const inputPrecoVenda = document.querySelector('#precoVenda');
 const inputPathImg = document.querySelector('#produto-imagem');
 const divImgProduct = document.querySelector('.quadro-img');
 
+document.addEventListener('DOMContentLoaded', () => {
+    // Seleciona o container de registro
+    const containerRegister = document.querySelector('.container-register');
+    
+    // Seleciona o botão de abrir o container
+    const btnCad = document.querySelector('#add-grupo');
 
-// btn open container 
-const btnCad = document.querySelector('#add-grupo');
+    // Seleciona o botão de fechar o container
+    const btnExit = document.querySelector('#btn-exit');
 
-// btn Close container 
-const btnExit = document.querySelector('#btn-exit');
+    // Evento para abrir o container
+    btnCad.addEventListener('click', (e) => {
+        e.preventDefault();
+        containerRegister.style.display = 'flex';
+    });
 
+    // Evento para fechar o container
+    btnExit.addEventListener('click', (e) => {
+        e.preventDefault();
+        containerRegister.style.display = 'none';
+    });
+});
 
 inputPathImg.onchange = function (event) {
     const file = event.target.files[0];
