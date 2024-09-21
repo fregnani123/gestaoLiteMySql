@@ -26,6 +26,13 @@ const inputPathImg = document.querySelector('#produto-imagem');
 const divImgProduct = document.querySelector('.quadro-img');
 
 
+// btn open container 
+const btnCad = document.querySelector('#add-grupo');
+
+// btn Close container 
+const btnExit = document.querySelector('#btn-exit');
+
+
 inputPathImg.onchange = function (event) {
     const file = event.target.files[0];
     if (file) {
@@ -129,6 +136,8 @@ function clearForm() {
     inputPathImg.value = '';
     inputPathImg.removeAttribute('data-relative-path');
 }
+
+
 
 getGrupo(selectGrupo);
 getSubGrupo(selectSubGrupo);
