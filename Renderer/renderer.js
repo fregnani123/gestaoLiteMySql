@@ -25,6 +25,7 @@ const inputPrecoVenda = document.querySelector('#precoVenda');
 const inputPathImg = document.querySelector('#produto-imagem');
 const divImgProduct = document.querySelector('.quadro-img');
 
+
 document.addEventListener('DOMContentLoaded', () => {
     // Seleciona o container de registro
     const containerRegister = document.querySelector('.container-register');
@@ -32,17 +33,20 @@ document.addEventListener('DOMContentLoaded', () => {
     const btnCadGrupo = document.querySelector('#add-grupo');
     const btnCadSubGrupo = document.querySelector('#add-subGrupo');
     const btnCadFornecedor = document.querySelector('#add-fornecedor');
-
     const btnExit = document.querySelector('#btn-exit');
 
+    // Evento para cadastrar grupo
     btnCadGrupo.addEventListener('click', (e) => {
         e.preventDefault();
         containerRegister.style.display = 'flex';
+        renderizarInputsGrupo();
     });
 
+    // Evento para cadastrar sub-grupo
     btnCadSubGrupo.addEventListener('click', (e) => {
         e.preventDefault();
         containerRegister.style.display = 'flex';
+        renderizarInputsSubGrupo();
     });
 
     btnCadFornecedor.addEventListener('click', (e) => {
@@ -50,16 +54,99 @@ document.addEventListener('DOMContentLoaded', () => {
         containerRegister.style.display = 'flex';
     });
 
-    
-
     // Evento para fechar o container
     btnExit.addEventListener('click', (e) => {
         e.preventDefault();
         containerRegister.style.display = 'none';
     });
 
+    // Função para criar inputs e botões do Grupo
+    function renderizarInputsGrupo() {
+        // Limpa o containerRegister antes de adicionar novos elementos
+        containerRegister.innerHTML = '';
 
+        // Cria a div que vai conter os elementos
+        const divGrupo = document.createElement('div');
+        divGrupo.className = 'div-grupo';
+
+        // Cria o botão "X"
+        const exitButton = document.createElement('button');
+        exitButton.id = 'btn-exit';
+        exitButton.className = 'btn-exit';
+        exitButton.textContent = 'X';
+        divGrupo.appendChild(exitButton);
+
+        // Cria o texto "Cadastrar Grupo"
+        const labelText = document.createElement('span');
+        labelText.textContent = 'Cadastrar Grupo';
+        divGrupo.appendChild(labelText);
+
+        // Cria o input
+        const inputGrupo = document.createElement('input');
+        inputGrupo.type = 'text';
+        inputGrupo.placeholder = 'Nome do Grupo';
+        divGrupo.appendChild(inputGrupo);
+
+        // Cria o botão "Cadastrar"
+        const cadButton = document.createElement('button');
+        cadButton.id = 'btn-cad-grupo';
+        cadButton.textContent = 'Cadastrar';
+        divGrupo.appendChild(cadButton);
+
+        // Adiciona a div ao container principal
+        containerRegister.appendChild(divGrupo);
+
+        // Evento para fechar o container
+        exitButton.addEventListener('click', (e) => {
+            e.preventDefault();
+            containerRegister.style.display = 'none';
+        });
+    }
+
+    // Função para criar inputs e botões do Sub-Grupo
+    function renderizarInputsSubGrupo() {
+        // Limpa o containerRegister antes de adicionar novos elementos
+        containerRegister.innerHTML = '';
+
+        // Cria a div que vai conter os elementos
+        const divSubGrupo = document.createElement('div');
+        divSubGrupo.className = 'div-subGrupo';
+
+        // Cria o botão "X"
+        const exitButton = document.createElement('button');
+        exitButton.id = 'btn-exit';
+        exitButton.className = 'btn-exit';
+        exitButton.textContent = 'X';
+        divSubGrupo.appendChild(exitButton);
+
+        // Cria o texto "Cadastrar Sub-Grupo"
+        const labelText = document.createElement('span');
+        labelText.textContent = 'Cadastrar Sub-Grupo';
+        divSubGrupo.appendChild(labelText);
+
+        // Cria o input
+        const inputSubGrupo = document.createElement('input');
+        inputSubGrupo.type = 'text';
+        inputSubGrupo.placeholder = 'Nome do Sub-Grupo';
+        divSubGrupo.appendChild(inputSubGrupo);
+
+        // Cria o botão "Cadastrar"
+        const cadButton = document.createElement('button');
+        cadButton.id = 'btn-cad-subGrupo';
+        cadButton.textContent = 'Cadastrar';
+        divSubGrupo.appendChild(cadButton);
+
+        // Adiciona a div ao container principal
+        containerRegister.appendChild(divSubGrupo);
+
+        // Evento para fechar o container
+        exitButton.addEventListener('click', (e) => {
+            e.preventDefault();
+            containerRegister.style.display = 'none';
+        });
+    }
 });
+
 
 inputPathImg.onchange = function (event) {
     const file = event.target.files[0];
