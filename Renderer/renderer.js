@@ -29,23 +29,36 @@ document.addEventListener('DOMContentLoaded', () => {
     // Seleciona o container de registro
     const containerRegister = document.querySelector('.container-register');
     
-    // Seleciona o botão de abrir o container
-    const btnCad = document.querySelector('#add-grupo');
+    const btnCadGrupo = document.querySelector('#add-grupo');
+    const btnCadSubGrupo = document.querySelector('#add-subGrupo');
+    const btnCadFornecedor = document.querySelector('#add-fornecedor');
 
-    // Seleciona o botão de fechar o container
     const btnExit = document.querySelector('#btn-exit');
 
-    // Evento para abrir o container
-    btnCad.addEventListener('click', (e) => {
+    btnCadGrupo.addEventListener('click', (e) => {
         e.preventDefault();
         containerRegister.style.display = 'flex';
     });
+
+    btnCadSubGrupo.addEventListener('click', (e) => {
+        e.preventDefault();
+        containerRegister.style.display = 'flex';
+    });
+
+    btnCadFornecedor.addEventListener('click', (e) => {
+        e.preventDefault();
+        containerRegister.style.display = 'flex';
+    });
+
+    
 
     // Evento para fechar o container
     btnExit.addEventListener('click', (e) => {
         e.preventDefault();
         containerRegister.style.display = 'none';
     });
+
+
 });
 
 inputPathImg.onchange = function (event) {

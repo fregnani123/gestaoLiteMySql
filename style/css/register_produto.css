@@ -363,14 +363,14 @@ a:hover {
     padding: 4px
 }
 
-#add-fornecedor,#add-grupo {
+#add-fornecedor,#add-grupo, #add-subGrupo {
     padding: 6px 10px;
     font-size: 1rem;
     margin-left: -5px;
     margin-top: 5px;
     cursor: pointer;
-
 }
+
 .cad{
     border-bottom: 1px solid black;
 }
