@@ -52,6 +52,7 @@ document.addEventListener('DOMContentLoaded', () => {
     btnCadFornecedor.addEventListener('click', (e) => {
         e.preventDefault();
         containerRegister.style.display = 'flex';
+        renderizarInputsFornecedor();A
     });
 
     // Evento para fechar o container
@@ -138,6 +139,49 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Adiciona a div ao container principal
         containerRegister.appendChild(divSubGrupo);
+
+        // Evento para fechar o container
+        exitButton.addEventListener('click', (e) => {
+            e.preventDefault();
+            containerRegister.style.display = 'none';
+        });
+    }
+
+    // Função para criar inputs e botões do Fornecedor 
+    function renderizarInputsFornecedor() {
+        // Limpa o containerRegister antes de adicionar novos elementos
+        containerRegister.innerHTML = '';
+
+        // Cria a div que vai conter os elementos
+        const divFornecedor = document.createElement('div');
+        divFornecedor.className = 'div-fornecedor';
+
+        // Cria o botão "X"
+        const exitButton = document.createElement('button');
+        exitButton.id = 'btn-exit';
+        exitButton.className = 'btn-exit';
+        exitButton.textContent = 'X';
+        divFornecedor.appendChild(exitButton);
+
+        // Cria o texto "Cadastrar Fornecedor"
+        const labelText = document.createElement('span');
+        labelText.textContent = 'Cadastrar Fornecedor';
+        divFornecedor.appendChild(labelText);
+
+        // Cria o input
+        const inputFornecedor = document.createElement('input');
+        inputFornecedor.type = 'text';
+        inputFornecedor.placeholder = 'Nome do Fornecedor';
+        divFornecedor.appendChild(inputFornecedor);
+
+        // Cria o botão "Cadastrar"
+        const cadButton = document.createElement('button');
+        cadButton.id = 'btn-cad-fornecedor';
+        cadButton.textContent = 'Cadastrar';
+        divFornecedor.appendChild(cadButton);
+
+        // Adiciona a div ao container principal
+        containerRegister.appendChild(divFornecedor);
 
         // Evento para fechar o container
         exitButton.addEventListener('click', (e) => {

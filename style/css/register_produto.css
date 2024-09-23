@@ -451,7 +451,7 @@ width: 2.5rem;
     margin-bottom: 10px;
 }
 
-.div-grupo,.div-subGrupo{
+.div-grupo,.div-subGrupo,.div-fornecedor{
     border: 1px solid black;
     padding: 40px;
     text-align: center;
@@ -475,7 +475,7 @@ width: 2.5rem;
     font-size: 1.5rem;
     
 }
-#btn-cad-grupo,#btn-cad-subGrupo{
+#btn-cad-grupo,#btn-cad-subGrupo,#btn-cad-fornecedor{
     padding: 10px 20px;
     cursor: pointer;
     margin-top: 10px;
