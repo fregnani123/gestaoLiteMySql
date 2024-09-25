@@ -25,6 +25,19 @@ const inputPrecoVenda = document.querySelector('#precoVenda');
 const inputPathImg = document.querySelector('#produto-imagem');
 const divImgProduct = document.querySelector('.quadro-img');
 
+inputPrecoCompra.addEventListener('input', (e) => {
+    let value = e.target.value;
+
+    // Remove qualquer caractere que não seja número
+    value = value.replace(/\D/g, '');
+
+    // Converte para um número com duas casas decimais
+    value = (parseFloat(value) / 100).toFixed(2);
+
+    // Atualiza o valor do campo, substitui o ponto por vírgula
+    e.target.value = value.replace('.', ',');
+});
+
 
 document.addEventListener('DOMContentLoaded', () => {
     // Seleciona o container de registro

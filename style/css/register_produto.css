@@ -209,6 +209,7 @@ label {
 textarea,
 input[type="text"],
 input[type="number"],
+input,
 select {
     padding: 7px;
     border: 1px solid var(--input-border-color);
