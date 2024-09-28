@@ -20,7 +20,7 @@ const inputComprimento = document.querySelector('#comprimento');
 const inputQuantidadeEstoque = document.querySelector('#estoqueQtd');
 const inputPrecoCompra = document.querySelector('#precoCusto');
 const inputMarkup = document.querySelector('#inputMarkup');
-const inputLucro = document.querySelector('#lucro');
+const outputLucro = document.querySelector('#lucro');
 const inputPrecoVenda = document.querySelector('#precoVenda');
 
 const inputPathImg = document.querySelector('#produto-imagem');
@@ -38,9 +38,34 @@ inputPrecoCompra.addEventListener('input', (e) => {
     // Atualiza o valor do campo, substitui o ponto por vírgula
     e.target.value = value.replace('.', ',');
 
-
+    // Calcula o lucro se ambos os campos tiverem valores válidos
+    calcularLucro();
 });
 
+inputMarkup.addEventListener('input', (e) => {
+    // Calcula o lucro se ambos os campos tiverem valores válidos
+    calcularLucro();
+});
+
+function calcularLucro() {
+    // Pega o valor do preço de compra, substitui a vírgula por ponto e converte para número
+    let precoCompra = parseFloat(inputPrecoCompra.value.replace(',', '.'));
+
+    // Pega o valor da margem de lucro e converte para número
+    let marginLucro = parseFloat(inputMarkup.value);
+
+    // Verifica se ambos os valores são números válidos
+    if (!isNaN(precoCompra) && !isNaN(marginLucro)) {
+        // Calcula o lucro (preço de compra * (margem de lucro / 100))
+        let valorLucro = precoCompra * (marginLucro / 100);
+         valorLucro.toFixed(2);
+
+      let valorVendaValue = precoCompra + valorLucro;
+      inputPrecoVenda.value = valorVendaValue.toFixed(2);
+      outputLucro.value = valorLucro.toFixed(2);
+        
+    }
+}
 
 document.addEventListener('DOMContentLoaded', () => {
     // Seleciona o container de registro
@@ -49,7 +74,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const btnCadGrupo = document.querySelector('#add-grupo');
     const btnCadSubGrupo = document.querySelector('#add-subGrupo');
     const btnCadFornecedor = document.querySelector('#add-fornecedor');
-    const btnExit = document.querySelector('#btn-exit');
 
     // Evento para cadastrar grupo
     btnCadGrupo.addEventListener('click', (e) => {
@@ -200,7 +224,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 });
-
 
 inputPathImg.onchange = function (event) {
     const file = event.target.files[0];

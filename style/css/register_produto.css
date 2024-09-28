@@ -235,7 +235,6 @@ input[type="number"]::-webkit-outer-spin-button {
 }
 
 .input-wrapper {
-    margin-top: 19px;
     margin-left: 15px;
     position: relative;
     display: inline-block;
@@ -247,8 +246,8 @@ input[type="number"]::-webkit-outer-spin-button {
 
 .percent-symbol {
     position: absolute;
-    right: 10px;
-    top: 55%;
+    right: 50px;
+    top: 70%;
     transform: translateY(-50%);
     pointer-events: none; /* Para garantir que não interfira no clique */
     color: #000; /* Cor do símbolo de % */
