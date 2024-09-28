@@ -19,7 +19,8 @@ const inputVolume = document.querySelector('#volumeNumero');
 const inputComprimento = document.querySelector('#comprimento');
 const inputQuantidadeEstoque = document.querySelector('#estoqueQtd');
 const inputPrecoCompra = document.querySelector('#precoCusto');
-const inputMarkup = document.querySelector('#markup');
+const inputMarkup = document.querySelector('#inputMarkup');
+const inputLucro = document.querySelector('#lucro');
 const inputPrecoVenda = document.querySelector('#precoVenda');
 
 const inputPathImg = document.querySelector('#produto-imagem');
@@ -36,6 +37,8 @@ inputPrecoCompra.addEventListener('input', (e) => {
 
     // Atualiza o valor do campo, substitui o ponto por vírgula
     e.target.value = value.replace('.', ',');
+
+
 });
 
 
@@ -65,13 +68,7 @@ document.addEventListener('DOMContentLoaded', () => {
     btnCadFornecedor.addEventListener('click', (e) => {
         e.preventDefault();
         containerRegister.style.display = 'flex';
-        renderizarInputsFornecedor();A
-    });
-
-    // Evento para fechar o container
-    btnExit.addEventListener('click', (e) => {
-        e.preventDefault();
-        containerRegister.style.display = 'none';
+        renderizarInputsFornecedor();
     });
 
     // Função para criar inputs e botões do Grupo
