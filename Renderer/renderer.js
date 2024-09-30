@@ -1,4 +1,4 @@
-// Select dropdown elements
+// Seleciona os elementos do dropdown
 const selectGrupo = document.querySelector('#categoriaProduto');
 const selectSubGrupo = document.querySelector('#grupo');
 const selectFornecedor = document.querySelector('#fornecedor');
@@ -10,7 +10,7 @@ const selectUnidadeComprimento = document.querySelector('#unidadeComprimento');
 const selectUnidadeEstoque = document.querySelector('#unidadeEstoque');
 const selectCorProduto = document.querySelector('#corProduto');
 
-// Select all the input fields
+// Seleciona todos os campos de input
 const inputCodigoEAN = document.querySelector('#codigoDeBarras');
 const inputNomeProduto = document.querySelector('#nomeProduto');
 const inputObservacoes = document.querySelector('#observacoes');
@@ -26,63 +26,90 @@ const inputPrecoVenda = document.querySelector('#precoVenda');
 const inputPathImg = document.querySelector('#produto-imagem');
 const divImgProduct = document.querySelector('.quadro-img');
 
+// Formatação do campo de preço de compra
 inputPrecoCompra.addEventListener('input', (e) => {
     let value = e.target.value;
-
     // Remove qualquer caractere que não seja número
     value = value.replace(/\D/g, '');
-
     // Converte para um número com duas casas decimais
     value = (parseFloat(value) / 100).toFixed(2);
-
     // Atualiza o valor do campo, substitui o ponto por vírgula
     e.target.value = value.replace('.', ',');
+    calcularLucro();
+    calcularLucroPorVenda();
+});
 
-    // Calcula o lucro se ambos os campos tiverem valores válidos
+// Formatação do campo de preço de venda
+inputPrecoVenda.addEventListener('input', (e) => {
+    let value = e.target.value;
+    value = value.replace(/\D/g, '');
+    value = (parseFloat(value) / 100).toFixed(2);
+    e.target.value = value.replace('.', ',');
+    calcularLucroPorVenda();
     calcularLucro();
 });
 
-inputMarkup.addEventListener('input', (e) => {
-    // Calcula o lucro se ambos os campos tiverem valores válidos
-    calcularLucro();
-});
-
-function calcularLucro() {
-    // Pega o valor do preço de compra, substitui a vírgula por ponto e converte para número
+// Função para calcular o lucro com base no preço de venda
+function calcularLucroPorVenda(){
     let precoCompra = parseFloat(inputPrecoCompra.value.replace(',', '.'));
+    let precoVenda = parseFloat(inputPrecoVenda.value.replace(',', '.'));
 
-    // Pega o valor da margem de lucro e converte para número
-    let marginLucro = parseFloat(inputMarkup.value);
-
-    // Verifica se ambos os valores são números válidos
-    if (!isNaN(precoCompra) && !isNaN(marginLucro)) {
-        // Calcula o lucro (preço de compra * (margem de lucro / 100))
-        let valorLucro = precoCompra * (marginLucro / 100);
-         valorLucro.toFixed(2);
-
-      let valorVendaValue = precoCompra + valorLucro;
-      inputPrecoVenda.value = valorVendaValue.toFixed(2);
-      outputLucro.value = valorLucro.toFixed(2);
-        
+    if (!isNaN(precoVenda) && !isNaN(precoCompra)) {
+        let lucro = precoVenda - precoCompra;
+        let markupPercentual = (lucro / precoCompra) * 100;
+        inputMarkup.value= isNaN(markupPercentual) || markupPercentual < 0 ? '': markupPercentual;
     }
 }
 
+// Permite apenas números e um ponto decimal no campo de markup
+inputMarkup.addEventListener('input', (e) => {
+    // Se o input estiver vazio, redefine a saída e retorna
+    if (e.target.value === '') {
+        outputLucro.value = '0,00'; // Resetando o valor da saída para '0,00' quando o input é limpo
+        return;
+    }
+    
+    // Substitui caracteres não numéricos e garante que apenas um ponto decimal é permitido
+    e.target.value = e.target.value
+        .replace(/[^0-9,.]/g, '') // Permitir dígitos, vírgulas e pontos
+        .replace(/(\..*)\./g, '$1') // Garantir que apenas um ponto decimal é permitido
+        .replace(/,/g, '.'); // Converter vírgula em ponto para a conversão correta para float
+    
+    // Chama funções para calcular lucro e lucro por venda
+    calcularLucro();
+    calcularLucroPorVenda();
+});
+
+
+// Função para calcular o lucro com base no markup
+function calcularLucro() {
+    let precoCompra = parseFloat(inputPrecoCompra.value.replace(',', '.'));
+    let margemLucro = parseFloat(inputMarkup.value);
+
+    if (!isNaN(precoCompra) && !isNaN(margemLucro)) {
+        let valorLucro = precoCompra * (margemLucro / 100);
+        let valorVenda = precoCompra + valorLucro;
+        
+        inputPrecoVenda.value = valorVenda.toFixed(2).replace('.', ',');
+        outputLucro.value = valorLucro.toFixed(2).replace('.', ',');
+    }
+}
+
+
+// Eventos para exibir o formulário de cadastro de grupo, subgrupo e fornecedor
 document.addEventListener('DOMContentLoaded', () => {
-    // Seleciona o container de registro
     const containerRegister = document.querySelector('.container-register');
     
     const btnCadGrupo = document.querySelector('#add-grupo');
     const btnCadSubGrupo = document.querySelector('#add-subGrupo');
     const btnCadFornecedor = document.querySelector('#add-fornecedor');
 
-    // Evento para cadastrar grupo
     btnCadGrupo.addEventListener('click', (e) => {
         e.preventDefault();
         containerRegister.style.display = 'flex';
         renderizarInputsGrupo();
     });
 
-    // Evento para cadastrar sub-grupo
     btnCadSubGrupo.addEventListener('click', (e) => {
         e.preventDefault();
         containerRegister.style.display = 'flex';
@@ -95,129 +122,105 @@ document.addEventListener('DOMContentLoaded', () => {
         renderizarInputsFornecedor();
     });
 
-    // Função para criar inputs e botões do Grupo
+    // Função para criar o formulário de cadastro de grupo
     function renderizarInputsGrupo() {
-        // Limpa o containerRegister antes de adicionar novos elementos
         containerRegister.innerHTML = '';
 
-        // Cria a div que vai conter os elementos
         const divGrupo = document.createElement('div');
         divGrupo.className = 'div-grupo';
 
-        // Cria o botão "X"
         const exitButton = document.createElement('button');
         exitButton.id = 'btn-exit';
         exitButton.className = 'btn-exit';
         exitButton.textContent = 'X';
         divGrupo.appendChild(exitButton);
 
-        // Cria o texto "Cadastrar Grupo"
         const labelText = document.createElement('span');
         labelText.textContent = 'Cadastrar Grupo';
         divGrupo.appendChild(labelText);
 
-        // Cria o input
         const inputGrupo = document.createElement('input');
         inputGrupo.type = 'text';
         inputGrupo.placeholder = 'Nome do Grupo';
         divGrupo.appendChild(inputGrupo);
 
-        // Cria o botão "Cadastrar"
         const cadButton = document.createElement('button');
         cadButton.id = 'btn-cad-grupo';
         cadButton.textContent = 'Cadastrar';
         divGrupo.appendChild(cadButton);
 
-        // Adiciona a div ao container principal
         containerRegister.appendChild(divGrupo);
 
-        // Evento para fechar o container
         exitButton.addEventListener('click', (e) => {
             e.preventDefault();
             containerRegister.style.display = 'none';
         });
     }
 
-    // Função para criar inputs e botões do Sub-Grupo
+    // Função para criar o formulário de cadastro de subgrupo
     function renderizarInputsSubGrupo() {
-        // Limpa o containerRegister antes de adicionar novos elementos
         containerRegister.innerHTML = '';
 
-        // Cria a div que vai conter os elementos
         const divSubGrupo = document.createElement('div');
         divSubGrupo.className = 'div-subGrupo';
 
-        // Cria o botão "X"
         const exitButton = document.createElement('button');
         exitButton.id = 'btn-exit';
         exitButton.className = 'btn-exit';
         exitButton.textContent = 'X';
         divSubGrupo.appendChild(exitButton);
 
-        // Cria o texto "Cadastrar Sub-Grupo"
         const labelText = document.createElement('span');
         labelText.textContent = 'Cadastrar Sub-Grupo';
         divSubGrupo.appendChild(labelText);
 
-        // Cria o input
         const inputSubGrupo = document.createElement('input');
         inputSubGrupo.type = 'text';
         inputSubGrupo.placeholder = 'Nome do Sub-Grupo';
         divSubGrupo.appendChild(inputSubGrupo);
 
-        // Cria o botão "Cadastrar"
         const cadButton = document.createElement('button');
         cadButton.id = 'btn-cad-subGrupo';
         cadButton.textContent = 'Cadastrar';
         divSubGrupo.appendChild(cadButton);
 
-        // Adiciona a div ao container principal
         containerRegister.appendChild(divSubGrupo);
 
-        // Evento para fechar o container
         exitButton.addEventListener('click', (e) => {
             e.preventDefault();
             containerRegister.style.display = 'none';
         });
     }
 
-    // Função para criar inputs e botões do Fornecedor 
+    // Função para criar o formulário de cadastro de fornecedor
     function renderizarInputsFornecedor() {
-        // Limpa o containerRegister antes de adicionar novos elementos
         containerRegister.innerHTML = '';
 
-        // Cria a div que vai conter os elementos
         const divFornecedor = document.createElement('div');
         divFornecedor.className = 'div-fornecedor';
 
-        // Cria o botão "X"
         const exitButton = document.createElement('button');
         exitButton.id = 'btn-exit';
         exitButton.className = 'btn-exit';
         exitButton.textContent = 'X';
         divFornecedor.appendChild(exitButton);
 
-        // Cria o texto "Cadastrar Fornecedor"
         const labelText = document.createElement('span');
         labelText.textContent = 'Cadastrar Fornecedor';
         divFornecedor.appendChild(labelText);
 
-        // Cria o input
         const inputFornecedor = document.createElement('input');
         inputFornecedor.type = 'text';
         inputFornecedor.placeholder = 'Nome do Fornecedor';
         divFornecedor.appendChild(inputFornecedor);
 
-        // Cria o botão "Cadastrar"
         const cadButton = document.createElement('button');
         cadButton.id = 'btn-cad-fornecedor';
         cadButton.textContent = 'Cadastrar';
         divFornecedor.appendChild(cadButton);
 
-        // Adiciona a div ao container principal
         containerRegister.appendChild(divFornecedor);
 
-        // Evento para fechar o container
         exitButton.addEventListener('click', (e) => {
             e.preventDefault();
             containerRegister.style.display = 'none';
@@ -225,6 +228,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 
+// Função para exibir a imagem do produto
 inputPathImg.onchange = function (event) {
     const file = event.target.files[0];
     if (file) {
@@ -241,12 +245,12 @@ inputPathImg.onchange = function (event) {
 
         reader.readAsDataURL(file);
 
-        // Define o caminho relativo sem a extensão
         const relativePath = file.name.replace(/\.[^/.]+$/, "");
         inputPathImg.setAttribute('data-relative-path', relativePath);
     }
 };
 
+// Evento para cadastrar um novo produto
 document.querySelector('#btn-cadastrar').addEventListener('click', function (e) {
     e.preventDefault();
     const file = document.querySelector('input[type="file"]').files[0];
@@ -255,49 +259,33 @@ document.querySelector('#btn-cadastrar').addEventListener('click', function (e) 
     if (file) {
         const extension = file.name.split('.').pop();
         relativePath = `${inputPathImg.getAttribute('data-relative-path')}-${inputCodigoEAN.value}.${extension}`;
-    };
-
-    if (!inputCodigoEAN.value || !inputNomeProduto.value) {
-        alert("Por favor, preencha os campos Código EAN e Nome do Produto.");
-        return;
+        uploadImage(relativePath);
     }
-    
-    // Get the values from the input fields and populate the object
+
     const produtoData = {
-        "codigo_ean": inputCodigoEAN.value,
-        "nome_produto": inputNomeProduto.value,
-        "grupo_id": selectGrupo.value,
-        "sub_grupo_id": selectSubGrupo.value,
-        "tamanho_letras_id": selectTamanhoLetras.value,
-        "tamanho_num_id": selectTamanhoNumeros.value,
-        "unidade_massa_qtd": inputMassa.value,
-        "unidade_massa_id": selectUnidadeMassa.value,
-        "medida_volume_qtd": inputVolume.value,
-        "medida_volume_id": selectMedidaVolume.value,
-        "unidade_comprimento_qtd": inputComprimento.value,
-        "unidade_comprimento_id": selectUnidadeComprimento.value,
-        "cor_produto_id": selectCorProduto.value,
-        "observacoes": inputObservacoes.value,
-        "quantidade_estoque": inputQuantidadeEstoque.value,
-        "preco_compra": inputPrecoCompra.value,
-        "markup": inputMarkup.value,
-        "preco_venda": inputPrecoVenda.value,
-        "unidade_estoque_id": selectUnidadeEstoque.value,
-        "fornecedor_id": selectFornecedor.value,
-        "caminho_img_produto": relativePath
+        codigo_ean: inputCodigoEAN.value,
+        nome_produto: inputNomeProduto.value,
+        observacoes: inputObservacoes.value,
+        categoria_id: selectGrupo.value,
+        grupo_produto_id: selectSubGrupo.value,
+        fornecedor_id: selectFornecedor.value,
+        tamanho_letras_id: selectTamanhoLetras.value,
+        tamanho_num_id: selectTamanhoNumeros.value,
+        unidade_massa_id: selectUnidadeMassa.value,
+        unidade_comprimento_id: selectUnidadeComprimento.value,
+        medida_volume_id: selectMedidaVolume.value,
+        quantidade_estoque: inputQuantidadeEstoque.value,
+        preco_compra: inputPrecoCompra.value,
+        markup: inputMarkup.value,
+        preco_venda: inputPrecoVenda.value,
+        unidade_estoque_id: selectUnidadeEstoque.value,
+        cor_produto: selectCorProduto.value,
+        caminho_imagem: relativePath,
     };
 
     postNewProduto(produtoData);
 
-    if (relativePath) {
-        uploadImage(relativePath); // Passa o caminho único para salvar a imagem
-    };
-
-    clearForm();
-});
-
-function clearForm() {
-    // Limpar inputs de texto
+    // Limpar todos os campos
     inputCodigoEAN.value = '';
     inputNomeProduto.value = '';
     inputObservacoes.value = '';
@@ -309,9 +297,10 @@ function clearForm() {
     inputMarkup.value = '';
     inputPrecoVenda.value = '';
 
-    // Limpar selects
+    // Resetar as seleções dos dropdowns
     selectGrupo.selectedIndex = 0;
     selectSubGrupo.selectedIndex = 0;
+    selectFornecedor.selectedIndex = 0;
     selectTamanhoLetras.selectedIndex = 0;
     selectTamanhoNumeros.selectedIndex = 0;
     selectUnidadeMassa.selectedIndex = 0;
@@ -319,27 +308,45 @@ function clearForm() {
     selectUnidadeComprimento.selectedIndex = 0;
     selectUnidadeEstoque.selectedIndex = 0;
     selectCorProduto.selectedIndex = 0;
-    selectFornecedor.selectedIndex = 0;
 
-    // Limpar a imagem exibida
+    // Limpar pré-visualização da imagem
     divImgProduct.innerHTML = '';
-    
-    // Limpar o input de imagem
     inputPathImg.value = '';
-    inputPathImg.removeAttribute('data-relative-path');
+});
+
+// Função para cadastrar o novo produto na API
+function postNewProduto(produtoData) {
+    fetch('/api/produto', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(produtoData)
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log('Produto cadastrado com sucesso:', data);
+    })
+    .catch(error => {
+        console.error('Erro ao cadastrar o produto:', error);
+    });
 }
 
+// Função para enviar a imagem
+function uploadImage(filePath) {
+    const fileInput = document.querySelector('input[type="file"]');
+    const formData = new FormData();
+    formData.append('image', fileInput.files[0], filePath);
 
-
-getGrupo(selectGrupo);
-getSubGrupo(selectSubGrupo);
-getFornecedor(selectFornecedor);
-getTamanhoLetras(selectTamanhoLetras);
-getTamanhoNumeros(selectTamanhoNumeros);
-getunidadeDeMassa(selectUnidadeMassa);
-getMedidaVolume(selectMedidaVolume);
-getunidadeComprimento(selectUnidadeComprimento);
-getunidadeEstoque(selectUnidadeEstoque);
-getCorProduto(selectCorProduto);
-
-
+    fetch('/api/upload', {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log('Imagem enviada com sucesso:', data);
+    })
+    .catch(error => {
+        console.error('Erro ao enviar a imagem:', error);
+    });
+}
