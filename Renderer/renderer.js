@@ -49,23 +49,13 @@ inputPrecoVenda.addEventListener('input', (e) => {
     calcularLucro();
 });
 
-// Função para calcular o lucro com base no preço de venda
-function calcularLucroPorVenda(){
-    let precoCompra = parseFloat(inputPrecoCompra.value.replace(',', '.'));
-    let precoVenda = parseFloat(inputPrecoVenda.value.replace(',', '.'));
-
-    if (!isNaN(precoVenda) && !isNaN(precoCompra)) {
-        let lucro = precoVenda - precoCompra;
-        let markupPercentual = (lucro / precoCompra) * 100;
-        inputMarkup.value= isNaN(markupPercentual) || markupPercentual < 0 ? '': markupPercentual;
-    }
-}
-
 // Permite apenas números e um ponto decimal no campo de markup
 inputMarkup.addEventListener('input', (e) => {
     // Se o input estiver vazio, redefine a saída e retorna
     if (e.target.value === '') {
-        outputLucro.value = '0,00'; // Resetando o valor da saída para '0,00' quando o input é limpo
+        inputPrecoVenda.value = '0,00';
+        outputLucro.value = '0,00';
+         // Resetando o valor da saída para '0,00' quando o input é limpo
         return;
     }
     
@@ -80,6 +70,20 @@ inputMarkup.addEventListener('input', (e) => {
     calcularLucroPorVenda();
 });
 
+// Função para calcular o lucro com base no preço de venda
+function calcularLucroPorVenda(){
+    let precoCompra = parseFloat(inputPrecoCompra.value.replace(',', '.'));
+    let precoVenda = parseFloat(inputPrecoVenda.value.replace(',', '.'));
+
+    if (!isNaN(precoVenda) && !isNaN(precoCompra)) {
+        let lucro = precoVenda - precoCompra;
+        let markupPercentual = (lucro / precoCompra) * 100;
+        inputMarkup.value= isNaN(markupPercentual) || markupPercentual < 0 ? '': markupPercentual;
+    }
+    if(precoVenda === '0,00'){
+        outputLucro.value = '0,00';
+    }
+}
 
 // Função para calcular o lucro com base no markup
 function calcularLucro() {
@@ -349,4 +353,4 @@ function uploadImage(filePath) {
     .catch(error => {
         console.error('Erro ao enviar a imagem:', error);
     });
-}
+} 
