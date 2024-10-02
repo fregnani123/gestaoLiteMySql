@@ -26,6 +26,18 @@ const inputPrecoVenda = document.querySelector('#precoVenda');
 const inputPathImg = document.querySelector('#produto-imagem');
 const divImgProduct = document.querySelector('.quadro-img');
 
+//functions que renderizam values padrões ou cadastrados no DB.
+getGrupo(selectGrupo);
+getSubGrupo(selectSubGrupo);
+getFornecedor(selectFornecedor);
+getTamanhoLetras(selectTamanhoLetras);
+getTamanhoNumeros(selectTamanhoNumeros);
+getunidadeComprimento(selectUnidadeComprimento);
+getunidadeEstoque(selectUnidadeEstoque);
+getMedidaVolume(selectMedidaVolume);
+getCorProduto(selectCorProduto);
+getunidadeDeMassa(selectUnidadeMassa);
+
 // Formatação do campo de preço de compra
 inputPrecoCompra.addEventListener('input', (e) => {
     let value = e.target.value;
@@ -48,6 +60,7 @@ inputPrecoVenda.addEventListener('input', (e) => {
     calcularLucroPorVenda();
     calcularLucro();
 });
+
 
 // Permite apenas números e um ponto decimal no campo de markup
 inputMarkup.addEventListener('input', (e) => {
@@ -80,7 +93,7 @@ function calcularLucroPorVenda(){
         let markupPercentual = (lucro / precoCompra) * 100;
         inputMarkup.value= isNaN(markupPercentual) || markupPercentual < 0 ? '': markupPercentual;
     }
-    if(precoVenda === '0,00'){
+    if(inputMarkup.value === ''){
         outputLucro.value = '0,00';
     }
 }
