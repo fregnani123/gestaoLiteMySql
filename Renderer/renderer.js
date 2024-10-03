@@ -26,7 +26,7 @@ const inputPrecoVenda = document.querySelector('#precoVenda');
 const inputPathImg = document.querySelector('#produto-imagem');
 const divImgProduct = document.querySelector('.quadro-img');
 
-//functions que renderizam values padrões ou cadastrados no DB.
+//Metodos criado por mim que renderizam os values iniciais padrões ou cadastrados no DB.
 getGrupo(selectGrupo);
 getSubGrupo(selectSubGrupo);
 getFornecedor(selectFornecedor);
