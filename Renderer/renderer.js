@@ -1,6 +1,6 @@
 // Seleciona os elementos do dropdown
-const selectGrupo = document.querySelector('#categoriaProduto');
-const selectSubGrupo = document.querySelector('#grupo');
+const selectGrupo = document.querySelector('#grupo');
+const selectSubGrupo = document.querySelector('#sub-grupo');
 const selectFornecedor = document.querySelector('#fornecedor');
 const selectTamanhoLetras = document.querySelector('#tamanhoLetras');
 const selectTamanhoNumeros = document.querySelector('#tamanhoNumeros');
@@ -157,6 +157,7 @@ document.addEventListener('DOMContentLoaded', () => {
         divGrupo.appendChild(labelText);
 
         const inputGrupo = document.createElement('input');
+        inputGrupo.className ='newGrupo';
         inputGrupo.type = 'text';
         inputGrupo.placeholder = 'Nome do Grupo';
         divGrupo.appendChild(inputGrupo);
@@ -168,12 +169,26 @@ document.addEventListener('DOMContentLoaded', () => {
 
         containerRegister.appendChild(divGrupo);
 
+      
+
+        let inputNewGrupo = document.querySelector('.newGrupo');
+        
+        cadButton.addEventListener('click',(e) =>{
+            e.preventDefault();
+            
+            const newGrupo = {
+                 nome_grupo: inputNewGrupo.value
+            }
+            postNewGrupoProduto(newGrupo);
+            inputNewGrupo.value='';
+        })
+
         exitButton.addEventListener('click', (e) => {
             e.preventDefault();
             containerRegister.style.display = 'none';
         });
     }
-
+   
     // Função para criar o formulário de cadastro de subgrupo
     function renderizarInputsSubGrupo() {
         containerRegister.innerHTML = '';

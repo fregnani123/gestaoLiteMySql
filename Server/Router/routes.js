@@ -16,5 +16,6 @@ Router.get('/corProduto', controllers.getCorProduto);
 Router.get('/produtos/:codigoDeBarras', controllers.findOneProduct);
 Router.post('/postNewProduto', controllers.postNewProduct);
 Router.post('/uploadImagem', controllers.postImgProduct);
+Router.post('/newGrupo', controllers.postNewProductGrupo);
 
 module.exports = Router;

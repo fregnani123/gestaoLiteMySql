@@ -1,7 +1,7 @@
 const path = require('path');
 const multer = require('multer');
 
-const { getAllProdutos, findProductByBarcode, getGrupo, getSubGrupo, getFornecedor, getTamanhoLetras, getTamanhoNumeros, getUnidadeMassa, getMedidaVolume, getUnidadeComprimento, getUnidadeEstoque,getCorProduto, postNewProduct } = require(path.join(__dirname, '../../db/model/product'));
+const { getAllProdutos, findProductByBarcode, getGrupo, getSubGrupo, getFornecedor, getTamanhoLetras, getTamanhoNumeros, getUnidadeMassa, getMedidaVolume, getUnidadeComprimento, getUnidadeEstoque,getCorProduto, postNewProduct, postNewProductGrupo } = require(path.join(__dirname, '../../db/model/product'));
 
 const controllers = {
 
@@ -165,7 +165,29 @@ const controllers = {
             }
             res.status(200).json({ message: 'Arquivo carregado com sucesso', filePath: req.file.path });
         });
-    }
+    },
+
+    postNewProductGrupo: async (req, res) => {
+        try {
+            // Extrai os dados do produto do corpo da requisição
+            const grupoData = req.body;
+
+            // Chama a função insertNewProduct para inserir o produto no banco de dados
+            const newGrupoProductId = await postNewProductGrupo(grupoData);
+
+            // Cria uma resposta contendo o ID do novo produto inserido
+            const response = {
+                message: 'Grupo inserido com sucesso!',
+                produto_id: newGrupoProductId
+            };
+
+            // Envia a resposta em formato JSON
+            res.json(response);
+        } catch (error) {
+            console.error('Erro ao inserir novo grupo:', error);
+            res.status(500).json({ error: 'Erro ao inserir novo grupo.' });
+        }
+    },
 
 
 }

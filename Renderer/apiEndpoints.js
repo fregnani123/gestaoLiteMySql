@@ -12,7 +12,8 @@ const apiEndpoints = {
     getunidadeEstoque: 'http://localhost:3000/unidadeEstoque',
     getCorProduto: 'http://localhost:3000/corProduto',
     postNewProduto: 'http://localhost:3000/postNewProduto',
-    postImgProduto: 'http://localhost:3000/uploadImagem'
+    postImgProduto: 'http://localhost:3000/uploadImagem',
+    postNewGrupoProduto: 'http://localhost:3000/newGrupo',
 };
 
 
@@ -70,6 +71,30 @@ function postNewProduto(produtoData) {
         });
 }
 
+function postNewGrupoProduto(newGrupoData) {
+    const postNewGrupoProdutoData = apiEndpoints.postNewGrupoProduto;
+    fetch(postNewGrupoProdutoData, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(newGrupoData),
+    })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+            return response.json(); 
+            
+        })
+        .then(data => {
+            console.log('Grupo added successfully:', data);
+        })
+        .catch(error => {
+            console.error('Error adding Grupo:', error);
+        });
+}
+
 
 function getGrupo(renderer) {
     const getGrupo = apiEndpoints.getGrupo;
@@ -88,6 +113,7 @@ function getGrupo(renderer) {
         .catch(error => {
             console.error('Erro ao buscar dados:', error);
         });
+
 }
 
 function getSubGrupo(renderer) {

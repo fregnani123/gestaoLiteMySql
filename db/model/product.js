@@ -57,7 +57,6 @@ async function getAllProdutos() {
 }
 
 
-
 async function getFornecedor() {
     let connection;
     try {
@@ -298,6 +297,40 @@ async function postNewProduct(product) {
     }
 }
 
+async function postNewProductGrupo(newGrupo) {
+    await ensureDBInitialized();
+    let connection;
+    try {
+        // Obtém uma conexão do pool
+        connection = await pool.getConnection();
+
+        // Verifica se já existe um grupo com o mesmo nome
+        const checkQuery = 'SELECT grupo_id FROM grupo WHERE nome_grupo = ?';
+        const [existingGrupo] = await connection.query(checkQuery, [newGrupo.nome_grupo]);
+
+        if (existingGrupo.length > 0 || '') {
+            // Se o produto já existir, lance um erro ou retorne uma mensagem
+
+            throw new Error('Este Grupo com o mesmo nome já existe.');
+        }}
+        catch (error) {
+            console.error('Erro ao inserir o grupo:', error.message);
+            throw error;
+        } finally {
+            if (connection) connection.release();
+        }
+        const insertQuery = `
+    INSERT INTO grupo (
+        nome_grupo
+    ) VALUES (?)
+`;
+        const values = [
+            newGrupo.nome_grupo
+        ];
+
+        const [result] = await connection.query(insertQuery, values);
+        return result.insertId;
+}
 
 module.exports = {
     getAllProdutos,
@@ -312,5 +345,6 @@ module.exports = {
     getUnidadeComprimento,
     getUnidadeEstoque,
     getCorProduto,
-    postNewProduct
+    postNewProduct,
+    postNewProductGrupo
 };

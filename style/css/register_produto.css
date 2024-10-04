@@ -296,12 +296,11 @@ width: 100%;
 
 .input-select-wrapper input {
     flex: 1;
-   
+    
 }
 
 .input-select-wrapper select {
     flex: 1;
-   
 }
 
 .input-select-wrapper {
@@ -509,4 +508,11 @@ width: 2.5rem;
     cursor: pointer;
     margin-top: 10px;
     font-size: 1rem;
+}
+#grupo{
+    margin-left: -20px;
+    width: 220px;
+}
+#sub-grupo{
+    width: 220px;
 }
