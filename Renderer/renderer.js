@@ -174,25 +174,32 @@ document.addEventListener('DOMContentLoaded', () => {
         
         cadButton.addEventListener('click', (e) => {
             e.preventDefault();
+
+            const newGrupo = {
+                nome_grupo: inputNewGrupo.value.trim() 
+            };
             
             if (!inputNewGrupo.value.trim()) {
                 alert('O campo de grupo não pode estar vazio!');
                 return; 
             }
             
-            const newGrupo = {
-                nome_grupo: inputNewGrupo.value.trim() 
-            };
-            
             postNewGrupoProduto(newGrupo);
+
             inputNewGrupo.value = ''; // Limpa o campo após o envio
-            
+        
+            // Limpa as opções atuais do select e redefine a primeira como "Selecione"
+            selectGrupo.innerHTML = '<option value="">Selecione</option>';
+        
+            // Chama a função para carregar novamente os grupos a partir da API
+            getGrupo(selectGrupo);
         });
         
 
         exitButton.addEventListener('click', (e) => {
             e.preventDefault();
             containerRegister.style.display = 'none';
+            
         });
     }
    
