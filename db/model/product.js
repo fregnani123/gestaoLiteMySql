@@ -325,7 +325,7 @@ async function postNewProductGrupo(newGrupo) {
     ) VALUES (?)
 `;
         const values = [
-            newGrupo.nome_sub_grupo
+            newGrupo.nome_grupo
         ];
 
         const [result] = await connection.query(insertQuery, values);
