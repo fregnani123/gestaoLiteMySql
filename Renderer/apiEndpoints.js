@@ -95,7 +95,6 @@ function postNewGrupoProduto(newGrupoData) {
         });
 }
 
-
 function getGrupo(renderer) {
     const getGrupo = apiEndpoints.getGrupo;
     fetch(getGrupo)
@@ -113,7 +112,6 @@ function getGrupo(renderer) {
         .catch(error => {
             console.error('Erro ao buscar dados:', error);
         });
-
 }
 
 function getSubGrupo(renderer) {

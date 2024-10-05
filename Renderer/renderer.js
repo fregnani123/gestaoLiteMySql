@@ -27,6 +27,7 @@ const inputPathImg = document.querySelector('#produto-imagem');
 const divImgProduct = document.querySelector('.quadro-img');
 
 //Metodos criado por mim que renderizam os values iniciais padrões ou cadastrados no DB.
+
 getGrupo(selectGrupo);
 getSubGrupo(selectSubGrupo);
 getFornecedor(selectFornecedor);
@@ -37,6 +38,7 @@ getunidadeEstoque(selectUnidadeEstoque);
 getMedidaVolume(selectMedidaVolume);
 getCorProduto(selectCorProduto);
 getunidadeDeMassa(selectUnidadeMassa);
+
 
 // Formatação do campo de preço de compra
 inputPrecoCompra.addEventListener('input', (e) => {
@@ -112,7 +114,6 @@ function calcularLucro() {
     }
 }
 
-
 // Eventos para exibir o formulário de cadastro de grupo, subgrupo e fornecedor
 document.addEventListener('DOMContentLoaded', () => {
     const containerRegister = document.querySelector('.container-register');
@@ -169,19 +170,25 @@ document.addEventListener('DOMContentLoaded', () => {
 
         containerRegister.appendChild(divGrupo);
 
-      
-
         let inputNewGrupo = document.querySelector('.newGrupo');
         
-        cadButton.addEventListener('click',(e) =>{
+        cadButton.addEventListener('click', (e) => {
             e.preventDefault();
             
-            const newGrupo = {
-                 nome_grupo: inputNewGrupo.value
+            if (!inputNewGrupo.value.trim()) {
+                alert('O campo de grupo não pode estar vazio!');
+                return; 
             }
+            
+            const newGrupo = {
+                nome_grupo: inputNewGrupo.value.trim() 
+            };
+            
             postNewGrupoProduto(newGrupo);
-            inputNewGrupo.value='';
-        })
+            inputNewGrupo.value = ''; // Limpa o campo após o envio
+            
+        });
+        
 
         exitButton.addEventListener('click', (e) => {
             e.preventDefault();
