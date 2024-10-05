@@ -115,6 +115,34 @@ function calcularLucro() {
 }
 
 // Eventos para exibir o formulário de cadastro de grupo, subgrupo e fornecedor
+
+async function postNewGrupoProduto(newGrupoData) {
+    const postNewGrupoProdutoData = apiEndpoints.postNewGrupoProduto;
+    fetch(postNewGrupoProdutoData, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(newGrupoData),
+    })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+            return response.json(); 
+            
+        })
+        .then(data => {
+            console.log('Grupo added successfully:', data);
+             // // Chama a função para carregar novamente os grupos a partir da API
+            getGrupo(selectGrupo);
+        })
+        .catch(error => {
+            console.error('Error adding Grupo:', error);
+        });
+        
+}
+
 document.addEventListener('DOMContentLoaded', () => {
     const containerRegister = document.querySelector('.container-register');
     
@@ -183,16 +211,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 alert('O campo de grupo não pode estar vazio!');
                 return; 
             }
-            
-            postNewGrupoProduto(newGrupo);
-
-            inputNewGrupo.value = ''; // Limpa o campo após o envio
         
+            postNewGrupoProduto(newGrupo);
+            inputNewGrupo.value = ''; // Limpa o campo após o envio
             // Limpa as opções atuais do select e redefine a primeira como "Selecione"
             selectGrupo.innerHTML = '<option value="">Selecione</option>';
         
-            // Chama a função para carregar novamente os grupos a partir da API
-            getGrupo(selectGrupo);
         });
         
 
@@ -204,6 +228,33 @@ document.addEventListener('DOMContentLoaded', () => {
     }
    
     // Função para criar o formulário de cadastro de subgrupo
+
+    async function postNewSubGrupoProduto(newSubGrupoData) {
+        const postNewSubGrupoProdutoData = apiEndpoints.postNewSubGrupoProduto;
+        fetch(postNewSubGrupoProdutoData, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(newSubGrupoData),
+        })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`HTTP error! Status: ${response.status}`);
+                }
+                return response.json(); 
+            })
+            .then(data => {
+                console.log('sub-grupo added successfully:', data);
+                 // // Chama a função para carregar novamente os grupos a partir da API
+                getSubGrupo(selectSubGrupo);
+            })
+            .catch(error => {
+                console.error('Error adding Sub-Grupo:', error);
+            });
+            
+    }
+
     function renderizarInputsSubGrupo() {
         containerRegister.innerHTML = '';
 
@@ -221,6 +272,7 @@ document.addEventListener('DOMContentLoaded', () => {
         divSubGrupo.appendChild(labelText);
 
         const inputSubGrupo = document.createElement('input');
+        inputSubGrupo.className = 'newSubGrupo';
         inputSubGrupo.type = 'text';
         inputSubGrupo.placeholder = 'Nome do Sub-Grupo';
         divSubGrupo.appendChild(inputSubGrupo);
@@ -231,6 +283,28 @@ document.addEventListener('DOMContentLoaded', () => {
         divSubGrupo.appendChild(cadButton);
 
         containerRegister.appendChild(divSubGrupo);
+
+        let inputNewSubGrupo = document.querySelector('.newSubGrupo');
+
+        cadButton.addEventListener('click', (e) => {
+            e.preventDefault();
+
+            const newSubGrupo = {
+                nome_sub_grupo: inputNewSubGrupo.value.trim() 
+            };
+            
+            if (!inputNewSubGrupo.value.trim()) {
+                alert('O campo de sub-grupo não pode estar vazio!');
+                return; 
+            }
+        
+            postNewSubGrupoProduto(newSubGrupo);
+            inputNewSubGrupo.value = ''; // Limpa o campo após o envio
+            // Limpa as opções atuais do select e redefine a primeira como "Selecione"
+            selectSubGrupo.innerHTML = '<option value="">Selecione</option>';
+        
+        });
+
 
         exitButton.addEventListener('click', (e) => {
             e.preventDefault();
@@ -266,6 +340,9 @@ document.addEventListener('DOMContentLoaded', () => {
         divFornecedor.appendChild(cadButton);
 
         containerRegister.appendChild(divFornecedor);
+
+
+        
 
         exitButton.addEventListener('click', (e) => {
             e.preventDefault();

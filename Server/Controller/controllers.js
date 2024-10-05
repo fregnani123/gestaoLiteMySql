@@ -1,7 +1,7 @@
 const path = require('path');
 const multer = require('multer');
 
-const { getAllProdutos, findProductByBarcode, getGrupo, getSubGrupo, getFornecedor, getTamanhoLetras, getTamanhoNumeros, getUnidadeMassa, getMedidaVolume, getUnidadeComprimento, getUnidadeEstoque,getCorProduto, postNewProduct, postNewProductGrupo } = require(path.join(__dirname, '../../db/model/product'));
+const { getAllProdutos, findProductByBarcode, getGrupo, getSubGrupo, getFornecedor, getTamanhoLetras, getTamanhoNumeros, getUnidadeMassa, getMedidaVolume, getUnidadeComprimento, getUnidadeEstoque,getCorProduto, postNewProduct, postNewProductGrupo, postNewProductSubGrupo} = require(path.join(__dirname, '../../db/model/product'));
 
 const controllers = {
 
@@ -172,13 +172,13 @@ const controllers = {
             // Extrai os dados do produto do corpo da requisição
             const grupoData = req.body;
 
-            // Chama a função insertNewProduct para inserir o produto no banco de dados
+            // Chama a função insertNewProduct para inserir o grupo no banco de dados
             const newGrupoProductId = await postNewProductGrupo(grupoData);
 
-            // Cria uma resposta contendo o ID do novo produto inserido
+            // Cria uma resposta contendo o ID do novo grupo inserido
             const response = {
                 message: 'Grupo inserido com sucesso!',
-                produto_id: newGrupoProductId
+                grupo_id: newGrupoProductId
             };
 
             // Envia a resposta em formato JSON
@@ -190,8 +190,29 @@ const controllers = {
     },
 
 
-}
+    postNewProductSubGrupo: async (req, res) => {
+        try {
+            // Extrai os dados do produto do corpo da requisição
+            const subGrupoData = req.body;
 
+            // Chama a função insertNewProduct para inserir o produto no banco de dados
+            const newGrupoProductId = await postNewProductSubGrupo(subGrupoData);
+
+            // Cria uma resposta contendo o ID do novo produto inserido
+            const response = {
+                message: 'Grupo inserido com sucesso!',
+                subGrupo_id: newGrupoProductId
+            };
+
+            // Envia a resposta em formato JSON
+            res.json(response);
+        } catch (error) {
+            console.error('Erro ao inserir novo sub-grupo:', error);
+            res.status(500).json({ error: 'Erro ao inserir novo sub-grupo.' });
+        }
+    },
+
+}
 
 
 module.exports = controllers;

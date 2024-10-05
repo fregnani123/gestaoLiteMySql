@@ -309,7 +309,7 @@ async function postNewProductGrupo(newGrupo) {
         const [existingGrupo] = await connection.query(checkQuery, [newGrupo.nome_grupo]);
 
         if (existingGrupo.length > 0 || '') {
-            // Se o produto já existir, lance um erro ou retorne uma mensagem
+            // Se o grupo já existir, lance um erro ou retorne uma mensagem
 
             throw new Error('Este Grupo com o mesmo nome já existe.');
         }}
@@ -325,7 +325,42 @@ async function postNewProductGrupo(newGrupo) {
     ) VALUES (?)
 `;
         const values = [
-            newGrupo.nome_grupo
+            newGrupo.nome_sub_grupo
+        ];
+
+        const [result] = await connection.query(insertQuery, values);
+        return result.insertId;
+}
+
+async function postNewProductSubGrupo(newSubGrupo) {
+    await ensureDBInitialized();
+    let connection;
+    try {
+        // Obtém uma conexão do pool
+        connection = await pool.getConnection();
+
+        // Verifica se já existe um grupo com o mesmo nome
+        const checkQuery = 'SELECT sub_grupo_id FROM sub_grupo WHERE nome_sub_grupo = ?';
+        const [existingSubGrupo] = await connection.query(checkQuery, [newSubGrupo.nome_sub_grupo]);
+
+        if (existingSubGrupo.length > 0 || '') {
+            // Se o sub-grupo já existir, lance um erro ou retorne uma mensagem
+
+            throw new Error('Este sub-grupo com o mesmo nome já existe.');
+        }}
+        catch (error) {
+            console.error('Erro ao inserir o sub-grupo:', error.message);
+            throw error;
+        } finally {
+            if (connection) connection.release();
+        }
+        const insertQuery = `
+    INSERT INTO sub_grupo (
+        nome_sub_grupo
+    ) VALUES (?)
+`;
+        const values = [
+            newSubGrupo.nome_sub_grupo
         ];
 
         const [result] = await connection.query(insertQuery, values);
@@ -346,5 +381,6 @@ module.exports = {
     getUnidadeEstoque,
     getCorProduto,
     postNewProduct,
-    postNewProductGrupo
+    postNewProductGrupo,
+    postNewProductSubGrupo
 };
