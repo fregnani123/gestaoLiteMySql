@@ -70,32 +70,32 @@ inputMarkup.addEventListener('input', (e) => {
     if (e.target.value === '') {
         inputPrecoVenda.value = '0,00';
         outputLucro.value = '0,00';
-         // Resetando o valor da saída para '0,00' quando o input é limpo
+        // Resetando o valor da saída para '0,00' quando o input é limpo
         return;
     }
-    
+
     // Substitui caracteres não numéricos e garante que apenas um ponto decimal é permitido
     e.target.value = e.target.value
         .replace(/[^0-9,.]/g, '') // Permitir dígitos, vírgulas e pontos
         .replace(/(\..*)\./g, '$1') // Garantir que apenas um ponto decimal é permitido
         .replace(/,/g, '.'); // Converter vírgula em ponto para a conversão correta para float
-    
+
     // Chama funções para calcular lucro e lucro por venda
     calcularLucro();
     calcularLucroPorVenda();
 });
 
 // Função para calcular o lucro com base no preço de venda
-function calcularLucroPorVenda(){
+function calcularLucroPorVenda() {
     let precoCompra = parseFloat(inputPrecoCompra.value.replace(',', '.'));
     let precoVenda = parseFloat(inputPrecoVenda.value.replace(',', '.'));
 
     if (!isNaN(precoVenda) && !isNaN(precoCompra)) {
         let lucro = precoVenda - precoCompra;
         let markupPercentual = (lucro / precoCompra) * 100;
-        inputMarkup.value= isNaN(markupPercentual) || markupPercentual < 0 ? '': markupPercentual;
+        inputMarkup.value = isNaN(markupPercentual) || markupPercentual < 0 ? '' : markupPercentual;
     }
-    if(inputMarkup.value === ''){
+    if (inputMarkup.value === '') {
         outputLucro.value = '0,00';
     }
 }
@@ -108,7 +108,7 @@ function calcularLucro() {
     if (!isNaN(precoCompra) && !isNaN(margemLucro)) {
         let valorLucro = precoCompra * (margemLucro / 100);
         let valorVenda = precoCompra + valorLucro;
-        
+
         inputPrecoVenda.value = valorVenda.toFixed(2).replace('.', ',');
         outputLucro.value = valorLucro.toFixed(2).replace('.', ',');
     }
@@ -129,23 +129,23 @@ async function postNewGrupoProduto(newGrupoData) {
             if (!response.ok) {
                 throw new Error(`HTTP error! Status: ${response.status}`);
             }
-            return response.json(); 
-            
+            return response.json();
+
         })
         .then(data => {
             console.log('Grupo added successfully:', data);
-             // // Chama a função para carregar novamente os grupos a partir da API
+            // // Chama a função para carregar novamente os grupos a partir da API
             getGrupo(selectGrupo);
         })
         .catch(error => {
             console.error('Error adding Grupo:', error);
         });
-        
+
 }
 
 document.addEventListener('DOMContentLoaded', () => {
     const containerRegister = document.querySelector('.container-register');
-    
+
     const btnCadGrupo = document.querySelector('#add-grupo');
     const btnCadSubGrupo = document.querySelector('#add-subGrupo');
     const btnCadFornecedor = document.querySelector('#add-fornecedor');
@@ -186,7 +186,7 @@ document.addEventListener('DOMContentLoaded', () => {
         divGrupo.appendChild(labelText);
 
         const inputGrupo = document.createElement('input');
-        inputGrupo.className ='newGrupo';
+        inputGrupo.className = 'newGrupo';
         inputGrupo.type = 'text';
         inputGrupo.placeholder = 'Nome do Grupo';
         divGrupo.appendChild(inputGrupo);
@@ -199,34 +199,34 @@ document.addEventListener('DOMContentLoaded', () => {
         containerRegister.appendChild(divGrupo);
 
         let inputNewGrupo = document.querySelector('.newGrupo');
-        
+
         cadButton.addEventListener('click', (e) => {
             e.preventDefault();
 
             const newGrupo = {
-                nome_grupo: inputNewGrupo.value.trim() 
+                nome_grupo: inputNewGrupo.value.trim()
             };
-            
+
             if (!inputNewGrupo.value.trim()) {
                 alert('O campo de grupo não pode estar vazio!');
-                return; 
+                return;
             }
-        
+
             postNewGrupoProduto(newGrupo);
             inputNewGrupo.value = ''; // Limpa o campo após o envio
             // Limpa as opções atuais do select e redefine a primeira como "Selecione"
             selectGrupo.innerHTML = '<option value="">Selecione</option>';
-        
+
         });
-        
+
 
         exitButton.addEventListener('click', (e) => {
             e.preventDefault();
             containerRegister.style.display = 'none';
-            
+
         });
     }
-   
+
     // Função para criar o formulário de cadastro de subgrupo
 
     async function postNewSubGrupoProduto(newSubGrupoData) {
@@ -242,17 +242,17 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (!response.ok) {
                     throw new Error(`HTTP error! Status: ${response.status}`);
                 }
-                return response.json(); 
+                return response.json();
             })
             .then(data => {
                 console.log('sub-grupo added successfully:', data);
-                 // // Chama a função para carregar novamente os grupos a partir da API
+                // // Chama a função para carregar novamente os grupos a partir da API
                 getSubGrupo(selectSubGrupo);
             })
             .catch(error => {
                 console.error('Error adding Sub-Grupo:', error);
             });
-            
+
     }
 
     function renderizarInputsSubGrupo() {
@@ -290,21 +290,20 @@ document.addEventListener('DOMContentLoaded', () => {
             e.preventDefault();
 
             const newSubGrupo = {
-                nome_sub_grupo: inputNewSubGrupo.value.trim() 
+                nome_sub_grupo: inputNewSubGrupo.value.trim()
             };
-            
+
             if (!inputNewSubGrupo.value.trim()) {
                 alert('O campo de sub-grupo não pode estar vazio!');
-                return; 
+                return;
             }
-        
+
             postNewSubGrupoProduto(newSubGrupo);
             inputNewSubGrupo.value = ''; // Limpa o campo após o envio
             // Limpa as opções atuais do select e redefine a primeira como "Selecione"
             selectSubGrupo.innerHTML = '<option value="">Selecione</option>';
-        
-        });
 
+        });
 
         exitButton.addEventListener('click', (e) => {
             e.preventDefault();
@@ -325,14 +324,53 @@ document.addEventListener('DOMContentLoaded', () => {
         exitButton.textContent = 'X';
         divFornecedor.appendChild(exitButton);
 
+        // Título do formulário
         const labelText = document.createElement('span');
         labelText.textContent = 'Cadastrar Fornecedor';
         divFornecedor.appendChild(labelText);
 
+        // Campo para Nome do Fornecedor
         const inputFornecedor = document.createElement('input');
         inputFornecedor.type = 'text';
-        inputFornecedor.placeholder = 'Nome do Fornecedor';
+        inputFornecedor.placeholder = ' Nome Fantasia';
         divFornecedor.appendChild(inputFornecedor);
+
+        // Campo para Endereço
+        const inputEndereco = document.createElement('input');
+        inputEndereco.type = 'text';
+        inputEndereco.placeholder = 'Endereço';
+        divFornecedor.appendChild(inputEndereco);
+
+        // Campo para Número
+        const inputNumero = document.createElement('input');
+        inputNumero.type = 'text';
+        inputNumero.placeholder = 'Número';
+        divFornecedor.appendChild(inputNumero);
+
+        // Campo para CEP
+        const inputCep = document.createElement('input');
+        inputCep.type = 'text';
+        inputCep.placeholder = 'CEP';
+        divFornecedor.appendChild(inputCep);
+
+        // Campo para CNPJ
+        const inputCnpj = document.createElement('input');
+        inputCnpj.type = 'text';
+        inputCnpj.placeholder = 'CNPJ';
+        divFornecedor.appendChild(inputCnpj);
+
+        // Campo para Telefone
+        const inputTelefone = document.createElement('input');
+        inputTelefone.type = 'text';
+        inputTelefone.placeholder = 'Telefone';
+        divFornecedor.appendChild(inputTelefone);
+
+        // Campo para email
+        const inputEmail = document.createElement('input');
+        inputEmail.type = 'text';
+        inputEmail.placeholder = 'Email';
+        divFornecedor.appendChild(inputEmail);
+
 
         const cadButton = document.createElement('button');
         cadButton.id = 'btn-cad-fornecedor';
@@ -372,7 +410,7 @@ inputPathImg.onchange = function (event) {
 
 // Evento para cadastrar um novo produto
 document.querySelector('#btn-cadastrar').addEventListener('click', function (e) {
-    e.preventDefault(); 
+    e.preventDefault();
     const file = document.querySelector('input[type="file"]').files[0];
     let relativePath = null;
 
@@ -432,7 +470,7 @@ document.querySelector('#btn-cadastrar').addEventListener('click', function (e) 
     // Limpar pré-visualização da imagem
     divImgProduct.innerHTML = ` <img class="img-produto" src="../style/img/produto.png" alt="imagem produto">`;
     inputPathImg.value = '';
-    
+
 });
 
 
@@ -446,11 +484,11 @@ function uploadImage(filePath) {
         method: 'POST',
         body: formData
     })
-    .then(response => response.json())
-    .then(data => {
-        console.log('Imagem enviada com sucesso:', data);
-    })
-    .catch(error => {
-        console.error('Erro ao enviar a imagem:', error);
-    });
+        .then(response => response.json())
+        .then(data => {
+            console.log('Imagem enviada com sucesso:', data);
+        })
+        .catch(error => {
+            console.error('Erro ao enviar a imagem:', error);
+        });
 } 
