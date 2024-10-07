@@ -43,7 +43,7 @@ async function uploadImage(fileName) {
     }
 }
 
-function postNewProduto(produtoData) {
+async function postNewProduto(produtoData) {
     const postNewProdutoData = apiEndpoints.postNewProduto;
     
     if (!produtoData.codigo_ean || !produtoData.nome_produto) {

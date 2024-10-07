@@ -235,7 +235,7 @@ async function findProductByBarcode(barcode) {
     }
 }
 
-async function postNewProduct(product) {
+async function postNewProduct(produto) {
     await ensureDBInitialized();
     let connection;
     try {
@@ -244,7 +244,7 @@ async function postNewProduct(product) {
 
         // Verifica se já existe um produto com o mesmo código EAN
         const checkQuery = 'SELECT produto_id FROM produto WHERE codigo_ean = ?';
-        const [existingProduct] = await connection.query(checkQuery, [product.codigo_ean]);
+        const [existingProduct] = await connection.query(checkQuery, [produto.codigo_ean]);
 
         if (existingProduct.length > 0) {
             // Se o produto já existir, lance um erro ou retorne uma mensagem
@@ -253,36 +253,52 @@ async function postNewProduct(product) {
 
         const insertQuery = `
     INSERT INTO produto (
-        codigo_ean, nome_produto, grupo_id, sub_grupo_id, 
-        tamanho_letras_id, tamanho_num_id, unidade_massa_qtd, unidade_massa_id, 
-        medida_volume_qtd, medida_volume_id, unidade_comprimento_qtd, unidade_comprimento_id, 
-        cor_produto_id, quantidade_estoque, observacoes, preco_compra, 
-        markup, preco_venda, unidade_estoque_id, fornecedor_id, caminho_img_produto
+    codigo_ean, 
+    nome_produto, 
+    grupo_id, 
+    sub_grupo_id, 
+    tamanho_letras_id, 
+    tamanho_num_id, 
+    unidade_massa_qtd, 
+    unidade_massa_id, 
+    medida_volume_qtd, 
+    medida_volume_id, 
+    unidade_comprimento_qtd, 
+    unidade_comprimento_id, 
+    cor_produto_id, 
+    quantidade_estoque, 
+    observacoes, 
+    preco_compra, 
+    markup, 
+    preco_venda, 
+    unidade_estoque_id, 
+    fornecedor_id, 
+    caminho_img_produto
     ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
 `;
 
         const values = [
-            product.codigo_ean,
-            product.nome_produto,
-            product.grupo_id || null, // Use null se o valor for vazio ou indefinido
-            product.sub_grupo_id || null,
-            product.tamanho_letras_id || null,
-            product.tamanho_num_id || null,
-            product.unidade_massa_qtd || 0,
-            product.unidade_massa_id || null,
-            product.medida_volume_qtd || 0,
-            product.medida_volume_id || null,
-            product.unidade_comprimento_qtd || 0,
-            product.unidade_comprimento_id || null,
-            product.cor_produto_id || null,
-            product.quantidade_estoque || 0,
-            product.observacoes || '',
-            product.preco_compra || 0,
-            product.markup || 0,
-            product.preco_venda || 0,
-            product.unidade_estoque_id || null,
-            product.fornecedor_id || null,
-            product.caminho_img_produto || null
+            produto.codigo_ean,
+            produto.nome_produto,
+            produto.grupo_id || null, // Use null se o valor for vazio ou indefinido
+            produto.sub_grupo_id || null,
+            produto.tamanho_letras_id || null,
+            produto.tamanho_num_id || null,
+            produto.unidade_massa_qtd || 0,
+            produto.unidade_massa_id || null,
+            produto.medida_volume_qtd || 0,
+            produto.medida_volume_id || null,
+            produto.unidade_comprimento_qtd || 0,
+            produto.unidade_comprimento_id || null,
+            produto.cor_produto_id || null,
+            produto.quantidade_estoque || 0,
+            produto.observacoes || '',
+            produto.preco_compra || 0,
+            produto.markup || 0,
+            produto.preco_venda || 0,
+            produto.unidade_estoque_id || null,
+            produto.fornecedor_id || null,
+            produto.caminho_img_produto || null
         ];
 
         const [result] = await connection.query(insertQuery, values);
