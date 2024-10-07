@@ -341,9 +341,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
         containerRegister.appendChild(divFornecedor);
 
-
-        
-
         exitButton.addEventListener('click', (e) => {
             e.preventDefault();
             containerRegister.style.display = 'none';
@@ -375,7 +372,7 @@ inputPathImg.onchange = function (event) {
 
 // Evento para cadastrar um novo produto
 document.querySelector('#btn-cadastrar').addEventListener('click', function (e) {
-    e.preventDefault();
+    e.preventDefault(); 
     const file = document.querySelector('input[type="file"]').files[0];
     let relativePath = null;
 
@@ -433,27 +430,11 @@ document.querySelector('#btn-cadastrar').addEventListener('click', function (e) 
     selectCorProduto.selectedIndex = 0;
 
     // Limpar pré-visualização da imagem
-    divImgProduct.innerHTML = '';
+    divImgProduct.innerHTML = ` <img class="img-produto" src="../style/img/produto.png" alt="imagem produto">`;
     inputPathImg.value = '';
+    
 });
 
-// Função para cadastrar o novo produto na API
-function postNewProduto(produtoData) {
-    fetch('/api/produto', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(produtoData)
-    })
-    .then(response => response.json())
-    .then(data => {
-        console.log('Produto cadastrado com sucesso:', data);
-    })
-    .catch(error => {
-        console.error('Erro ao cadastrar o produto:', error);
-    });
-}
 
 // Função para enviar a imagem
 function uploadImage(filePath) {
