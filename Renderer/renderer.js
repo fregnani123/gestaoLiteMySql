@@ -219,7 +219,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
         });
 
-
         exitButton.addEventListener('click', (e) => {
             e.preventDefault();
             containerRegister.style.display = 'none';
@@ -311,79 +310,78 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Função para criar o formulário de cadastro de fornecedor
     function renderizarInputsFornecedor() {
         containerRegister.innerHTML = '';
-
+    
         const divFornecedor = document.createElement('div');
         divFornecedor.className = 'div-fornecedor';
-
+    
         const exitButton = document.createElement('button');
         exitButton.id = 'btn-exit';
         exitButton.className = 'btn-exit';
         exitButton.textContent = 'X';
         divFornecedor.appendChild(exitButton);
-
+    
         // Título do formulário
         const labelText = document.createElement('span');
         labelText.textContent = 'Cadastrar Fornecedor';
         divFornecedor.appendChild(labelText);
-
-        // Campo para Nome do Fornecedor
-        const inputFornecedor = document.createElement('input');
-        inputFornecedor.type = 'text';
-        inputFornecedor.placeholder = ' Nome Fantasia';
-        divFornecedor.appendChild(inputFornecedor);
-
-        // Campo para Endereço
-        const inputEndereco = document.createElement('input');
-        inputEndereco.type = 'text';
-        inputEndereco.placeholder = 'Endereço';
-        divFornecedor.appendChild(inputEndereco);
-
-        // Campo para Número
-        const inputNumero = document.createElement('input');
-        inputNumero.type = 'text';
-        inputNumero.placeholder = 'Número';
-        divFornecedor.appendChild(inputNumero);
-
-        // Campo para CEP
-        const inputCep = document.createElement('input');
-        inputCep.type = 'text';
-        inputCep.placeholder = 'CEP';
-        divFornecedor.appendChild(inputCep);
-
-        // Campo para CNPJ
-        const inputCnpj = document.createElement('input');
-        inputCnpj.type = 'text';
-        inputCnpj.placeholder = 'CNPJ';
-        divFornecedor.appendChild(inputCnpj);
-
-        // Campo para Telefone
-        const inputTelefone = document.createElement('input');
-        inputTelefone.type = 'text';
-        inputTelefone.placeholder = 'Telefone';
-        divFornecedor.appendChild(inputTelefone);
-
-        // Campo para email
-        const inputEmail = document.createElement('input');
-        inputEmail.type = 'text';
-        inputEmail.placeholder = 'Email';
-        divFornecedor.appendChild(inputEmail);
-
-
+    
+        // Função para criar uma linha de inputs
+        function criarLinhaInputs(labelText1, inputId1, placeholder1, labelText2, inputId2, placeholder2) {
+            const linhaDiv = document.createElement('div');
+            linhaDiv.className = 'linha-inputs'; // classe para estilização
+    
+            // Primeiro input
+            const label1 = document.createElement('label');
+            label1.textContent = labelText1;
+            label1.setAttribute('for', inputId1);
+            linhaDiv.appendChild(label1);
+    
+            const input1 = document.createElement('input');
+            input1.id = inputId1;
+            input1.type = 'text';
+            input1.placeholder = placeholder1;
+            linhaDiv.appendChild(input1);
+    
+            // Segundo input
+            const label2 = document.createElement('label');
+            label2.textContent = labelText2;
+            label2.setAttribute('for', inputId2);
+            linhaDiv.appendChild(label2);
+    
+            const input2 = document.createElement('input');
+            input2.id = inputId2;
+            input2.type = 'text';
+            input2.placeholder = placeholder2;
+            linhaDiv.appendChild(input2);
+    
+            divFornecedor.appendChild(linhaDiv);
+        }
+    
+        // Campos agrupados
+        criarLinhaInputs('Nome Fantasia', 'fantasia', 'Nome Fantasia', 'Razão Social', 'razaoSocial', 'Razão Social');
+        criarLinhaInputs('CNPJ', 'cnpj', 'CNPJ', 'Endereço', 'endereco', 'Endereço');
+        criarLinhaInputs('Número', 'numero', 'Número', 'CEP', 'cep', 'CEP');
+        criarLinhaInputs('Telefone', 'telefone', 'Telefone', 'Email', 'email', 'Email');
+    
+        // Botão de cadastro
         const cadButton = document.createElement('button');
         cadButton.id = 'btn-cad-fornecedor';
         cadButton.textContent = 'Cadastrar';
         divFornecedor.appendChild(cadButton);
-
+    
+        // Adiciona o formulário ao container principal
         containerRegister.appendChild(divFornecedor);
-
+    
+        // Função para fechar o formulário
         exitButton.addEventListener('click', (e) => {
             e.preventDefault();
             containerRegister.style.display = 'none';
         });
     }
+    
+
 });
 
 // Função para exibir a imagem do produto
