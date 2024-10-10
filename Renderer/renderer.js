@@ -310,6 +310,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    //Renderiza form cadastro Fornecedor
     function renderizarInputsFornecedor() {
         containerRegister.innerHTML = '';
     
@@ -323,7 +324,8 @@ document.addEventListener('DOMContentLoaded', () => {
         divFornecedor.appendChild(exitButton);
     
         // Título do formulário
-        const labelText = document.createElement('span');
+        const labelText = document.createElement('div');
+        labelText.classList='labelText';
         labelText.textContent = 'Cadastrar Fornecedor';
         divFornecedor.appendChild(labelText);
     
@@ -332,36 +334,44 @@ document.addEventListener('DOMContentLoaded', () => {
             const linhaDiv = document.createElement('div');
             linhaDiv.className = 'linha-inputs'; // classe para estilização
     
-            // Primeiro input
+            // Primeiro par (label + input)
+            const div1 = document.createElement('div');
             const label1 = document.createElement('label');
+            div1.className= 'div1'
             label1.textContent = labelText1;
             label1.setAttribute('for', inputId1);
-            linhaDiv.appendChild(label1);
+            div1.appendChild(label1);
     
             const input1 = document.createElement('input');
             input1.id = inputId1;
             input1.type = 'text';
             input1.placeholder = placeholder1;
-            linhaDiv.appendChild(input1);
+            div1.appendChild(input1);
     
-            // Segundo input
+            linhaDiv.appendChild(div1);
+    
+            // Segundo par (label + input)
+            const div2 = document.createElement('div');
             const label2 = document.createElement('label');
+            div2.className = 'div2'
             label2.textContent = labelText2;
             label2.setAttribute('for', inputId2);
-            linhaDiv.appendChild(label2);
+            div2.appendChild(label2);
     
             const input2 = document.createElement('input');
             input2.id = inputId2;
             input2.type = 'text';
             input2.placeholder = placeholder2;
-            linhaDiv.appendChild(input2);
+            div2.appendChild(input2);
+    
+            linhaDiv.appendChild(div2);
     
             divFornecedor.appendChild(linhaDiv);
         }
     
         // Campos agrupados
-        criarLinhaInputs('Nome Fantasia', 'fantasia', 'Nome Fantasia', 'Razão Social', 'razaoSocial', 'Razão Social');
-        criarLinhaInputs('CNPJ', 'cnpj', 'CNPJ', 'Endereço', 'endereco', 'Endereço');
+        criarLinhaInputs('CNPJ', 'cnpj', 'CNPJ', 'Razão Social', 'razaoSocial', 'Razão Social');
+        criarLinhaInputs( 'Nome Fantasia', 'Nome Fantasia', 'Nome Fantasia','Endereço', 'endereco', 'Endereço');
         criarLinhaInputs('Número', 'numero', 'Número', 'CEP', 'cep', 'CEP');
         criarLinhaInputs('Telefone', 'telefone', 'Telefone', 'Email', 'email', 'Email');
     
@@ -379,8 +389,7 @@ document.addEventListener('DOMContentLoaded', () => {
             e.preventDefault();
             containerRegister.style.display = 'none';
         });
-    }
-    
+    }    
 
 });
 
