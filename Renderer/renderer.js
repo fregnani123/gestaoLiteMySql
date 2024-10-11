@@ -310,87 +310,100 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    //Renderiza form cadastro Fornecedor
+    function formatarTelefone(input) {
+        input.addEventListener('input', (e) => {
+            let telefone = e.target.value;
+            telefone = telefone.replace(/\D/g, ''); // Remove qualquer caractere que não seja número
+            telefone = telefone.replace(/^(\d{2})(\d)/g, '($1) $2'); // Adiciona parênteses em volta do DDD
+            telefone = telefone.replace(/(\d{5})(\d)/, '$1-$2'); // Adiciona o hífen no quinto dígito
+
+            e.target.value = telefone;
+        });
+    }
+
+    // Renderiza form cadastro Fornecedor
     function renderizarInputsFornecedor() {
         containerRegister.innerHTML = '';
-    
+
         const divFornecedor = document.createElement('div');
         divFornecedor.className = 'div-fornecedor';
-    
+
         const exitButton = document.createElement('button');
         exitButton.id = 'btn-exit';
         exitButton.className = 'btn-exit';
         exitButton.textContent = 'X';
         divFornecedor.appendChild(exitButton);
-    
+
         // Título do formulário
         const labelText = document.createElement('div');
-        labelText.classList='labelText';
+        labelText.classList = 'labelText';
         labelText.textContent = 'Cadastrar Fornecedor';
         divFornecedor.appendChild(labelText);
-    
-        // Função para criar uma linha de inputs
-        function criarLinhaInputs(labelText1, inputId1, placeholder1, labelText2, inputId2, placeholder2) {
+
+        // Função para criar uma linha de inputs com o tipo de input incluído
+        function criarLinhaInputs(labelText1, inputId1, placeholder1, type1, labelText2, inputId2, placeholder2, type2) {
             const linhaDiv = document.createElement('div');
             linhaDiv.className = 'linha-inputs'; // classe para estilização
-    
+
             // Primeiro par (label + input)
             const div1 = document.createElement('div');
             const label1 = document.createElement('label');
-            div1.className= 'div1'
+            div1.className = 'div1';
             label1.textContent = labelText1;
             label1.setAttribute('for', inputId1);
             div1.appendChild(label1);
-    
+
             const input1 = document.createElement('input');
             input1.id = inputId1;
-            input1.type = 'text';
+            input1.type = type1;  // Define o tipo de input
             input1.placeholder = placeholder1;
             div1.appendChild(input1);
-    
+
             linhaDiv.appendChild(div1);
-    
+
             // Segundo par (label + input)
             const div2 = document.createElement('div');
             const label2 = document.createElement('label');
-            div2.className = 'div2'
+            div2.className = 'div2';
             label2.textContent = labelText2;
             label2.setAttribute('for', inputId2);
             div2.appendChild(label2);
-    
+
             const input2 = document.createElement('input');
             input2.id = inputId2;
-            input2.type = 'text';
+            input2.type = type2;  // Define o tipo de input
             input2.placeholder = placeholder2;
             div2.appendChild(input2);
-    
+
             linhaDiv.appendChild(div2);
-    
+
             divFornecedor.appendChild(linhaDiv);
         }
-    
 
-        // Campos agrupados
-        criarLinhaInputs('CNPJ', 'cnpj', 'CNPJ', 'Razão Social', 'razaoSocial', 'Razão Social');
-        criarLinhaInputs('Nome Fantasia', 'nomeFantasia', 'Nome Fantasia','CEP', 'cep', 'CEP');
-        criarLinhaInputs('Endereço', 'endereco', 'Endereço','Número', 'numero', 'Número' );
-        criarLinhaInputs('Telefone', 'telefone', 'Telefone', 'Email', 'email', 'Email');
-    
+        // Campos agrupados com tipos específicos
+        criarLinhaInputs('CNPJ', 'cnpj', '', 'text', 'Razão Social', 'razaoSocial', '', 'text');
+        criarLinhaInputs('Nome Fantasia', 'nomeFantasia', '', 'text', 'CEP', 'cep', '', 'text');
+        criarLinhaInputs('Endereço', 'endereco', '', 'text', 'Número', 'numero', '', 'text');
+        criarLinhaInputs('Telefone', 'telefone', '', 'tel', 'Email', 'email', '', 'email');  // Telefone e Email com tipos específicos
+
         // Botão de cadastro
         const cadButton = document.createElement('button');
         cadButton.id = 'btn-cad-fornecedor';
         cadButton.textContent = 'Cadastrar';
         divFornecedor.appendChild(cadButton);
-    
+
         // Adiciona o formulário ao container principal
         containerRegister.appendChild(divFornecedor);
-    
+
         // Função para fechar o formulário
         exitButton.addEventListener('click', (e) => {
             e.preventDefault();
             containerRegister.style.display = 'none';
         });
-    }    
+
+        const inputTelefone = document.getElementById('telefone');
+        formatarTelefone(inputTelefone);
+    }
 
 });
 

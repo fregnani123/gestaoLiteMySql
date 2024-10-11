@@ -590,6 +590,6 @@ width: 2.5rem;
 #nomeFantasia,#endereco{
     width:600px
 }
-#nomeFantasia,#endereco,#telefone{
-    width:600px
+#nomeFantasia,#endereco,#email{
+    width:500px
 }
