@@ -369,10 +369,11 @@ document.addEventListener('DOMContentLoaded', () => {
             divFornecedor.appendChild(linhaDiv);
         }
     
+
         // Campos agrupados
         criarLinhaInputs('CNPJ', 'cnpj', 'CNPJ', 'Razão Social', 'razaoSocial', 'Razão Social');
-        criarLinhaInputs( 'Nome Fantasia', 'Nome Fantasia', 'Nome Fantasia','Endereço', 'endereco', 'Endereço');
-        criarLinhaInputs('Número', 'numero', 'Número', 'CEP', 'cep', 'CEP');
+        criarLinhaInputs('Nome Fantasia', 'nomeFantasia', 'Nome Fantasia','CEP', 'cep', 'CEP');
+        criarLinhaInputs('Endereço', 'endereco', 'Endereço','Número', 'numero', 'Número' );
         criarLinhaInputs('Telefone', 'telefone', 'Telefone', 'Email', 'email', 'Email');
     
         // Botão de cadastro
@@ -392,6 +393,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }    
 
 });
+
 
 // Função para exibir a imagem do produto
 inputPathImg.onchange = function (event) {
