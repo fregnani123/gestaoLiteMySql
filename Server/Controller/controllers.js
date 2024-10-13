@@ -1,7 +1,7 @@
 const path = require('path');
 const multer = require('multer');
 
-const { getAllProdutos, findProductByBarcode, getGrupo, getSubGrupo, getFornecedor, getTamanhoLetras, getTamanhoNumeros, getUnidadeMassa, getMedidaVolume, getUnidadeComprimento, getUnidadeEstoque,getCorProduto, postNewProduct, postNewProductGrupo, postNewProductSubGrupo} = require(path.join(__dirname, '../../db/model/product'));
+const { getAllProdutos, findProductByBarcode, getGrupo, getSubGrupo, getFornecedor, getTamanhoLetras, getTamanhoNumeros, getUnidadeMassa, getMedidaVolume, getUnidadeComprimento, getUnidadeEstoque,getCorProduto, postNewProduct, postNewProductGrupo, postNewProductSubGrupo, postNewFornecedor} = require(path.join(__dirname, '../../db/model/product'));
 
 const controllers = {
 
@@ -144,6 +144,28 @@ const controllers = {
         } catch (error) {
             console.error('Erro ao inserir o produto:', error);
             res.status(500).json({ error: 'Erro ao inserir o produto.' });
+        }
+    },
+
+      postNewFornecedor: async (req, res) => {
+        try {
+            // Extrai os dados do fornecedor do corpo da requisição
+            const fornecedorData = req.body;
+
+            // Chama a função insertNewProduct para inserir o produto no banco de dados
+            const newFornecedorId = await postNewFornecedor(fornecedorData);
+
+            // Cria uma resposta contendo o ID do novo produto inserido
+            const response = {
+                message: 'Fornecedor inserido com sucesso!',
+                fornecedor_id: newFornecedorId
+            };
+
+            // Envia a resposta em formato JSON
+            res.json(response);
+        } catch (error) {
+            console.error('Erro ao inserir o fornecedor:', error);
+            res.status(500).json({ error: 'Erro ao inserir o fornecedor.' });
         }
     },
 

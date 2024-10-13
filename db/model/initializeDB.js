@@ -19,81 +19,89 @@ async function initializeDB() {
             `SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;`,
             `SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;`,
             `SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';`,
-
+        
             // Criar Schema gestaolite
             `CREATE SCHEMA IF NOT EXISTS gestaolite DEFAULT CHARACTER SET utf8;`,
             `USE gestaolite;`,
-
+        
             // Criar Tabela grupo
             `CREATE TABLE IF NOT EXISTS grupo (
                 grupo_id INT NOT NULL AUTO_INCREMENT,
                 nome_grupo VARCHAR(150) NULL,
                 PRIMARY KEY(grupo_id)
             ) ENGINE = InnoDB;`,
-
+        
             // Criar Tabela sub-grupo
             `CREATE TABLE IF NOT EXISTS sub_grupo (
                 sub_grupo_id INT NOT NULL AUTO_INCREMENT,
                 nome_sub_grupo VARCHAR(150) NULL,
                 PRIMARY KEY(sub_grupo_id)
             ) ENGINE = InnoDB;`,
-
+        
             // Criar Tabela tamanho_letras
             `CREATE TABLE IF NOT EXISTS tamanho_letras (
                 tamanho_id INT NOT NULL AUTO_INCREMENT,
                 tamanho VARCHAR(15) NULL,
                 PRIMARY KEY(tamanho_id)
             ) ENGINE = InnoDB;`,
-
+        
             // Criar Tabela tamanho_numero
             `CREATE TABLE IF NOT EXISTS tamanho_numero (
                 tamanho_id INT NOT NULL AUTO_INCREMENT,
                 tamanho VARCHAR(15) NULL,
                 PRIMARY KEY(tamanho_id)
             ) ENGINE = InnoDB;`,
-
+        
             // Criar Tabela unidade_massa
             `CREATE TABLE IF NOT EXISTS unidade_massa (
                 unidade_massa_id INT NOT NULL AUTO_INCREMENT,
                 unidade_nome VARCHAR(45) NULL,
                 PRIMARY KEY(unidade_massa_id)
             ) ENGINE = InnoDB;`,
-
+        
             // Criar Tabela medida_volume
             `CREATE TABLE IF NOT EXISTS medida_volume (
                 medida_volume_id INT NOT NULL AUTO_INCREMENT,
                 medida_nome VARCHAR(45) NULL,
                 PRIMARY KEY(medida_volume_id)
             ) ENGINE = InnoDB;`,
-
+        
             // Criar Tabela unidade_comprimento
             `CREATE TABLE IF NOT EXISTS unidade_comprimento (
                 unidade_comprimento_id INT NOT NULL AUTO_INCREMENT,
                 unidade_nome VARCHAR(100) NULL,
                 PRIMARY KEY(unidade_comprimento_id)
             ) ENGINE = InnoDB;`,
-
+        
             // Criar Tabela unidade_estoque
             `CREATE TABLE IF NOT EXISTS unidade_estoque (
                 unidade_estoque_id INT NOT NULL AUTO_INCREMENT,
                 estoque_nome VARCHAR(45) NULL,
                 PRIMARY KEY(unidade_estoque_id)
             ) ENGINE = InnoDB;`,
-
-            // Criar Tabela fornecedor
+        
+            // Criar Tabela fornecedor com as novas colunas
             `CREATE TABLE IF NOT EXISTS fornecedor (
                 fornecedor_id INT NOT NULL AUTO_INCREMENT,
-                fornecedor_nome VARCHAR(200) NULL,
+                cnpj VARCHAR(20) NULL,
+                inscricao_estadual VARCHAR(20) NULL,
+                razao_social VARCHAR(200) NULL,
+                nome_fantasia VARCHAR(200) NULL,
+                cep VARCHAR(10) NULL,
+                endereco VARCHAR(255) NULL,
+                numero VARCHAR(10) NULL,
+                telefone VARCHAR(20) NULL,
+                email VARCHAR(100) NULL,
                 PRIMARY KEY(fornecedor_id)
             ) ENGINE = InnoDB;`,
-
+        
             // Criar Tabela cor produto
             `CREATE TABLE IF NOT EXISTS cor_produto (
                 cor_produto_id INT NOT NULL AUTO_INCREMENT,
                 nome_cor_produto VARCHAR(150) NULL,
                 PRIMARY KEY(cor_produto_id)
             ) ENGINE = InnoDB;`,
-
+        
             // Criar Tabela produto
             `CREATE TABLE IF NOT EXISTS produto (
                 produto_id INT NOT NULL AUTO_INCREMENT,
@@ -180,13 +188,13 @@ async function initializeDB() {
                     ON DELETE NO ACTION
                     ON UPDATE NO ACTION
             ) ENGINE = InnoDB;`,
-
+        
             // Reativar as verificações de chaves únicas e chaves estrangeiras
             `SET SQL_MODE=@OLD_SQL_MODE;`,
             `SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;`,
             `SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;`
         ];
-
+        
         // Execução das queries
         for (const query of queries) {
             await connection.query(query);
@@ -507,14 +515,14 @@ async function insertFornecedorPadrao() {
         // Verifica se já existem registros na tabela
         const [existingRecords] = await connection.query('SELECT COUNT(*) as count FROM fornecedor');
         if (existingRecords[0].count > 0) {
-            console.log('Fornecedor_nome dos produtos já foram inseridas.');
+            console.log('Fornecedores dos produtos já foram inseridas.');
             return;
         }
 
-        const query = `INSERT INTO fornecedor (fornecedor_nome) 
+        const query = `INSERT INTO fornecedor (nome_fantasia) 
     VALUES 
         ('Fornecedor não Cadastrado')
-        ON DUPLICATE KEY UPDATE fornecedor_nome = VALUES(fornecedor_nome);
+        ON DUPLICATE KEY UPDATE nome_fantasia = VALUES(nome_fantasia);
     `;
 
         const [result] = await connection.query(query);

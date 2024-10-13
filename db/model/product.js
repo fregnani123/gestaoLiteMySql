@@ -4,9 +4,9 @@ const pool = require('../db');
 const path = require('path');
 require('dotenv').config({ path: path.join(__dirname, '../../config/.env') });
 const { initializeDB, insertSubGrupo, insertGrupo, insertTamanhoLetras, insertTamanhoNumeros,
-    insertUnidadeMassa, insertUnidadeVolume, insertUnidadeComprimento, insertUnidadeEstoque, insertFornecedorPadrao,insertCorProduto
+    insertUnidadeMassa, insertUnidadeVolume, insertUnidadeComprimento, insertUnidadeEstoque, insertFornecedorPadrao, insertCorProduto
 
- } = require(path.join(__dirname, './initializeDB'));
+} = require(path.join(__dirname, './initializeDB'));
 
 
 let dbInitialized = false;
@@ -106,7 +106,7 @@ async function getGrupo() {
 
     try {
         connection = await pool.getConnection();
-        const [rows,fields] = await connection.query('SELECT * FROM grupo');
+        const [rows, fields] = await connection.query('SELECT * FROM grupo');
         return rows;
     } catch (error) {
         console.error('Erro ao conectar ao MySQL ou executar a consulta:', error);
@@ -235,6 +235,64 @@ async function findProductByBarcode(barcode) {
     }
 }
 
+async function postNewFornecedor(fornecedor) {
+    await ensureDBInitialized();
+    let connection;
+    try {
+        // Obtém uma conexão do pool
+        connection = await pool.getConnection();
+
+        // Verifica se já existe um produto com o mesmo código EAN
+        const checkQuery = 'SELECT fornecedor_id FROM fornecedor WHERE cnpj = ?';
+        const [existingProduct] = await connection.query(checkQuery, [fornecedor.cnpj]);
+
+        if (existingProduct.length > 0) {
+            // Se o fornecedor já existir, lance um erro ou retorne uma mensagem
+            throw new Error('Um fornecedor com o mesmo cnpj já existe.');
+        }
+
+        const insertQuery = `
+        INSERT INTO fornecedor (
+        cnpj,
+        inscricao_estadual,
+        razao_social,
+        nome_fantasia,
+        cep,
+        endereco,
+        numero,
+        telefone,
+        email
+        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+    `;
+
+        const values = [
+            fornecedor.cnpj,
+            fornecedor.inscricao_estadual || null, // Use null se o valor for vazio ou indefinido
+            fornecedor.razao_social || null, // Use null se o valor for vazio ou indefinido,
+            fornecedor.nome_fantasia,
+            fornecedor.cep || null, // Use null se o valor for vazio ou indefinido,
+            fornecedor.endereco || null, // Use null se o valor for vazio ou indefinido,
+            fornecedor.numero || null, // Use null se o valor for vazio ou indefinido,
+            fornecedor.telefone || null, // Use null se o valor for vazio ou indefinido,
+            fornecedor.email || null // Use null se o valor for vazio ou indefinido
+        ];
+
+        const [result] = await connection.query(insertQuery, values);
+
+        // Retorne o ID do novo produto inserido ou uma confirmação
+        return result.insertId;
+
+    } catch (error) {
+        console.error('Erro ao inserir o fornecedor:', error.message);
+        throw error;
+    } finally {
+        if (connection) connection.release();
+    };
+
+}
+
+
+
 async function postNewProduct(produto) {
     await ensureDBInitialized();
     let connection;
@@ -328,24 +386,25 @@ async function postNewProductGrupo(newGrupo) {
             // Se o grupo já existir, lance um erro ou retorne uma mensagem
 
             throw new Error('Este Grupo com o mesmo nome já existe.');
-        }}
-        catch (error) {
-            console.error('Erro ao inserir o grupo:', error.message);
-            throw error;
-        } finally {
-            if (connection) connection.release();
         }
-        const insertQuery = `
+    }
+    catch (error) {
+        console.error('Erro ao inserir o grupo:', error.message);
+        throw error;
+    } finally {
+        if (connection) connection.release();
+    }
+    const insertQuery = `
     INSERT INTO grupo (
         nome_grupo
     ) VALUES (?)
 `;
-        const values = [
-            newGrupo.nome_grupo
-        ];
+    const values = [
+        newGrupo.nome_grupo
+    ];
 
-        const [result] = await connection.query(insertQuery, values);
-        return result.insertId;
+    const [result] = await connection.query(insertQuery, values);
+    return result.insertId;
 }
 
 async function postNewProductSubGrupo(newSubGrupo) {
@@ -363,24 +422,25 @@ async function postNewProductSubGrupo(newSubGrupo) {
             // Se o sub-grupo já existir, lance um erro ou retorne uma mensagem
 
             throw new Error('Este sub-grupo com o mesmo nome já existe.');
-        }}
-        catch (error) {
-            console.error('Erro ao inserir o sub-grupo:', error.message);
-            throw error;
-        } finally {
-            if (connection) connection.release();
         }
-        const insertQuery = `
+    }
+    catch (error) {
+        console.error('Erro ao inserir o sub-grupo:', error.message);
+        throw error;
+    } finally {
+        if (connection) connection.release();
+    }
+    const insertQuery = `
     INSERT INTO sub_grupo (
         nome_sub_grupo
     ) VALUES (?)
 `;
-        const values = [
-            newSubGrupo.nome_sub_grupo
-        ];
+    const values = [
+        newSubGrupo.nome_sub_grupo
+    ];
 
-        const [result] = await connection.query(insertQuery, values);
-        return result.insertId;
+    const [result] = await connection.query(insertQuery, values);
+    return result.insertId;
 }
 
 module.exports = {
@@ -398,5 +458,6 @@ module.exports = {
     getCorProduto,
     postNewProduct,
     postNewProductGrupo,
-    postNewProductSubGrupo
+    postNewProductSubGrupo,
+    postNewFornecedor
 };

@@ -1,5 +1,7 @@
 // My Methods.
 
+const { postNewFornecedor } = require("../Server/Controller/controllers");
+
 const apiEndpoints = {
     getGrupo: 'http://localhost:3000/grupos',
     getSubGrupo: 'http://localhost:3000/subGrupos',
@@ -15,6 +17,7 @@ const apiEndpoints = {
     postImgProduto: 'http://localhost:3000/uploadImagem',
     postNewGrupoProduto: 'http://localhost:3000/newGrupo',
     postNewSubGrupoProduto: 'http://localhost:3000/newSubGrupo',
+    postNewFornecedor: 'http://localhost:3000/newFornecedor',
 };
 
 
@@ -72,6 +75,34 @@ async function postNewProduto(produtoData) {
         });
 }
 
+async function postNewFornecedor(fornecedorData) {
+    const postNewFornecedorData = apiEndpoints.postNewFornecedor;
+    //Parei aqui... API ok já.
+    if (!produtoData.codigo_ean || !produtoData.nome_produto) {
+        console.error('Erro: código EAN e nome do produto são obrigatórios.');
+        alert('Erro: código EAN e nome do produto são obrigatórios.');
+        return;
+    }
+    fetch(postNewProdutoData, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(produtoData),
+    })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+            return response.json();
+        })
+        .then(data => {
+            console.log('Produto added successfully:', data);
+        })
+        .catch(error => {
+            console.error('Error adding produto:', error);
+        });
+}
 
 function getGrupo(renderer) {
     const getGrupo = apiEndpoints.getGrupo;
@@ -121,7 +152,7 @@ function getFornecedor(renderer){
             const fornecedor = data;
             fornecedor.forEach((fornecedor) => {
                 const option = document.createElement('option');
-                option.innerHTML = fornecedor.fornecedor_nome;
+                option.innerHTML = fornecedor.nome_fantasia;
                 option.value =fornecedor.fornecedor_id;
                 renderer.appendChild(option);
             });
