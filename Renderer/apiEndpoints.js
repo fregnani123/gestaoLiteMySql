@@ -1,6 +1,6 @@
 // My Methods.
 
-const { postNewFornecedor } = require("../Server/Controller/controllers");
+
 
 const apiEndpoints = {
     getGrupo: 'http://localhost:3000/grupos',
@@ -77,13 +77,12 @@ async function postNewProduto(produtoData) {
 
 async function postNewFornecedor(fornecedorData) {
     const postNewFornecedorData = apiEndpoints.postNewFornecedor;
-    //Parei aqui... API ok já.
-    if (!produtoData.codigo_ean || !produtoData.nome_produto) {
-        console.error('Erro: código EAN e nome do produto são obrigatórios.');
-        alert('Erro: código EAN e nome do produto são obrigatórios.');
+    if (!fornecedorData.cnpj || !produtoData.nome_fantasia) {
+        console.error('Erro: cnpj e nome fantasia são obrigatórios.');
+        alert('Erro: Erro: cnpj e nome fantasia são obrigatórios.');
         return;
     }
-    fetch(postNewProdutoData, {
+    fetch(postNewFornecedorData, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',

@@ -517,79 +517,111 @@ width: 2.5rem;
     width: 220px;
 }
 
-/* CSS fornecedor */
-.div-fornecedor{
-    width: 1250px;
-    height: auto;
+
+/* Estilo do container principal */
+.div-fornecedor {
+    width:1100px ;
+    position:absolute;
+    margin: 0 auto;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     margin-bottom: 50px;
-    justify-content: left;
 }
-#btn-exit {
+#razaoSocial,#nomeFantasia{
+    width:400px;
+}
+
+#endereco,#email{
+    width:600px;
+}
+
+#cnpj,#ie,#cep{
+    width: 100%;
+}
+/* Estilo do título */
+.labelText, .labelFornecedor{
+    text-align: center;
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-bottom: 20px;
+   
+}
+
+/* Estilo do botão de saída */
+.btn-exit {
     position: absolute;
     top: 10px;
-    right: 10px;
-    background-color: #ff4d4d;
-    border-radius: 50%;
-    width: 30px;
-    height: 30px;
-    font-size: 16px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
-    color: white;
+    right: 20px;
+    background-color: #ff5c5c;
     border: none;
+    color: white;
+    font-size: 16px;
+    padding: 5px 10px;
+    border-radius: 50%;
+    cursor: pointer;
 }
 
-#btn-exit:hover {
-    background-color: #cc0000;
+.btn-exit:hover {
+    background-color: #ff1c1c;
 }
 
-.div2, .div1{
-    align-items: center;
-}
-
+/* Estilo das linhas de inputs */
 .linha-inputs {
     display: flex;
-    justify-content: space-between; /* Espaça os elementos igualmente na linha */
-    margin-bottom: 15px; /* Espaço entre as linhas */
+    justify-content: space-between;
+    margin-bottom: 15px;
 }
 
-.linha-inputs > div {
+/* Estilo das divs que envolvem cada input */
+.linha-inputs div {
+    flex: 1;
     display: flex;
-    flex-direction: column; /* Faz o label ficar em cima do input */
-    flex: 1; /* Faz com que cada par label/input ocupe o espaço disponível */
-    margin-right: 10px; /* Espaço entre os pares de inputs */
+    flex-direction: column;
+    margin-right: 10px;
 }
 
-.linha-inputs > div:last-child {
-    margin-right: 0; /* Remove a margem à direita do último item da linha */
+.linha-inputs div:last-child {
+    margin-right: 0;
 }
 
+/* Estilo para os rótulos (labels) */
 .linha-inputs label {
-    margin-bottom: 0px; /* Espaço entre o label e o input */
+    font-size: 1rem;
+    margin-bottom: 0px;
+    color: #333;
 }
 
+/* Estilo para os inputs */
 .linha-inputs input {
-    width: 100%; /* Faz o input ocupar toda a largura do seu contêiner */
-    min-width: 150px; /* Largura mínima para os inputs */
-}
-.labelText{
-    background-color: var(--header-background-color);
     padding: 10px;
-    margin-bottom: 20px;
-    color: white;
+    font-size: 14px;
+    border: 1px solid #050505;
+    border-radius: 2px;
+    outline: none;
+    transition: border-color 0.3s ease;
+}
+
+/* Estilo para os inputs quando recebem foco */
+.linha-inputs input:focus {
+    outline: 1px solid #000000; /* Adiciona uma borda verde, por exemplo */
+    border-color: #000000; /* Muda a cor da borda também, se necessário */
+}
+
+/* Estilo do botão de cadastro */
+#btn-cad-fornecedor {
+    width: 200px;
+    padding: 12px;
     font-size: 1.2rem;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 20px;
 }
-#cnpj{
-    width: 250px;
+
+#btn-cad-fornecedor:hover {
+    background-color: #0056b3;
 }
-#razaoSocial{
-    width:600px
-}
-#nomeFantasia,#endereco{
-    width:600px
-}
-#nomeFantasia,#endereco,#email{
-    width:500px
-}
+
+

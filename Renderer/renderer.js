@@ -341,50 +341,76 @@ document.addEventListener('DOMContentLoaded', () => {
         divFornecedor.appendChild(labelText);
 
         // Função para criar uma linha de inputs com o tipo de input incluído
-        function criarLinhaInputs(labelText1, inputId1, placeholder1, type1, labelText2, inputId2, placeholder2, type2) {
+        function criarLinhaInputs(labelText1, inputId1, placeholder1, type1,
+            labelText2, inputId2, placeholder2, type2,
+            labelText3, inputId3, placeholder3, type3, optionsUF) {
             const linhaDiv = document.createElement('div');
+            const linhaDiv1 = document.createElement('div');
             linhaDiv.className = 'linha-inputs'; // classe para estilização
 
-            // Primeiro par (label + input)
-            const div1 = document.createElement('div');
-            const label1 = document.createElement('label');
-            div1.className = 'div1';
-            label1.textContent = labelText1;
-            label1.setAttribute('for', inputId1);
-            div1.appendChild(label1);
+            // Função para criar um par de label e input
+            function createInputElement(labelText, inputId, placeholder, type) {
+                const div = document.createElement('div');
+                const label = document.createElement('label');
+                label.className = 'labelFornecedor';
+                label.textContent = labelText;
+                label.setAttribute('for', inputId);
+                div.appendChild(label);
 
-            const input1 = document.createElement('input');
-            input1.id = inputId1;
-            input1.type = type1;  // Define o tipo de input
-            input1.placeholder = placeholder1;
-            div1.appendChild(input1);
+                const input = document.createElement('input');
+                input.id = inputId;
+                input.type = type;  // Define o tipo de input
+                input.placeholder = placeholder;
+                div.appendChild(input);
 
-            linhaDiv.appendChild(div1);
+                return div;
+            }
 
-            // Segundo par (label + input)
-            const div2 = document.createElement('div');
-            const label2 = document.createElement('label');
-            div2.className = 'div2';
-            label2.textContent = labelText2;
-            label2.setAttribute('for', inputId2);
-            div2.appendChild(label2);
+            // Função para criar o select para o UF
+            function createSelectElement(labelText, inputId, options) {
+                const div = document.createElement('div');
+                const label = document.createElement('label');
+                label.className = 'labelFornecedor';
+                label.textContent = labelText;
+                label.setAttribute('for', inputId);
+                div.appendChild(label);
 
-            const input2 = document.createElement('input');
-            input2.id = inputId2;
-            input2.type = type2;  // Define o tipo de input
-            input2.placeholder = placeholder2;
-            div2.appendChild(input2);
+                const select = document.createElement('select');
+                select.id = inputId;
 
-            linhaDiv.appendChild(div2);
+                options.forEach(option => {
+                    const opt = document.createElement('option');
+                    opt.value = option.value;
+                    opt.textContent = option.text;
+                    select.appendChild(opt);
+                });
+
+                div.appendChild(select);
+                return div;
+            }
+
+            // Cria os elementos de input e select
+            linhaDiv.appendChild(createInputElement(labelText1, inputId1, placeholder1, type1));
+            linhaDiv.appendChild(createInputElement(labelText2, inputId2, placeholder2, type2));
+            
+            linhaDiv1.appendChild(createSelectElement(labelText3, inputId3, optionsUF));
 
             divFornecedor.appendChild(linhaDiv);
+            divFornecedor.appendChild(linhaDiv1);
         }
 
+        const estadosUF = [
+            { value: 'SP', text: 'São Paulo' },
+            { value: 'RJ', text: 'Rio de Janeiro' },
+            { value: 'MG', text: 'Minas Gerais' },
+            // Adicione mais estados conforme necessário
+        ];
+        
         // Campos agrupados com tipos específicos
-        criarLinhaInputs('CNPJ', 'cnpj', '', 'text', 'Razão Social', 'razaoSocial', '', 'text');
-        criarLinhaInputs('Nome Fantasia', 'nomeFantasia', '', 'text', 'CEP', 'cep', '', 'text');
-        criarLinhaInputs('Endereço', 'endereco', '', 'text', 'Número', 'numero', '', 'text');
-        criarLinhaInputs('Telefone', 'telefone', '', 'tel', 'Email', 'email', '', 'email');  // Telefone e Email com tipos específicos
+        criarLinhaInputs('CNPJ', 'cnpj', 'Digite o CNPJ', 'text', 
+                         'Nome Fantasia', 'nomeFantasia', 'Digite o nome fantasia', 'text', 
+                         'Estado / UF', 'estado', 'Selecione o estado', 'select', estadosUF);
+
 
         // Botão de cadastro
         const cadButton = document.createElement('button');
