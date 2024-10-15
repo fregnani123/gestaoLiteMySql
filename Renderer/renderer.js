@@ -340,83 +340,6 @@ document.addEventListener('DOMContentLoaded', () => {
         labelText.textContent = 'Cadastrar Fornecedor';
         divFornecedor.appendChild(labelText);
 
-        // Função para criar uma linha de inputs com o tipo de input incluído
-        function criarLinhaInputs(labelText1, inputId1, placeholder1, type1,
-            labelText2, inputId2, placeholder2, type2,
-            labelText3, inputId3, placeholder3, type3, optionsUF) {
-            const linhaDiv = document.createElement('div');
-            const linhaDiv1 = document.createElement('div');
-            linhaDiv.className = 'linha-inputs'; // classe para estilização
-
-            // Função para criar um par de label e input
-            function createInputElement(labelText, inputId, placeholder, type) {
-                const div = document.createElement('div');
-                const label = document.createElement('label');
-                label.className = 'labelFornecedor';
-                label.textContent = labelText;
-                label.setAttribute('for', inputId);
-                div.appendChild(label);
-
-                const input = document.createElement('input');
-                input.id = inputId;
-                input.type = type;  // Define o tipo de input
-                input.placeholder = placeholder;
-                div.appendChild(input);
-
-                return div;
-            }
-
-            // Função para criar o select para o UF
-            function createSelectElement(labelText, inputId, options) {
-                const div = document.createElement('div');
-                const label = document.createElement('label');
-                label.className = 'labelFornecedor';
-                label.textContent = labelText;
-                label.setAttribute('for', inputId);
-                div.appendChild(label);
-
-                const select = document.createElement('select');
-                select.id = inputId;
-
-                options.forEach(option => {
-                    const opt = document.createElement('option');
-                    opt.value = option.value;
-                    opt.textContent = option.text;
-                    select.appendChild(opt);
-                });
-
-                div.appendChild(select);
-                return div;
-            }
-
-            // Cria os elementos de input e select
-            linhaDiv.appendChild(createInputElement(labelText1, inputId1, placeholder1, type1));
-            linhaDiv.appendChild(createInputElement(labelText2, inputId2, placeholder2, type2));
-            
-            linhaDiv1.appendChild(createSelectElement(labelText3, inputId3, optionsUF));
-
-            divFornecedor.appendChild(linhaDiv);
-            divFornecedor.appendChild(linhaDiv1);
-        }
-
-        const estadosUF = [
-            { value: 'SP', text: 'São Paulo' },
-            { value: 'RJ', text: 'Rio de Janeiro' },
-            { value: 'MG', text: 'Minas Gerais' },
-            // Adicione mais estados conforme necessário
-        ];
-        
-        // Campos agrupados com tipos específicos
-        criarLinhaInputs('CNPJ', 'cnpj', 'Digite o CNPJ', 'text', 
-                         'Nome Fantasia', 'nomeFantasia', 'Digite o nome fantasia', 'text', 
-                         'Estado / UF', 'estado', 'Selecione o estado', 'select', estadosUF);
-
-
-        // Botão de cadastro
-        const cadButton = document.createElement('button');
-        cadButton.id = 'btn-cad-fornecedor';
-        cadButton.textContent = 'Cadastrar';
-        divFornecedor.appendChild(cadButton);
 
         // Adiciona o formulário ao container principal
         containerRegister.appendChild(divFornecedor);
@@ -426,6 +349,90 @@ document.addEventListener('DOMContentLoaded', () => {
             e.preventDefault();
             containerRegister.style.display = 'none';
         });
+
+        //cria as linhas do form fornecedor
+        const linhaDiv1 = document.createElement('div');
+        const linhaDiv2 = document.createElement('div');
+        const linhaDiv3 = document.createElement('div');
+        const linhaDiv4 = document.createElement('div');
+        linhaDiv1.className = 'linha-inputs'; // classe para estilização
+        linhaDiv2.className = 'linha-inputs'; 
+        linhaDiv3.className = 'linha-inputs'; 
+        linhaDiv4.className = 'linha-inputs'; 
+
+        function createSelectElement(labelText, selectId, options) {
+            const div = document.createElement('div');
+            const label = document.createElement('label');
+            label.className = 'labelFornecedor';
+            label.textContent = labelText;
+            label.setAttribute('for', selectId);
+            div.appendChild(label);
+        
+            const select = document.createElement('select');
+            select.id = selectId;
+        
+            options.forEach(optionText => {
+                const option = document.createElement('option');
+                option.value = optionText.toLowerCase();  // Define o valor da opção
+                option.textContent = optionText;          // Define o texto visível
+                select.appendChild(option);
+            });
+        
+            div.appendChild(select);
+            return div;
+        }
+        
+
+        // Função para criar um par de label e input
+        function createInputElement(labelText, inputId, placeholder, type) {
+            const div = document.createElement('div');
+            const label = document.createElement('label');
+            label.className = 'labelFornecedor';
+            label.textContent = labelText;
+            label.setAttribute('for', inputId);
+            div.appendChild(label);
+
+            const input = document.createElement('input');
+            input.id = inputId;
+            input.type = type;  // Define o tipo de input
+            input.placeholder = placeholder;
+            div.appendChild(input);
+
+            return div;
+        }
+
+        const optionsUF = [
+            "Selecione",'Acre', 'Alagoas', 'Amapá', 'Amazonas', 'Bahia', 'Ceará', 'Distrito Federal',
+            'Espírito Santo', 'Goiás', 'Maranhão', 'Mato Grosso', 'Mato Grosso do Sul', 
+            'Minas Gerais', 'Pará', 'Paraíba', 'Paraná', 'Pernambuco', 'Piauí', 
+            'Rio de Janeiro', 'Rio Grande do Norte', 'Rio Grande do Sul', 'Rondônia', 
+            'Roraima', 'Santa Catarina', 'São Paulo', 'Sergipe', 'Tocantins'
+        ];
+        
+        linhaDiv1.appendChild(createInputElement('CNPJ', 'cnpj', '', 'text'));
+        linhaDiv1.appendChild(createInputElement('Inscrição Estadual / IE', 'ie', '', 'text'));
+        linhaDiv1.appendChild(createInputElement('Razão Social', 'razaoSocial', '', 'text'));
+        divFornecedor.appendChild(linhaDiv1);
+
+        linhaDiv2.appendChild(createInputElement('Nome Fantasia ', 'nomeFantasia', '', 'text'));
+        linhaDiv2.appendChild(createInputElement('Cep', 'cep', '', 'text'));
+        // linhaDiv2.appendChild( createSelectElement("UF", "uf", optionsUF));
+        divFornecedor.appendChild(linhaDiv2);
+
+        linhaDiv3.appendChild(createInputElement('Endereço', 'endereco', '', 'text'));
+        linhaDiv3.appendChild(createInputElement('Cidade', 'cidade', '', 'text'));
+        linhaDiv3.appendChild( createSelectElement("UF", "uf", optionsUF));
+        divFornecedor.appendChild(linhaDiv3);
+        
+        linhaDiv4.appendChild(createInputElement('Telefone', 'telefone', '', 'text'));
+        linhaDiv4.appendChild(createInputElement('Email', 'email', '', 'email'));
+        divFornecedor.appendChild(linhaDiv4);
+
+        // Botão de cadastro (agora no final)
+        const cadButton = document.createElement('button');
+        cadButton.id = 'btn-cad-fornecedor';
+        cadButton.textContent = 'Cadastrar';
+        divFornecedor.appendChild(cadButton);
 
         const inputTelefone = document.getElementById('telefone');
         formatarTelefone(inputTelefone);
