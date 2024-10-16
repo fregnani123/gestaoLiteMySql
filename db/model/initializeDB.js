@@ -83,15 +83,17 @@ async function initializeDB() {
             // Criar Tabela fornecedor com as novas colunas
             `CREATE TABLE IF NOT EXISTS fornecedor (
                 fornecedor_id INT NOT NULL AUTO_INCREMENT,
-                cnpj VARCHAR(20) NULL,
-                inscricao_estadual VARCHAR(20) NULL,
+                cnpj VARCHAR(200) NULL,
+                inscricao_estadual VARCHAR(200) NULL,
                 razao_social VARCHAR(200) NULL,
                 nome_fantasia VARCHAR(200) NULL,
-                cep VARCHAR(10) NULL,
+                cep VARCHAR(150) NULL,
+                cidade VARCHAR(150) NULL,
+                bairro VARCHAR(150) NULL,
+                uf VARCHAR(150) NULL,
                 endereco VARCHAR(255) NULL,
-                numero VARCHAR(10) NULL,
                 telefone VARCHAR(20) NULL,
-                email VARCHAR(100) NULL,
+                email VARCHAR(150) NULL,
                 PRIMARY KEY(fornecedor_id)
             ) ENGINE = InnoDB;`,
         

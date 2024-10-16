@@ -420,10 +420,12 @@ document.addEventListener('DOMContentLoaded', () => {
         divFornecedor.appendChild(linhaDiv2);
 
         linhaDiv3.appendChild(createInputElement('Endereço', 'endereco', '', 'text'));
+        linhaDiv3.appendChild(createInputElement('Bairro', 'bairro', '', 'text'));
         linhaDiv3.appendChild(createInputElement('Cidade', 'cidade', '', 'text'));
-        linhaDiv3.appendChild( createSelectElement("UF", "uf", optionsUF));
+        
         divFornecedor.appendChild(linhaDiv3);
         
+        linhaDiv4.appendChild( createSelectElement("UF", "uf", optionsUF));
         linhaDiv4.appendChild(createInputElement('Telefone', 'telefone', '', 'text'));
         linhaDiv4.appendChild(createInputElement('Email', 'email', '', 'email'));
         divFornecedor.appendChild(linhaDiv4);
