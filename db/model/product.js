@@ -258,21 +258,25 @@ async function postNewFornecedor(fornecedor) {
         razao_social,
         nome_fantasia,
         cep,
+        cidade,
+        bairro,
+        uf,
         endereco,
-        numero,
         telefone,
         email
-        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
     `;
 
         const values = [
             fornecedor.cnpj,
             fornecedor.inscricao_estadual || null, // Use null se o valor for vazio ou indefinido
             fornecedor.razao_social || null, // Use null se o valor for vazio ou indefinido,
-            fornecedor.nome_fantasia,
+            fornecedor.razao_social,
             fornecedor.cep || null, // Use null se o valor for vazio ou indefinido,
+            fornecedor.cidade || null, // Use null se o valor for vazio ou indefinido,
+            fornecedor.bairro || null, // Use null se o valor for vazio ou indefinido,
+            fornecedor.uf || null, // Use null se o valor for vazio ou indefinido,
             fornecedor.endereco || null, // Use null se o valor for vazio ou indefinido,
-            fornecedor.numero || null, // Use null se o valor for vazio ou indefinido,
             fornecedor.telefone || null, // Use null se o valor for vazio ou indefinido,
             fornecedor.email || null // Use null se o valor for vazio ou indefinido
         ];

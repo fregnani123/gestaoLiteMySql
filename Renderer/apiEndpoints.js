@@ -77,7 +77,7 @@ async function postNewProduto(produtoData) {
 
 async function postNewFornecedor(fornecedorData) {
     const postNewFornecedorData = apiEndpoints.postNewFornecedor;
-    if (!fornecedorData.cnpj || !produtoData.nome_fantasia) {
+    if (!fornecedorData.cnpj || !fornecedorData.nome_fantasia) {
         console.error('Erro: cnpj e nome fantasia são obrigatórios.');
         alert('Erro: Erro: cnpj e nome fantasia são obrigatórios.');
         return;
@@ -87,7 +87,7 @@ async function postNewFornecedor(fornecedorData) {
         headers: {
             'Content-Type': 'application/json',
         },
-        body: JSON.stringify(produtoData),
+        body: JSON.stringify(fornecedorData),
     })
         .then(response => {
             if (!response.ok) {
@@ -96,10 +96,10 @@ async function postNewFornecedor(fornecedorData) {
             return response.json();
         })
         .then(data => {
-            console.log('Produto added successfully:', data);
+            console.log('fornecedor added successfully:', data);
         })
         .catch(error => {
-            console.error('Error adding produto:', error);
+            console.error('Error adding fornecedor:', error);
         });
 }
 
