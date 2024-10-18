@@ -63,6 +63,20 @@ inputPrecoVenda.addEventListener('input', (e) => {
     calcularLucro();
 });
 
+inputCodigoEAN.addEventListener('input', (e) => {
+    let value = e.target.value;
+    
+    // Remove qualquer caractere que não seja número
+    value = value.replace(/\D/g, '');
+
+    // Limita o número de caracteres a 13
+    if (value.length > 13) {
+        value = value.substring(0, 13);
+    }
+
+    // Atualiza o valor do input com o valor formatado
+    e.target.value = value;
+});
 
 // Permite apenas números e um ponto decimal no campo de markup
 inputMarkup.addEventListener('input', (e) => {
@@ -310,6 +324,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    //formatar Telefone
     function formatarTelefone(input) {
         input.addEventListener('input', (e) => {
             let telefone = e.target.value;
@@ -319,8 +334,32 @@ document.addEventListener('DOMContentLoaded', () => {
 
             e.target.value = telefone;
         });
-    }
+    };
 
+  function formatarCNPJ(input) {
+    input.addEventListener('input', (e) => {
+        let cnpj = e.target.value;
+
+        // Remove qualquer caractere que não seja número
+        cnpj = cnpj.replace(/\D/g, '');
+
+        // Aplica a formatação do CNPJ
+        cnpj = cnpj.replace(/^(\d{2})(\d)/, "$1.$2");           // Coloca o ponto após os 2 primeiros dígitos
+        cnpj = cnpj.replace(/^(\d{2})\.(\d{3})(\d)/, "$1.$2.$3"); // Coloca o segundo ponto após os 3 dígitos seguintes
+        cnpj = cnpj.replace(/\.(\d{3})(\d)/, ".$1/$2");          // Adiciona a barra após mais 3 dígitos
+        cnpj = cnpj.replace(/(\d{4})(\d)/, "$1-$2");             // Coloca o hífen após os 4 dígitos
+
+        // Limita o número de caracteres a 18 (incluindo a formatação)
+        if (cnpj.length > 18) {
+            cnpj = cnpj.substring(0, 18);
+        }
+
+        // Atualiza o valor do input com o CNPJ formatado
+        e.target.value = cnpj;
+    });
+}
+
+  
     // Renderiza form cadastro Fornecedor
 function renderizarInputsFornecedor() {
     containerRegister.innerHTML = '';
@@ -410,7 +449,7 @@ function renderizarInputsFornecedor() {
     linhaDiv1.appendChild(createInputElement('CNPJ', 'cnpj', '', 'text'));
     linhaDiv1.appendChild(createInputElement('Inscrição Estadual / IE', 'ie', '', 'text'));
     linhaDiv1.appendChild(createInputElement('Razão Social', 'razaoSocial', '', 'text'));
-    divFornecedor.appendChild(linhaDiv1);
+    divFornecedor.appendChild(linhaDiv1); 
 
     linhaDiv2.appendChild(createInputElement('Nome Fantasia', 'nomeFantasia', '', 'text'));
     linhaDiv2.appendChild(createInputElement('Cep', 'cep', '', 'text'));
@@ -426,7 +465,8 @@ function renderizarInputsFornecedor() {
     linhaDiv4.appendChild(createInputElement('Email', 'email', '', 'email'));
     divFornecedor.appendChild(linhaDiv4);
 
-    // Botão de cadastro
+
+// Botão de cadastro
     const cadButton = document.createElement('button');
     cadButton.id = 'btn-cad-fornecedor';
     cadButton.textContent = 'Cadastrar';
@@ -453,11 +493,16 @@ function renderizarInputsFornecedor() {
 
         // Função para enviar os dados
         postNewFornecedor(fornecedorData);
+        
     });
 
-    // Função para formatar o campo telefone (exemplo)
+    // Função para formatar o campo telefone 
     const inputTelefone = document.getElementById('telefone');
     formatarTelefone(inputTelefone);
+
+    // Função para formatar o campo cnpj
+    const inputTCnpj = document.getElementById('cnpj');
+    formatarCNPJ(inputTCnpj)
 }
 
 });
