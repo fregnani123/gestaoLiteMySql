@@ -359,6 +359,69 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 }
 
+
+function formatarCNPJ(input) {
+    input.addEventListener('input', (e) => {
+        let cnpj = e.target.value;
+
+        // Remove qualquer caractere que não seja número
+        cnpj = cnpj.replace(/\D/g, '');
+
+        // Aplica a formatação do CNPJ
+        cnpj = cnpj.replace(/^(\d{2})(\d)/, "$1.$2");           // Coloca o ponto após os 2 primeiros dígitos
+        cnpj = cnpj.replace(/^(\d{2})\.(\d{3})(\d)/, "$1.$2.$3"); // Coloca o segundo ponto após os 3 dígitos seguintes
+        cnpj = cnpj.replace(/\.(\d{3})(\d)/, ".$1/$2");          // Adiciona a barra após mais 3 dígitos
+        cnpj = cnpj.replace(/(\d{4})(\d)/, "$1-$2");             // Coloca o hífen após os 4 dígitos
+
+        // Limita o número de caracteres a 18 (incluindo a formatação)
+        if (cnpj.length > 18) {
+            cnpj = cnpj.substring(0, 18);
+        }
+
+        // Atualiza o valor do input com o CNPJ formatado
+        e.target.value = cnpj;
+    });
+}
+
+function formatarCNPJ(input) {
+    input.addEventListener('input', (e) => {
+        let cnpj = e.target.value;
+
+        // Remove qualquer caractere que não seja número
+        cnpj = cnpj.replace(/\D/g, '');
+
+        // Aplica a formatação do CNPJ
+        cnpj = cnpj.replace(/^(\d{2})(\d)/, "$1.$2");           // Coloca o ponto após os 2 primeiros dígitos
+        cnpj = cnpj.replace(/^(\d{2})\.(\d{3})(\d)/, "$1.$2.$3"); // Coloca o segundo ponto após os 3 dígitos seguintes
+        cnpj = cnpj.replace(/\.(\d{3})(\d)/, ".$1/$2");          // Adiciona a barra após mais 3 dígitos
+        cnpj = cnpj.replace(/(\d{4})(\d)/, "$1-$2");             // Coloca o hífen após os 4 dígitos
+
+        // Limita o número de caracteres a 18 (incluindo a formatação)
+        if (cnpj.length > 18) {
+            cnpj = cnpj.substring(0, 18);
+        }
+
+        // Atualiza o valor do input com o CNPJ formatado
+        e.target.value = cnpj;
+    });
+}
+function formatarIE(input) {
+    input.addEventListener('input', (e) => {
+        let IE = e.target.value;
+
+        // Remove qualquer caractere que não seja número
+        IE = IE.replace(/\D/g, '');
+
+        // Limita o número de caracteres a 18 (incluindo a formatação)
+        if (IE.length > 9) {
+            IE = IE.substring(0, 9);
+        }
+
+        // Atualiza o valor do input com o CNPJ formatado
+        e.target.value = IE;
+    });
+}
+
   
     // Renderiza form cadastro Fornecedor
 function renderizarInputsFornecedor() {
@@ -502,7 +565,11 @@ function renderizarInputsFornecedor() {
 
     // Função para formatar o campo cnpj
     const inputTCnpj = document.getElementById('cnpj');
-    formatarCNPJ(inputTCnpj)
+    formatarCNPJ(inputTCnpj);
+
+    // Função para formatar o campo inscrição estadual
+    const inputIE = document.getElementById('ie');
+    formatarIE(inputIE);
 }
 
 });
