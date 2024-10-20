@@ -360,51 +360,6 @@ document.addEventListener('DOMContentLoaded', () => {
 }
 
 
-function formatarCNPJ(input) {
-    input.addEventListener('input', (e) => {
-        let cnpj = e.target.value;
-
-        // Remove qualquer caractere que não seja número
-        cnpj = cnpj.replace(/\D/g, '');
-
-        // Aplica a formatação do CNPJ
-        cnpj = cnpj.replace(/^(\d{2})(\d)/, "$1.$2");           // Coloca o ponto após os 2 primeiros dígitos
-        cnpj = cnpj.replace(/^(\d{2})\.(\d{3})(\d)/, "$1.$2.$3"); // Coloca o segundo ponto após os 3 dígitos seguintes
-        cnpj = cnpj.replace(/\.(\d{3})(\d)/, ".$1/$2");          // Adiciona a barra após mais 3 dígitos
-        cnpj = cnpj.replace(/(\d{4})(\d)/, "$1-$2");             // Coloca o hífen após os 4 dígitos
-
-        // Limita o número de caracteres a 18 (incluindo a formatação)
-        if (cnpj.length > 18) {
-            cnpj = cnpj.substring(0, 18);
-        }
-
-        // Atualiza o valor do input com o CNPJ formatado
-        e.target.value = cnpj;
-    });
-}
-
-function formatarCNPJ(input) {
-    input.addEventListener('input', (e) => {
-        let cnpj = e.target.value;
-
-        // Remove qualquer caractere que não seja número
-        cnpj = cnpj.replace(/\D/g, '');
-
-        // Aplica a formatação do CNPJ
-        cnpj = cnpj.replace(/^(\d{2})(\d)/, "$1.$2");           // Coloca o ponto após os 2 primeiros dígitos
-        cnpj = cnpj.replace(/^(\d{2})\.(\d{3})(\d)/, "$1.$2.$3"); // Coloca o segundo ponto após os 3 dígitos seguintes
-        cnpj = cnpj.replace(/\.(\d{3})(\d)/, ".$1/$2");          // Adiciona a barra após mais 3 dígitos
-        cnpj = cnpj.replace(/(\d{4})(\d)/, "$1-$2");             // Coloca o hífen após os 4 dígitos
-
-        // Limita o número de caracteres a 18 (incluindo a formatação)
-        if (cnpj.length > 18) {
-            cnpj = cnpj.substring(0, 18);
-        }
-
-        // Atualiza o valor do input com o CNPJ formatado
-        e.target.value = cnpj;
-    });
-}
 function formatarIE(input) {
     input.addEventListener('input', (e) => {
         let IE = e.target.value;
@@ -421,6 +376,21 @@ function formatarIE(input) {
         e.target.value = IE;
     });
 }
+
+// Formatar CEP
+function formatarCEP(input) {
+    input.addEventListener('input', (e) => {
+        let cep = e.target.value;
+        cep = cep.replace(/\D/g, ''); // Remove qualquer caractere que não seja número
+        cep = cep.replace(/^(\d{5})(\d)/, '$1-$2'); // Adiciona o hífen após o quinto dígito
+
+        if (cep.length > 9) {
+            cep = cep.substring(0, 9);
+        }
+
+        e.target.value = cep;
+    });
+};
 
   
     // Renderiza form cadastro Fornecedor
@@ -570,6 +540,10 @@ function renderizarInputsFornecedor() {
     // Função para formatar o campo inscrição estadual
     const inputIE = document.getElementById('ie');
     formatarIE(inputIE);
+
+    // Função para formatar o campo inscrição CEP
+    const inputCep = document.getElementById('cep');
+    formatarCEP(inputCep);
 }
 
 });
