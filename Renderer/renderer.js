@@ -335,7 +335,20 @@ document.addEventListener('DOMContentLoaded', () => {
             e.target.value = telefone;
         });
     };
-
+    function verificarEmail(input) {
+        input.addEventListener('blur', (e) => { // Trigger the validation when the input loses focus
+            let email = e.target.value;
+    
+            // Expressão regular para validar e-mail
+            let emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    
+            // Verifica se o valor digitado é um e-mail válido
+            if (!emailRegex.test(email)) {
+                alert('Por favor, insira um e-mail válido.'); // Alerta se o e-mail for inválido
+            }
+        });
+    }
+    
   function formatarCNPJ(input) {
     input.addEventListener('input', (e) => {
         let cnpj = e.target.value;
@@ -472,12 +485,10 @@ function renderizarInputsFornecedor() {
     }
 
     const optionsUF = [
-        "Selecione", 'Acre', 'Alagoas', 'Amapá', 'Amazonas', 'Bahia', 'Ceará', 'Distrito Federal',
-        'Espírito Santo', 'Goiás', 'Maranhão', 'Mato Grosso', 'Mato Grosso do Sul',
-        'Minas Gerais', 'Pará', 'Paraíba', 'Paraná', 'Pernambuco', 'Piauí',
-        'Rio de Janeiro', 'Rio Grande do Norte', 'Rio Grande do Sul', 'Rondônia',
-        'Roraima', 'Santa Catarina', 'São Paulo', 'Sergipe', 'Tocantins'
+        "Selecione", 'AC', 'AL', 'AP', 'AM', 'BA', 'CE', 'DF', 'ES', 'GO', 'MA', 'MT', 
+        'MS', 'MG', 'PA', 'PB', 'PR', 'PE', 'PI', 'RJ', 'RN', 'RS', 'RO', 'RR', 'SC', 'SP', 'SE', 'TO'
     ];
+    
 
     linhaDiv1.appendChild(createInputElement('CNPJ', 'cnpj', '', 'text'));
     linhaDiv1.appendChild(createInputElement('Inscrição Estadual / IE', 'ie', '', 'text'));
@@ -523,9 +534,22 @@ function renderizarInputsFornecedor() {
             telefone: document.getElementById('telefone').value,
             email: document.getElementById('email').value
         };
-
+        
+        
         // Função para enviar os dados
         postNewFornecedor(fornecedorData);
+        
+            document.getElementById('cnpj').value = '';
+            document.getElementById('ie').value = '';
+            document.getElementById('razaoSocial').value = '';
+            document.getElementById('nomeFantasia').value = '';
+            document.getElementById('cep').value = '';
+            document.getElementById('cidade').value = '';
+            document.getElementById('bairro').value = '';
+            document.getElementById('uf').value = '';
+            document.getElementById('endereco').value = '';
+            document.getElementById('telefone').value = '';
+            document.getElementById('email').value = '';
         
     });
 
@@ -541,9 +565,33 @@ function renderizarInputsFornecedor() {
     const inputIE = document.getElementById('ie');
     formatarIE(inputIE);
 
-    // Função para formatar o campo inscrição CEP
+    // Função para formatar o campo CEP
     const inputCep = document.getElementById('cep');
     formatarCEP(inputCep);
+
+    // Função para formatar o campo email
+    const inputEmail = document.getElementById('email');
+    verificarEmail(inputEmail);
+    inputMaxCaracteres(inputEmail, 150);
+
+    
+    // Função para formatar caracteres máximo, campo razao Social
+    const razao_social = document.getElementById('razaoSocial');
+    inputMaxCaracteres(razao_social, 200);
+
+    // Função para formatar caracteres máximo, campo nome fantasia
+    const nome_fantasia = document.getElementById('nomeFantasia');
+    inputMaxCaracteres(nome_fantasia, 200);
+    
+    // Função para formatar caracteres máximo, campo endereco
+    const endereco = document.getElementById('endereco');
+    inputMaxCaracteres(endereco, 250);
+
+    // Função para formatar caracteres máximo, campo bairro
+    const bairro = document.getElementById('bairro');
+    inputMaxCaracteres(bairro, 150);
+    
+    
 }
 
 });

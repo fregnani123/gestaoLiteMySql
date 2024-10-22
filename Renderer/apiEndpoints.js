@@ -20,6 +20,19 @@ const apiEndpoints = {
     postNewFornecedor: 'http://localhost:3000/newFornecedor',
 };
 
+function inputMaxCaracteres (input,max){
+    input.addEventListener('input', (e) => {
+        let input = e.target.value;
+       
+        // Limita o número de caracteres a 18 (incluindo a formatação)
+        if (input.length > max) {
+            input = input.substring(0, max);
+        }
+
+        // Atualiza o valor do input com o CNPJ formatado
+        e.target.value = input;
+}
+)}
 
 async function uploadImage(fileName) {
     const fileInput = document.querySelector('input[type="file"]');
@@ -66,6 +79,7 @@ async function postNewProduto(produtoData) {
                 throw new Error(`HTTP error! Status: ${response.status}`);
             }
             return response.json();
+         
         })
         .then(data => {
             console.log('Produto added successfully:', data);
@@ -97,6 +111,7 @@ async function postNewFornecedor(fornecedorData) {
         })
         .then(data => {
             console.log('fornecedor added successfully:', data);
+            
         })
         .catch(error => {
             console.error('Error adding fornecedor:', error);
