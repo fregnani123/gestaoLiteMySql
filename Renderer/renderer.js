@@ -39,6 +39,9 @@ getMedidaVolume(selectMedidaVolume);
 getCorProduto(selectCorProduto);
 getunidadeDeMassa(selectUnidadeMassa);
 
+inputMaxCaracteres(inputNomeProduto, 150); //max caracteres input
+inputMaxCaracteres(inputObservacoes, 150); 
+
 
 // Formatação do campo de preço de compra
 inputPrecoCompra.addEventListener('input', (e) => {
@@ -509,6 +512,7 @@ function renderizarInputsFornecedor() {
     linhaDiv4.appendChild(createInputElement('Email', 'email', '', 'email'));
     divFornecedor.appendChild(linhaDiv4);
 
+    
 
 // Botão de cadastro
     const cadButton = document.createElement('button');

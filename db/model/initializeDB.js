@@ -110,7 +110,7 @@ async function initializeDB() {
                 codigo_ean BIGINT(13) NULL,
                 grupo_id INT NULL,
                 sub_grupo_id INT NULL,
-                nome_produto VARCHAR(390) NULL,
+                nome_produto VARCHAR(200) NULL,
                 tamanho_letras_id INT NULL,
                 tamanho_num_id INT NULL,
                 unidade_massa_id INT NULL,
